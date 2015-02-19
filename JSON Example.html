@@ -3,64 +3,9 @@
 <head>
 </head>
 
+<script src="JSONTemplate.js"></script>
+
 <script>
-	response = {
-	
-			"code" : "2BCT",
-			"school" : "Engineering and Informatics",
-			"timetable" : [
-
-				{"roomcode" : "IT125",
-				"module" : "CT216",
-				"lecturer" : "Jim Duggan",
-				"time" : "0"},
-
-				
-				{"roomcode" : "IT250",
-				"module" : "CT229",
-				"lecturer" : "Michael Madden",
-				"time" : "1"},
-
-				
-				{"roomcode" : "IT125",
-				"module" : "CT248",
-				"lecturer" : "Hugh Melvin",
-				"time" : "2"},
-
-				
-				{"roomcode" : null,
-				"module" : null,
-				"lecturer" : null,
-				"time" : "3"}
-			]
-		}
-	
-	// Needless to say this isn't complete. 
-	
-	//I've just added a variable called "time" which really represents 
-	// the index the values are supposed to go into.
-	// i.e. it could be setup that there's 55 elements (5 days * 11 hours)
-	// in a week and we just loop over all of them.
-	
-	// alternatively we could have something like this with day and actual time:
-	
-	response2 = {
-	
-			"code" : "2BCT",
-			"school" : "Engineering and Informatics",
-			"timetable" : [
-
-				{"roomcode" : "IT125",
-				"module" : "CT216",
-				"lecturer" : "Jim Duggan",
-				"time" : "09:00",
-				"day" : "Monday"},
-			]
-		}
-	
-	// this might be more dynamic in the long run and easier for other people 
-	// to understand (i.e. whoever is marking this). It just means a little more 
-	// code on the javascript side of things, but nothing crazy
 	
 function tableCreate() {
 
@@ -70,26 +15,26 @@ function tableCreate() {
 
 
 		for (var i = 0; i < response.timetable.length; i++) {
-		
+
 			var row = document.createElement("tr");
-		
+
 			var cell = document.createElement("td");
-			
+
 			if (response.timetable[i].roomcode != null){
 				var cellText = (response.timetable[i].roomcode + "<br>" +
 														response.timetable[i].module + "<br>" +
 														response.timetable[i].lecturer + "<br>" +
-														response.timetable[i].time + "<br>"); 
+														response.timetable[i].time + "<br>");
 				cell.innerHTML = cellText;
 			}
 			row.appendChild(cell);
-			
+
 			tblBody.appendChild(row);
-			
+
 		}
 
         tbl.appendChild(tblBody);
-		
+
         body.appendChild(tbl);
 		
         tbl.setAttribute("border", "2");
