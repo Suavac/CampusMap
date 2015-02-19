@@ -17,6 +17,7 @@
 
     <!-- Custom CSS -->
     <link href="{{ STATIC_URL }}css/simple-sidebar.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/site.css" rel="stylesheet">
 
 </head>
 
@@ -33,10 +34,10 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">Dashboard</a>
+                    <a href="../home">Dashboard</a>
                 </li>
                 <li>
-                    <a href="#">Timetables</a>
+                    <a href="../timetable">Timetables</a>
                 </li>
                 <li>
                     <a href="#">Maps</a>
@@ -50,25 +51,24 @@
                 <li>
                     <a href="#">Contact</a>
                 </li>
-
-                <ul href="#"> Database Stuff
-                    <li>
-                    <a href="../course">Add Course</a>
-                    </li>
-                    <li>
-                    <a href="#">Add Module</a>
-                    </li>
-                    <li>
-                    <a href="#">Add Room</a>
-                    </li>
-                    <li>
-                    <a href="#">Add Building</a>
-                    </li>
-                    <li>
-                    <a href="#">Add Lecturer</a>
-                    </li>
-
-                </ul>
+				
+				<ul href="#"> Database Stuff
+					<li>
+					<a href = "../course">Add Course</a>
+					</li>
+					<li>
+					<a href = "#">Add Module</a>
+					</li>
+					<li>
+					<a href = "#">Add Room</a>
+					</li>
+					<li>
+					<a href = "#">Add Building</a>
+					</li>
+					<li>
+					<a href = "#">Add Lecturer</a>
+					</li>
+				</ul>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -99,11 +99,14 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
 
+    
+    
     <!-- Menu Toggle Script -->
     <script>
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
+        $("#timetable").css('left', 'auto');
     });
     </script>
 
@@ -114,7 +117,7 @@
 {% block footer %}
       <hr>
       <footer class="footer" align="center">
-        <p>&copy; CampusMap</p>
+        <p>&copy; CampusMap 2015</p>
       </footer>
 {% endblock %}
 

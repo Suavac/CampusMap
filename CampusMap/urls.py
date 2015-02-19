@@ -11,6 +11,7 @@ urlpatterns = patterns('map.views',
     url(r'^room/', 'room'),
     url(r'^building/', 'building'),
     url(r'^lecturer/', 'lecturer'),
+    url(r'^timetable/$', 'timetable'),
 
 
 )

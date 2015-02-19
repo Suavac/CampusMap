@@ -5,6 +5,9 @@ from .forms import CourseForm, ModuleForm, RoomForm, LecturerForm, BuildingForm
 def home(request):
     return render(request, 'home.html')
 
+def timetable(request):
+    return render(request, 'timetable.html')
+
 def course(request):
     if request.method == 'POST': # If the form has been submitted...
         form = CourseForm(request.POST) # A form bound to the POST data
