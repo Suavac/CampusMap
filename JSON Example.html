@@ -14,19 +14,31 @@ function tableCreate() {
         var tblBody = document.createElement("tbody");
 
 
-		for (var i = 0; i < response.timetable.length; i++) {
+		for (var i = 1; i <= 11; i++) {
 
 			var row = document.createElement("tr");
 
-			var cell = document.createElement("td");
+            for (var j = 1; j <= 5; j++){
 
-			if (response.timetable[i].roomcode != null){
-				var cellText = (response.timetable[i].roomcode + "<br>" +
-														response.timetable[i].module + "<br>" +
-														response.timetable[i].lecturer + "<br>" +
-														response.timetable[i].time + "<br>");
-				cell.innerHTML = cellText;
-			}
+                var cell = document.createElement("td");
+
+                if (response.timetable[j].day == j && response.timetable[j].time == i){
+
+                    var cellText = (response.timetable[i].roomcode + "<br>" +
+                                        response.timetable[i].module + "<br>" +
+                                        response.timetable[i].lecturer + "<br>" +
+                                        response.timetable[i].time + "<br>");
+
+                } else {
+
+                    var cellText = "Empty"
+
+                }
+
+                cell.innerHTML = cellText;
+
+            }
+
 			row.appendChild(cell);
 
 			tblBody.appendChild(row);
