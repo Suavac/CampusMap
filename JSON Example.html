@@ -14,32 +14,43 @@ function tableCreate() {
         var tblBody = document.createElement("tbody");
 
 
+
+        // for every hour
 		for (var i = 1; i <= 11; i++) {
 
+            // create a row
 			var row = document.createElement("tr");
 
+            // for every row, create 5 days
             for (var j = 1; j <= 5; j++){
 
                 var cell = document.createElement("td");
 
-                if (response.timetable[j].day == j && response.timetable[j].time == i){
+                // loop over all elements in time table, looking for a match
+                for (var k = 0; k < response.timetable.length; k++){
 
-                    var cellText = (response.timetable[i].roomcode + "<br>" +
-                                        response.timetable[i].module + "<br>" +
-                                        response.timetable[i].lecturer + "<br>" +
-                                        response.timetable[i].time + "<br>");
+                    // place in cell
+                    if ((response.timetable[k].day == j) && (response.timetable[k].time == i )){
 
-                } else {
+                        var cellText = (response.timetable[k].room + "<br>" +
+                                        response.timetable[k].mod + "<br>" +
+                                        response.timetable[k].lect + "<br>");
 
-                    var cellText = "Empty"
+                        break;
+
+                    // otherwise, something default
+                    } else {
+
+                        var cellText = "Empty"
+                    }
 
                 }
 
                 cell.innerHTML = cellText;
 
-            }
+                row.appendChild(cell);
 
-			row.appendChild(cell);
+            }
 
 			tblBody.appendChild(row);
 

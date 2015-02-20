@@ -6,6 +6,7 @@
 // I'm gonna say we just skip this scenario for now, it's too much extra work
 // for proof of concept.
 
+// Sample data for Monday on our timetable
 response = {
 
         "code" : "2BCT",
