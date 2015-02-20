@@ -8,29 +8,20 @@ function createTable(title){
 			table.className = "table table-bordered table-striped table-condensed text-center";
 			
 			var trh = document.createElement('tr');
-			
-			var th1 = document.createElement('th');
-			var th2 = document.createElement('th');
-			var th3 = document.createElement('th');
-			var th4 = document.createElement('th');
-			var th5 = document.createElement('th');
-			var th6 = document.createElement('th');
-			
+
+
 			var tbody = document.createElement('tbody')
-			
-			th1.innerHTML = ('Time/Day');
-			th2.innerHTML = ('Monday');
-			th3.innerHTML = ('Tuesday');
-			th4.innerHTML = ('Wednesday');
-			th5.innerHTML = ('Thursday');
-			th6.innerHTML = ('Friday');
-			
-			trh.appendChild(th1);
-			trh.appendChild(th2);
-			trh.appendChild(th3);
-			trh.appendChild(th4);
-			trh.appendChild(th5);
-			trh.appendChild(th6);
+
+
+            var strings = ['Time/Day', 'Monday', 'Tuesday',
+                            'Wednesday', 'Thursday', 'Friday'];
+
+            for (var i = 0; i < 6; i++){
+                trh.appendChild(document.createElement('th'));
+                trh.lastChild.innerHTML = (strings[i]);
+
+            }
+
 			
 			tbody.appendChild(trh);
 			table.appendChild(tbody);
@@ -118,3 +109,61 @@ function createTable(title){
 				
 				return time;
 		}
+
+
+
+function tableCreate() {
+
+        var body = document.getElementsByTagName("body")[0];
+        var tbl     = document.createElement("table");
+        var tblBody = document.createElement("tbody");
+
+
+
+        // for every hour
+		for (var i = 1; i <= 11; i++) {
+
+            // create a row
+			var row = document.createElement("tr");
+
+            // for every row, create 5 days
+            for (var j = 1; j <= 5; j++){
+
+                var cell = document.createElement("td");
+
+                // loop over all elements in time table, looking for a match
+                for (var k = 0; k < response.timetable.length; k++){
+
+                    // place in cell
+                    if ((response.timetable[k].day == j) && (response.timetable[k].time == i )){
+
+                        var cellText = (response.timetable[k].room + "<br>" +
+                                        response.timetable[k].mod + "<br>" +
+                                        response.timetable[k].lect + "<br>");
+
+                        break;
+
+                    // otherwise, something default
+                    } else {
+
+                        var cellText = "Empty"
+                    }
+
+                }
+
+                cell.innerHTML = cellText;
+
+                row.appendChild(cell);
+
+            }
+
+			tblBody.appendChild(row);
+
+		}
+
+        tbl.appendChild(tblBody);
+
+        body.appendChild(tbl);
+
+        tbl.setAttribute("border", "2");
+    }
