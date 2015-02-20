@@ -59,8 +59,8 @@
       <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/map/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.68" vertical-offset="0" max-vertical-offset="1105">
-              <caret line="26" column="4" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="16" />
+            <state vertical-scroll-proportion="-12.24" vertical-offset="0" max-vertical-offset="1105">
+              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
               </folding>
@@ -94,14 +94,9 @@
       <file leaf-file-name="addroom.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstaff/addroom.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.52224827" vertical-offset="64" max-vertical-offset="1020">
-              <caret line="30" column="51" selection-start-line="30" selection-start-column="51" selection-end-line="30" selection-end-column="51" />
-              <folding>
-                <element signature="e#471#490#0#HTML" expanded="true" />
-                <element signature="e#520#541#0#HTML" expanded="true" />
-                <element signature="e#930#949#0#HTML" expanded="true" />
-                <element signature="e#979#1000#0#HTML" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.21896955" vertical-offset="0" max-vertical-offset="854">
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="19" selection-end-column="6" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -125,6 +120,7 @@
         <option value="$PROJECT_DIR$/CampusMap/urls.py" />
         <option value="$PROJECT_DIR$/CampusMap/templates/dbstaff/addtimetable.html" />
         <option value="$PROJECT_DIR$/CampusMap/templates/dbstaff/addcourse.html" />
+        <option value="$PROJECT_DIR$/map/forms.py" />
         <option value="$PROJECT_DIR$/CampusMap/templates/dbstaff/addroom.html" />
       </list>
     </option>
@@ -534,7 +530,13 @@
       <option name="project" value="LOCAL" />
       <updated>1424458986824</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="by default go to the home page">
+      <created>1424461507043</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1424461507043</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -640,8 +642,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/map/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.68" vertical-offset="0" max-vertical-offset="1105">
-          <caret line="26" column="4" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="16" />
+        <state vertical-scroll-proportion="-12.24" vertical-offset="0" max-vertical-offset="1105">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>
@@ -650,14 +652,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstaff/addroom.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.52224827" vertical-offset="64" max-vertical-offset="1020">
-          <caret line="30" column="51" selection-start-line="30" selection-start-column="51" selection-end-line="30" selection-end-column="51" />
-          <folding>
-            <element signature="e#471#490#0#HTML" expanded="true" />
-            <element signature="e#520#541#0#HTML" expanded="true" />
-            <element signature="e#930#949#0#HTML" expanded="true" />
-            <element signature="e#979#1000#0#HTML" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.21896955" vertical-offset="0" max-vertical-offset="854">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="19" selection-end-column="6" />
+          <folding />
         </state>
       </provider>
     </entry>
