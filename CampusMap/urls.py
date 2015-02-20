@@ -4,6 +4,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('map.views',
+    url(r'^$', 'home'),
     url(r'^home/$', 'home'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^course/', 'course'),
