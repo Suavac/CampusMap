@@ -10,14 +10,45 @@
 </head>
 <body>
 <div class="container">
-<h1>Add New Room</h1>
 
-    <form action='addroom.html' method='post'>{% csrf_token %}
-    {{ form.as_p }}
+            <h1>Add Course Page</h1>
 
-    <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-</div>
+            <form class="form-contact" action="" method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+                <fieldset class="form-group">
+
+
+
+                {% ifequal field.name "buildingCode" %}
+                   <div style= "color: red">
+
+                    <label style= "color: black" for="id_{{ field.name }}">{{ field.label }}</label>
+                        {{ field.errors|striptags }}
+                     </div>
+
+                    <select class="form-control" >
+                    <option {{ form.buildingCode }}
+                    </select>
+                    <p class="help-text">{{ field.help_text }} </p>
+
+                {% else %}
+                    <div style= "color: red">
+
+                    <label style= "color: black" for="id_{{ field.name }}">{{ field.label }}</label>
+                        {{ field.errors|striptags }}
+                     </div>
+                    <input type="text" class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
+                    <p class="help-text">{{ field.help_text }} </p>
+                {% endifequal %}
+
+                    </fieldset>
+
+
+            {% endfor %}
+             <input type="submit" value="Submit"  class="btn btn-primary">
+            </form>
+        </div>
 </body>
 </html>
 
