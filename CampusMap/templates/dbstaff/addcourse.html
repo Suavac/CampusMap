@@ -4,24 +4,54 @@
 
 <!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
+    <head lang="en">
+        <meta charset="UTF-8">
     <title></title>
-</head>
-<body>
+    </head>
 
-    <div class="container">
+    <body>
+        <div class="container">
 
-        <h1>Add Course Page</h1>
+            <h1>Add Course Page</h1>
 
-        <form action='addcourse.html' method='post'>{% csrf_token %}
-        {{ form.as_p }}
-        <input type='submit' value='Submit' />
-        </form>
+            <form class="form-contact" action="" method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+                <fieldset class="form-group">
 
-    </div>
-
+                    <div style= "color: red">
+                    <label style= "color: black" for="id_{{ field.name }}">{{ field.label }}</label>
+                        {{ field.errors|striptags }}
+                     </div>
+                    <input type="text" class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
+                    <p class="help-text">{{ field.help_text }} </p>
+                    </fieldset>
+            {% endfor %}
+             <input type="submit" value="Submit"  class="btn btn-primary">
+            </form>
+        </div>
 </body>
 </html>
 
-{% endblock %}
+{%  endblock %}
+
+            value="{{ field.value }}"
+<form role="form" action='addcourse.html' method='post'>{% csrf_token %}
+
+                <div class="form-group">
+
+                    {{ form.courseCode.label }} <br/>
+                    {{ form.courseCode }}       <br/><br/>
+                    {{ form.courseName.label }} <br/>
+                    {{ form.courseName }}       <br/><br/>
+                    {{ form.department.label }} <br/>
+                    {{ form.department }}       <br/><br/>
+
+
+                    <button type="submit" class="btn btn-default">Submit</button>
+
+                </div>
+        </form>
+
+
+
