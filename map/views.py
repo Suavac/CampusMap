@@ -8,6 +8,9 @@ def home(request):
 def timetable(request):
     return render(request, 'timetable.html')
 
+def timetableAdmin(request):
+	return render(request, 'timetableAdmin.html')
+
 def course(request):
     if request.method == 'POST': # If the form has been submitted...
         form = CourseForm(request.POST) # A form bound to the POST data
