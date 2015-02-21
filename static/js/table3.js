@@ -1,11 +1,11 @@
 function createTable(title) {
 
-    document.write("<b>" + response.title + "</b>");
-
     var div = document.createElement('div');
     var table = document.createElement('table');
-
+	var title = document.createTextNode(response.title);
+	
     div.className = 'container';
+	div.appendChild(title);
     table.className = "table table-bordered table-striped table-condensed text-center";
 
     var trh = document.createElement('tr');
@@ -43,6 +43,7 @@ function createTable(title) {
         for (var j = 1; j <= 5; j++) {
 
             var cell = document.createElement("td");
+			cell.className = "col-md-2"
 
             // loop over all elements in time table, looking for a match
             for (var k = 0; k < response.timetable.length; k++) {
@@ -51,16 +52,18 @@ function createTable(title) {
                 if ((response.timetable[k].day == j) && (response.timetable[k].time == i )) {
 
                     var cellText = (
+                    response.timetable[k].mod + " " + response.timetable[k].title + "<br>" +
                     response.timetable[k].room + "<br>" +
-                    response.timetable[k].mod + "<br>" +
                     response.timetable[k].lect + "<br>");
+					
+					cell.style.backgroundColor = response.timetable[k].colour;
 
                     break; // important
 
                     // otherwise, something default
                 } else {
 
-                    var cellText = "Empty"
+                    var cellText = ""
                 }
 
             }
@@ -71,6 +74,6 @@ function createTable(title) {
     }
 
     div.appendChild(table);
-    document.body.appendChild(div);
+    document.getElementById("myDiv").appendChild(div);
 
 }
