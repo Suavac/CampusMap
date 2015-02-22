@@ -6,8 +6,8 @@ from .models import Course, Module, Lecturer, Room, Building, Timetable
 class CourseForm(forms.ModelForm):
 
     courseCode = forms.CharField(max_length=7,label = mark_safe('<strong>Code</strong>'))
-    courseName = forms.CharField(max_length=7,label = mark_safe('<strong>Name</strong>'))
-    department = forms.CharField(max_length=7,label = mark_safe('<strong>Department</strong>'))
+    courseName = forms.CharField(max_length=50,label = mark_safe('<strong>Name</strong>'))
+    department = forms.CharField(max_length=50,label = mark_safe('<strong>Department</strong>'))
 
     class Meta:
         model = Course
@@ -15,7 +15,7 @@ class CourseForm(forms.ModelForm):
 class ModuleForm(forms.ModelForm):
 
     modCode = forms.CharField(max_length=7, label = mark_safe('<strong>Module Code</strong>'))
-    modName = forms.CharField(max_length=7,label = mark_safe('<strong>Module Name</strong>'))
+    modName = forms.CharField(max_length=50,label = mark_safe('<strong>Module Name</strong>'))
 
     class Meta:
         model = Module
@@ -23,10 +23,10 @@ class ModuleForm(forms.ModelForm):
 class RoomForm(forms.ModelForm):
 
     roomCode = forms.CharField(max_length = 7,label = mark_safe('<strong>Room Code</strong>'))
-    roomName = forms.CharField(max_length = 7,label = mark_safe('<strong>Room Name</strong>'))
+    roomName = forms.CharField(max_length = 30,label = mark_safe('<strong>Room Name</strong>'))
     buildingCode = queryset=Building.objects.all()
-    lat = forms.CharField(max_length = 7,label = mark_safe('<strong>Latitude</strong>'))
-    lon = forms.CharField(max_length = 7,label = mark_safe('<strong>Longitude</strong>'))
+    lat = forms.CharField(max_length = 9, label = mark_safe('<strong>Latitude</strong>'))
+    lon = forms.CharField(max_length = 9, label = mark_safe('<strong>Longitude</strong>'))
 
     class Meta:
         model = Room
@@ -42,8 +42,8 @@ class BuildingForm(forms.ModelForm):
 class LecturerForm(forms.ModelForm):
 
     lecCode = forms.CharField(max_length = 7,label = mark_safe('<strong>Code</strong>'),)
-    lecFirst_Name = forms.CharField(max_length = 100,label = mark_safe('<strong>First Name</strong>'))
-    lecLast_Name = forms.CharField(max_length = 100,label = mark_safe('<strong>Last Name</strong>'))
+    lecFirst_Name = forms.CharField(max_length = 50,label = mark_safe('<strong>First Name</strong>'))
+    lecLast_Name = forms.CharField(max_length = 50,label = mark_safe('<strong>Last Name</strong>'))
     lecEmail = forms.EmailField(label = mark_safe('<strong>Email</strong>'))
     class Meta:
         model = Lecturer

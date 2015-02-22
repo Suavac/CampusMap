@@ -1,6 +1,45 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .forms import CourseForm, ModuleForm, RoomForm, LecturerForm, BuildingForm,TimetableForm
+import json
+from models import Course, Timetable
+
+
+def editTimetable(request):
+    return render(request, 'timetable.html')
+
+## Testing JSON responses
+def detail(request):
+
+    message = request.GET.get('message')
+
+    course = Course.objects.get(courseCode=message) #objects.all().filter(courseCode=message)
+
+    temp = []
+
+    t = Timetable.objects.filter(courseCode=Course.objects.get(courseCode=message))
+
+    for o in t.iterator():
+
+        tempData = {
+        'code' : o.courseCode.courseCode,
+        'mod' : o.modCode.modCode,
+        'room' : o.roomCode.roomCode,
+        'lec' : o.lecCode.lecFirst_Name + " " + o.lecCode.lecLast_Name,
+        'day' : o.day,
+        'time' : o.time
+        }
+
+        temp.append(tempData)
+
+    temp2json = json.dumps(temp)
+
+    data = {'code' : message, 'title' : course.courseName, 'department' : course.department,
+    'timetable' : temp2json}
+
+    json_data = json.dumps(data)
+
+    return render(request, 'test.html', {"foo": json_data})
 
 def home(request):
     return render(request, 'home.html')
@@ -18,7 +57,7 @@ def course(request):
     else:
         form = CourseForm() # An unbound form
 
-    return render(request, 'dbstaff/addcourse.html', {
+    return render(request, 'dbstuff/addcourse.html', {
         'form': form,
     })
 
@@ -35,7 +74,7 @@ def module(request):
     else:
         form = ModuleForm() # An unbound form
 
-    return render(request, 'dbstaff/addmodule.html', {
+    return render(request, 'dbstuff/addmodule.html', {
         'form': form,
     })
 
@@ -52,7 +91,7 @@ def room(request):
     else:
         form = RoomForm() # An unbound form
 
-    return render(request, 'dbstaff/addroom.html', {
+    return render(request, 'dbstuff/addroom.html', {
         'form': form,
     })
 
@@ -69,7 +108,7 @@ def lecturer(request):
     else:
         form = LecturerForm() # An unbound form
 
-    return render(request, 'dbstaff/addlecturer.html', {
+    return render(request, 'dbstuff/addlecturer.html', {
         'form': form,
     })
 
@@ -86,7 +125,7 @@ def building(request):
     else:
         form = BuildingForm() # An unbound form
 
-    return render(request, 'dbstaff/addbuilding.html', {
+    return render(request, 'dbstuff/addbuilding.html', {
         'form': form,
     })
 
@@ -103,7 +142,7 @@ def timetable(request):
     else:
         form = TimetableForm() # An unbound form
 
-    return render(request, 'dbstaff/addtimetable.html', {
+    return render(request, 'dbstuff/addtimetable.html', {
         'form': form,
     })
 

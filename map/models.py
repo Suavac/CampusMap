@@ -22,10 +22,10 @@ class Building(models.Model):
 
 class Room(models.Model):
     roomCode = models.CharField(max_length = 7, primary_key=True)
-    roomName = models.CharField(max_length = 7)
+    roomName = models.CharField(max_length = 30)                    # Change 7 to 30
     buildingCode = models.ForeignKey(Building)
-    lat = models.CharField(max_length = 7)
-    lon = models.CharField(max_length = 7)
+    lat = models.FloatField(max_length = 9)                         # Char to Float and size 7 to 9
+    lon = models.FloatField(max_length = 9)
 
     def __str__(self):
         return self.roomCode
@@ -34,8 +34,8 @@ class Room(models.Model):
 
 class Lecturer(models.Model):
     lecCode = models.CharField(max_length = 7, primary_key=True)
-    lecFirst_Name = models.CharField(max_length = 100)
-    lecLast_Name = models.CharField(max_length = 100)
+    lecFirst_Name = models.CharField(max_length = 50)               # Reduced size from 100 to 50
+    lecLast_Name = models.CharField(max_length = 50)
     lecEmail = models.EmailField();
 
     def __str__(self):

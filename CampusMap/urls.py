@@ -1,5 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from django.views.generic import TemplateView
+
 
 admin.autodiscover()
 
@@ -12,7 +14,9 @@ urlpatterns = patterns('map.views',
     url(r'^room/', 'room'),
     url(r'^building/', 'building'),
     url(r'^lecturer/', 'lecturer'),
-    url(r'^timetable/', 'timetable'),
+    url(r'^timetable/$', 'timetable'),
+    url(r'^editTimetable/$', 'editTimetable'),
+    url(r'^test/', 'detail'),
 
 
 )
