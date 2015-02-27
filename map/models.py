@@ -9,7 +9,7 @@ class Course(models.Model):
 
 class Module(models.Model):
     modCode = models.CharField(max_length = 7, primary_key=True)
-    modName = models.CharField(max_length = 50)
+    modName = models.CharField(max_length = 70)
     def __str__(self):
         return self.modCode
 
@@ -19,7 +19,7 @@ class Building(models.Model):
     buildingNameI = models.CharField(max_length = 75)
 
     def __str__(self):
-        return "%s" % self.buildingCode
+        return "%s" % self.buildingCode + '   ' + self.buildingNameE
 
 class Room(models.Model):
     roomCode = models.CharField(max_length = 7, primary_key=True)

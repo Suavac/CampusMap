@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .forms import CourseForm, ModuleForm, RoomForm, LecturerForm, BuildingForm,TimetableForm
 import json
-from .models import Course, Timetable, Building
+from .models import Course, Timetable, Building, Module
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
@@ -65,6 +65,9 @@ def course(request):
 
 
 def module(request):
+    # get all data from course table in ascending order
+    query_results = Module.objects.all().order_by('modCode')
+
     if request.method == 'POST': # If the form has been submitted...
         form = ModuleForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
@@ -77,9 +80,8 @@ def module(request):
     else:
         form = ModuleForm() # An unbound form
 
-    return render(request, 'dbstuff/addmodule.html', {
-        'form': form,
-    })
+    return render_to_response('dbstuff/addmodule.html', locals(),context_instance=RequestContext(request))
+
 
 def room(request):
     if request.method == 'POST': # If the form has been submitted...
