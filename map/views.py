@@ -2,7 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .forms import CourseForm, ModuleForm, RoomForm, LecturerForm, BuildingForm,TimetableForm
 import json
-from .models import Course, Timetable
+from .models import Course, Timetable, Building
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+
 
 def editTimetable(request):
     return render(request, 'timetable.html')
@@ -44,6 +47,8 @@ def home(request):
     return render(request, 'home.html')
 
 def course(request):
+    # get all data from course table in ascending order
+    query_results = Course.objects.all().order_by('courseCode')
     if request.method == 'POST': # If the form has been submitted...
         form = CourseForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
@@ -56,9 +61,8 @@ def course(request):
     else:
         form = CourseForm() # An unbound form
 
-    return render(request, 'dbstuff/addcourse.html', {
-        'form': form,
-    })
+    return render_to_response('dbstuff/addcourse.html', locals(),context_instance=RequestContext(request))
+
 
 def module(request):
     if request.method == 'POST': # If the form has been submitted...
@@ -112,6 +116,9 @@ def lecturer(request):
     })
 
 def building(request):
+    # get all data from building table in ascending order
+    query_results = Building.objects.all()
+
     if request.method == 'POST': # If the form has been submitted...
         form = BuildingForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
@@ -123,10 +130,7 @@ def building(request):
             return HttpResponseRedirect('/building/') # Redirect after POST
     else:
         form = BuildingForm() # An unbound form
-
-    return render(request, 'dbstuff/addbuilding.html', {
-        'form': form,
-    })
+    return render_to_response('dbstuff/addbuilding.html', locals(),context_instance=RequestContext(request))
 
 def timetable(request):
     if request.method == 'POST': # If the form has been submitted...

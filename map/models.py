@@ -15,7 +15,8 @@ class Module(models.Model):
 
 class Building(models.Model):
     buildingCode = models.CharField(max_length = 7, primary_key=True)
-    buildingName = models.CharField(max_length = 50)
+    buildingNameE = models.CharField(max_length = 75)
+    buildingNameI = models.CharField(max_length = 75)
 
     def __str__(self):
         return "%s" % self.buildingCode

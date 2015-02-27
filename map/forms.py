@@ -34,7 +34,8 @@ class RoomForm(forms.ModelForm):
 class BuildingForm(forms.ModelForm):
 
     buildingCode = forms.CharField(max_length = 7,label = mark_safe('<strong>Building Code</strong>'))
-    buildingName = forms.CharField(max_length = 50,label = mark_safe('<strong>Building Name</strong>'))
+    buildingNameE = forms.CharField(max_length = 75,label = mark_safe('<strong>Building Name</strong>'))
+    buildingNameI = forms.CharField(max_length = 75,label = mark_safe('<strong>Building Name</strong>'))
 
     class Meta:
         model = Building
