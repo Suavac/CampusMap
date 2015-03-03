@@ -3,14 +3,73 @@
 {%block content%}
 
 <script src="{{ STATIC_URL }}js/table3.js"></script>
-<script src="{{ STATIC_URL }}js/Response.js"></script>
-   
-<script>
-  createTable("")
-</script>
+
+
+
+<div class="container">
+
+    <div class="dropdown" id="dropMain">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+            Select a course  <span class="caret"></span>
+        </button>
+
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" id="courseDrop">
+            <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>1-->
+        </ul>
+    </div>
+
+    <div id="timetable"></div>
+
+</div>
+
+
+    <script>
+
+    window.onload=getCourses();
+
+    function getCourses(){
+
+        var request = new XMLHttpRequest();
+        request.open('GET', '../json/?message=courses', false);  // `false` makes the request synchronous
+        request.send(null);
+
+        courses = JSON.parse(request.responseText);
+
+        ul = document.getElementById('courseDrop');
+
+        for(var i = 0; i<courses.courses.length; i++){
+            var li = document.createElement("li");
+            li.setAttribute('role', 'presentation')
+            var a = document.createElement("a")
+            a.innerHTML = "" + courses.courses[i]
+            a.setAttribute('role', 'menuitem')
+            a.setAttribute('tabindex', '-1')
+            a.setAttribute('onclick', 'loadTimetable("' + courses.courses[i] + '")')
+            li.appendChild(a)
+            ul.appendChild(li);
+        }
+
+    }
+
+    function loadTimetable(course){
+
+        var request = new XMLHttpRequest();
+        request.open('GET', '../json/?message=' + course, false);  // `false` makes the request synchronous
+        request.send(null);
+
+        timeTable = JSON.parse(request.responseText);
+
+        retDiv = createTable(timetable);
+
+        document.getElementById("timetable").appendChild(retDiv);
+
+    }
+
+    </script>
 
 			
 <script>
+/*
 $('#myModal').on('show.bs.modal', function (event) {
 	  var button = $(event.relatedTarget) // Button that triggered the modal
 	  var cell = button.data('whatever') // Extract info from data-* attributes
@@ -20,6 +79,7 @@ $('#myModal').on('show.bs.modal', function (event) {
 	  var modal = $(this)
 	  modal.find('.modal-title').text('New class for cell: ' + recipient)
   })
+*/
 </script>
 	
 {%endblock%}

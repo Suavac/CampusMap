@@ -1,6 +1,4 @@
-function createTable(title) {
-
-    document.write("<b>" + response.title + "</b>");
+function createTable(response) {
 
     var div = document.createElement('div');
     var table = document.createElement('table');
@@ -72,6 +70,6 @@ function createTable(title) {
     }
 
     div.appendChild(table);
-    document.body.appendChild(div);
+    return div;
 
 }
