@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from .forms import CourseForm, ModuleForm, RoomForm, LecturerForm, BuildingForm,TimetableForm
+from .forms import CourseForm, ModuleForm, RoomForm, LecturerForm, BuildingForm,TimetableForm, DepartmentForm
 import json
-from .models import Course, Timetable, Building, Module
+from .models import Course, Timetable, Building, Module, Lecturer, Department
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
@@ -36,7 +36,7 @@ def detail(request):
 
     temp2json = json.dumps(temp)
 
-    data = {'code' : message, 'title' : course.courseName, 'department' : course.department,
+    data = {'code' : message, 'title' : course.courseName, 'department' : course.department_id,
     'timetable' : temp2json}
 
     json_data = json.dumps(data)
@@ -65,7 +65,7 @@ def course(request):
 
 
 def module(request):
-    # get all data from course table in ascending order
+    # get all data from module table in ascending order
     query_results = Module.objects.all().order_by('modCode')
 
     if request.method == 'POST': # If the form has been submitted...
@@ -101,6 +101,8 @@ def room(request):
     })
 
 def lecturer(request):
+     # get all data from lecturer table in ascending order
+    query_results = Lecturer.objects.all()
     if request.method == 'POST': # If the form has been submitted...
         form = LecturerForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
@@ -113,13 +115,12 @@ def lecturer(request):
     else:
         form = LecturerForm() # An unbound form
 
-    return render(request, 'dbstuff/addlecturer.html', {
-        'form': form,
-    })
+    return render_to_response('dbstuff/addlecturer.html', locals(),context_instance=RequestContext(request))
+
 
 def building(request):
     # get all data from building table in ascending order
-    query_results = Building.objects.all()
+    query_results = Building.objects.all().order_by('buildingName')
 
     if request.method == 'POST': # If the form has been submitted...
         form = BuildingForm(request.POST) # A form bound to the POST data
@@ -133,6 +134,23 @@ def building(request):
     else:
         form = BuildingForm() # An unbound form
     return render_to_response('dbstuff/addbuilding.html', locals(),context_instance=RequestContext(request))
+
+def department(request):
+    # get all data from building table in ascending order
+    query_results = Department.objects.all()
+
+    if request.method == 'POST': # If the form has been submitted...
+        form = DepartmentForm(request.POST) # A form bound to the POST data
+        if form.is_valid(): # All validation rules pass
+            # Process the data in form.cleaned_data
+            # ...
+
+            save_it = form.save()
+            save_it.save()
+            return HttpResponseRedirect('/department/') # Redirect after POST
+    else:
+        form = DepartmentForm() # An unbound form
+    return render_to_response('dbstuff/adddepartment.html', locals(),context_instance=RequestContext(request))
 
 def timetable(request):
     if request.method == 'POST': # If the form has been submitted...

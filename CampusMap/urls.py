@@ -17,7 +17,7 @@ urlpatterns = patterns('map.views',
     url(r'^timetable/$', 'timetable'),
     url(r'^editTimetable/$', 'editTimetable'),
     url(r'^test/$', 'detail'),
-    url(r'^t1/$', 'courses'),
+    url(r'^department/$', 'department'),
 
 
 )

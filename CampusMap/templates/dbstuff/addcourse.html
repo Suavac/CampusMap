@@ -39,12 +39,25 @@
                 {% csrf_token %}
 
                     {% for field in form %}
+
                     <td>
 
-                    <input type="text" class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
-                    <div style= "color: red" >
-                        {{ field.errors|striptags }}
-                     </div>
+                        {% ifequal field.name "department" %}
+
+                            <select class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
+                                <option value= {{ form.department }}
+
+                            <div style= "color: red"> {{ field.errors|striptags }}</div>
+                            <p class="help-text">{{ field.help_text }} </p>
+                            </select>
+                        {% else %}
+
+                            <input type="text" class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
+                            <div style= "color: red" >{{ field.errors|striptags }} </div>
+
+                        {% endifequal %}
+
+
                     </td>
 
                     {% endfor %}
