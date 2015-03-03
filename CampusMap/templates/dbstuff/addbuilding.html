@@ -11,49 +11,7 @@
 <body>
 <div class="container">
 
-            <h1>Buildings</h1>
-
-            <table class="table">
-            <!-- PRINT COLUMN NAME -->
-                <tr>
-                    <th>Building Code</th>
-                    <th>Building Name</th>
-                    <th>Building Name</th>
-                    <th></th>
-                </tr>
-                <!-- FILL ONE ROW - 3 COLUMNS  -->
-                {% for item in query_results %}
-                 <tr>
-                    <td >{{ item.buildingCode }}</td>
-                    <td>{{  item.buildingNameE }}</td>
-                    <td>{{  item.buildingNameI }}</td>
-
-                 </tr>
-                {% endfor %}
-
-                <tr>
-                <!-- PRINT FORM IN THE LAST ROW -->
-                <form class="form-contact" action="" method="POST">
-                {% csrf_token %}
-
-                    {% for field in form %}
-                    <td>
-
-                    <input type="text" class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
-                    <div style= "color: red" >
-                        {{ field.errors|striptags }}
-                     </div>
-                    </td>
-
-                    {% endfor %}
-                    <td><input type="submit" value="Submit"  class="btn btn-primary">
-                    </td>
-
-                    </form>
-
-            </table>
-</div>
-<!--
+            <h1>Add Course Page</h1>
 
             <form class="form-contact" action="" method="POST">
             {% csrf_token %}
@@ -71,7 +29,7 @@
              <input type="submit" value="Submit"  class="btn btn-primary">
             </form>
         </div>
--->
+
 </body>
 </html>
 

@@ -10,47 +10,8 @@
 </head>
 <div class="container">
 
-            <h1>Modules</h1>
+            <h1>Add Course Page</h1>
 
-            <table class="table">
-            <!-- PRINT COLUMN NAME -->
-                <tr>
-                    <th>Module Code</th>
-                    <th>Module Name</th>
-                    <th></th>
-                </tr>
-                <!-- FILL ONE ROW - 3 COLUMNS  -->
-                {% for item in query_results %}
-                 <tr>
-                    <td >{{ item.modCode }}</td>
-                    <td>{{  item.modName }}</td>
-
-                 </tr>
-                {% endfor %}
-
-                <tr>
-                <!-- PRINT FORM IN THE LAST ROW -->
-                <form class="form-contact" action="" method="POST">
-                {% csrf_token %}
-
-                    {% for field in form %}
-                    <td>
-
-                    <input type="text" class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
-                    <div style= "color: red" >
-                        {{ field.errors|striptags }}
-                     </div>
-                    </td>
-
-                    {% endfor %}
-                    <td><input type="submit" value="Submit"  class="btn btn-primary">
-                    </td>
-
-                    </form>
-
-            </table>
-</div>
-<!--
             <form class="form-contact" action="" method="POST">
             {% csrf_token %}
             {% for field in form %}
@@ -67,7 +28,6 @@
              <input type="submit" value="Submit"  class="btn btn-primary">
             </form>
         </div>
--->
 </body>
 </html>
 

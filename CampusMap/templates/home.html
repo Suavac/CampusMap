@@ -8,8 +8,32 @@
       <div class="jumbotron">
         <h1>This is a test page!</h1>
         <p class="lead">This button will test the JSON request functionality</p>
-        <p><a class="btn btn-lg btn-success" href="../test/?message=2BCT" role="button">Request some stuff!</a></p>
+        <p><a class="btn btn-lg btn-success"  onclick="loadXMLDoc()" role="button">Request some stuff!</a></p>
+
+          <div id="test"></div>
+
       </div>
 </div> <!-- End Container -->
+
+<!--href="../test/?message=2BCT"-->
+
+<script>
+
+function loadXMLDoc() {
+
+    xmlhttp=new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+            document.getElementById("test").innerHTML=xmlhttp.responseText;
+        }
+    }
+
+    xmlhttp.open("GET","../test/?message=2BCT",true);
+    xmlhttp.send();
+}
+
+</script>
 
 {%  endblock %}

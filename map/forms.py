@@ -15,7 +15,7 @@ class CourseForm(forms.ModelForm):
 class ModuleForm(forms.ModelForm):
 
     modCode = forms.CharField(max_length=7, label = mark_safe('<strong>Module Code</strong>'))
-    modName = forms.CharField(max_length=70,label = mark_safe('<strong>Module Name</strong>'))
+    modName = forms.CharField(max_length=50,label = mark_safe('<strong>Module Name</strong>'))
 
     class Meta:
         model = Module
@@ -34,8 +34,7 @@ class RoomForm(forms.ModelForm):
 class BuildingForm(forms.ModelForm):
 
     buildingCode = forms.CharField(max_length = 7,label = mark_safe('<strong>Building Code</strong>'))
-    buildingNameE = forms.CharField(max_length = 75,label = mark_safe('<strong>Building Name</strong>'))
-    buildingNameI = forms.CharField(max_length = 75,label = mark_safe('<strong>Building Name</strong>'))
+    buildingName = forms.CharField(max_length = 50,label = mark_safe('<strong>Building Name</strong>'))
 
     class Meta:
         model = Building
