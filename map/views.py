@@ -6,6 +6,7 @@ from .models import Course, Timetable, Building, Module, Lecturer, Department
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
+import json
 
 def editTimetable(request):
     return render(request, 'timetable.html')
@@ -62,10 +63,11 @@ def JSON(request):
 
             timetable.append(tempData)
 
-        #temp2json = json.dumps(temp)
+        temp2json = json.dumps(timetable)
 
-        data = {'code' : message, 'title' : course.courseName, 'department' : course.department,
-        'timetable' : timetable}
+        data = {'code' : message, 'title' : course.courseName, 'department'  : course.department.depName,
+        'timetable' : temp2json}
+
 
         return JsonResponse(data)
 
