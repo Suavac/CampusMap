@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from .forms import CourseForm, ModuleForm, RoomForm, LecturerForm, BuildingForm,TimetableForm, DepartmentForm
-import json
+
 from .models import Course, Timetable, Building, Module, Lecturer, Department
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -10,38 +10,72 @@ from django.template import RequestContext
 def editTimetable(request):
     return render(request, 'timetable.html')
 
-## Testing JSON responses
-def detail(request):
+
+
+
+# Handle JSON requests
+def JSON(request):
 
     message = request.GET.get('message')
 
-    course = Course.objects.get(courseCode=message) #objects.all().filter(courseCode=message)
+    c = Course.objects.all()
+    exists = False
 
-    temp = []
+    # returns list of available courses
+    if (message == 'courses'):
 
-    t = Timetable.objects.filter(courseCode=Course.objects.get(courseCode=message))
+        temp = []
 
-    for o in t.iterator():
+        for o in c.iterator():
 
-        tempData = {
-        'code' : o.courseCode.courseCode,
-        'mod' : o.modCode.modCode,
-        'room' : o.roomCode.roomCode,
-        'lec' : o.lecCode.lecFirst_Name + " " + o.lecCode.lecLast_Name,
-        'day' : o.day,
-        'time' : o.time
-        }
+            print(o.courseCode)
 
-        temp.append(tempData)
+            temp.append(o.courseCode)
 
-    temp2json = json.dumps(temp)
+        data = {'courses' : temp}
 
-    data = {'code' : message, 'title' : course.courseName, 'department' : course.department_id,
-    'timetable' : temp2json}
+        return JsonResponse(data)
 
-    json_data = json.dumps(data)
+    # checks for queried course
+    for o in c.iterator():
+        if message == o.courseCode:
+            exists = True
 
-    return render(request, 'test.html', {"foo": json_data})
+    if (exists):
+
+        course = Course.objects.get(courseCode=message)
+
+        timetable = []
+
+        t = Timetable.objects.filter(courseCode=Course.objects.get(courseCode=message))
+
+        for o in t.iterator():
+
+            tempData = {
+            'code' : o.courseCode.courseCode,
+            'mod' : o.modCode.modCode,
+            'room' : o.roomCode.roomCode,
+            'lec' : o.lecCode.lecFirst_Name + " " + o.lecCode.lecLast_Name,
+            'day' : o.day,
+            'time' : o.time
+            }
+
+            timetable.append(tempData)
+
+        #temp2json = json.dumps(temp)
+
+        data = {'code' : message, 'title' : course.courseName, 'department' : course.department,
+        'timetable' : timetable}
+
+        return JsonResponse(data)
+
+    else:
+        return JsonResponse({'Invalid Query' : 'null'})
+
+
+
+
+
 
 def home(request):
     return render(request, 'home.html')

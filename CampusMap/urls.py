@@ -16,9 +16,10 @@ urlpatterns = patterns('map.views',
     url(r'^lecturer/', 'lecturer'),
     url(r'^timetable/$', 'timetable'),
     url(r'^editTimetable/$', 'editTimetable'),
-    url(r'^test/$', 'detail'),
     url(r'^department/$', 'department'),
 
+    url(r'^json/', 'JSON'),
+    url(r'^JSON/', 'JSON'),
 
 )
 
