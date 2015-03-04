@@ -53,7 +53,6 @@ def JSON(request):
         for o in t.iterator():
 
             tempData = {
-            'code' : o.courseCode.courseCode,
             'mod' : o.modCode.modCode,
             'room' : o.roomCode.roomCode,
             'lec' : o.lecCode.lecFirst_Name + " " + o.lecCode.lecLast_Name,
@@ -61,12 +60,14 @@ def JSON(request):
             'time' : o.time
             }
 
+            tempData2json = json.dumps(tempData)
+
             timetable.append(tempData)
 
-        temp2json = json.dumps(timetable)
+        #temp2json = json.dumps(timetable)
 
         data = {'code' : message, 'title' : course.courseName, 'department'  : course.department.depName,
-        'timetable' : temp2json}
+        'timetable' : timetable}
 
 
         return JsonResponse(data)

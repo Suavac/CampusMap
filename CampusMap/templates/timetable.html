@@ -8,19 +8,18 @@
 
 <div class="container">
 
-    <div class="dropdown" id="dropMain">
-        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-            Select a course  <span class="caret"></span>
-        </button>
+    <ul class="nav nav-pills">
 
-        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" id="courseDrop">
-            <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>1-->
-        </ul>
-    </div>
+        <li class="dropdown active"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Select a Course <span class="caret"></span></a>
 
-    <div id="timetable"></div>
+            <ul class="dropdown-menu" role="menu" id="courseDrop"></ul>
+
+    </ul>
+
 
 </div>
+
+<div id="timetable" class="container" style="margin:20px"></div>
 
 
     <script>
@@ -59,8 +58,13 @@
 
         timeTable = JSON.parse(request.responseText);
 
-        retDiv = createTable(timetable);
+        retDiv = createTable(timeTable);
 
+        el = document.getElementById("timetable");
+
+        while (el.hasChildNodes()){
+            el.removeChild(el.firstChild);
+        }
         document.getElementById("timetable").appendChild(retDiv);
 
     }

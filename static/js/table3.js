@@ -52,7 +52,7 @@ function createTable(response) {
                     response.timetable[k].room + "<br>" +
                     response.timetable[k].mod + "<br>" +
                     response.timetable[k].lect + "<br>");
-					cell.style.backgroundColor = response.timetable[i].colour;
+					//cell.style.backgroundColor = response.timetable[i].colour;
 
                     break; // important
 
