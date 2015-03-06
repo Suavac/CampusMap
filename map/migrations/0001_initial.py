@@ -13,9 +13,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Building',
             fields=[
-                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
-                ('buildingCode', models.CharField(max_length=7)),
-                ('buildingName', models.CharField(max_length=50)),
+                ('buildingName', models.CharField(max_length=75, serialize=False, primary_key=True)),
             ],
             options={
             },
@@ -24,10 +22,17 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Course',
             fields=[
-                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
-                ('courseCode', models.CharField(max_length=7)),
+                ('courseCode', models.CharField(max_length=7, serialize=False, primary_key=True)),
                 ('courseName', models.CharField(max_length=50)),
-                ('department', models.CharField(max_length=50)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Department',
+            fields=[
+                ('depName', models.CharField(max_length=70, serialize=False, primary_key=True)),
             ],
             options={
             },
@@ -36,10 +41,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Lecturer',
             fields=[
-                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
-                ('lecCode', models.CharField(max_length=7)),
-                ('lecFirst_Name', models.CharField(max_length=100)),
-                ('lecLast_Name', models.CharField(max_length=100)),
+                ('lecCode', models.CharField(max_length=7, serialize=False, primary_key=True)),
+                ('lecFirst_Name', models.CharField(max_length=50)),
+                ('lecLast_Name', models.CharField(max_length=50)),
                 ('lecEmail', models.EmailField(max_length=75)),
             ],
             options={
@@ -49,9 +53,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Module',
             fields=[
-                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
-                ('modCode', models.CharField(max_length=7)),
-                ('modName', models.CharField(max_length=50)),
+                ('modCode', models.CharField(max_length=7, serialize=False, primary_key=True)),
+                ('modName', models.CharField(max_length=70)),
             ],
             options={
             },
@@ -60,11 +63,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Room',
             fields=[
-                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
-                ('roomCode', models.CharField(max_length=7)),
-                ('roomName', models.CharField(max_length=7)),
-                ('lat', models.CharField(max_length=7)),
-                ('lon', models.CharField(max_length=7)),
+                ('roomCode', models.CharField(max_length=15, serialize=False, primary_key=True)),
+                ('roomName', models.CharField(max_length=30)),
+                ('lat', models.FloatField(max_length=9)),
+                ('lon', models.FloatField(max_length=9)),
                 ('building', models.ForeignKey(to='map.Building')),
             ],
             options={
@@ -74,7 +76,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Timetable',
             fields=[
-                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('year', models.CharField(max_length=1)),
+                ('semester', models.CharField(max_length=1)),
                 ('day', models.CharField(max_length=7)),
                 ('time', models.CharField(max_length=7)),
                 ('courseCode', models.ForeignKey(to='map.Course')),
@@ -88,6 +92,12 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterUniqueTogether(
             name='timetable',
-            unique_together=set([('courseCode', 'modCode', 'day', 'time')]),
+            unique_together=set([('year', 'semester', 'courseCode', 'modCode', 'day', 'time')]),
+        ),
+        migrations.AddField(
+            model_name='course',
+            name='department',
+            field=models.ForeignKey(to='map.Department'),
+            preserve_default=True,
         ),
     ]

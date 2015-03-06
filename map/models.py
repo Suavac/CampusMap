@@ -29,7 +29,7 @@ class Building(models.Model):
 
 
 class Room(models.Model):
-    roomCode = models.CharField(max_length = 7, primary_key=True)
+    roomCode = models.CharField(max_length = 15, primary_key=True) # changed to 15
     roomName = models.CharField(max_length = 30)
     building = models.ForeignKey(Building)
     lat = models.FloatField(max_length = 9)

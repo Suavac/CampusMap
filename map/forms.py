@@ -36,7 +36,7 @@ class BuildingForm(forms.ModelForm):
 
 class RoomForm(forms.ModelForm):
 
-    roomCode = forms.CharField(max_length = 7,label = mark_safe('<strong>Room Code</strong>'))
+    roomCode = forms.CharField(max_length = 15,label = mark_safe('<strong>Room Code</strong>'))
     roomName = forms.CharField(max_length = 30,label = mark_safe('<strong>Room Name</strong>'))
     building = queryset=Building.objects.all()
     lat = forms.CharField(max_length = 9, label = mark_safe('<strong>Latitude</strong>'))
