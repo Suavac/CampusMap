@@ -76,7 +76,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Timetable',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
                 ('year', models.CharField(max_length=1)),
                 ('semester', models.CharField(max_length=1)),
                 ('day', models.CharField(max_length=7)),
