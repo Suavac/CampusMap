@@ -12,7 +12,7 @@ class DepartmentForm(forms.ModelForm):
 
 class CourseForm(forms.ModelForm):
 
-    courseCode = forms.CharField(max_length=7,label = mark_safe('<strong>Code</strong>'))
+    courseCode = forms.CharField(max_length=15,label = mark_safe('<strong>Code</strong>'))
     courseName = forms.CharField(max_length=50,label = mark_safe('<strong>Name</strong>'))
     department = queryset=Department.objects.all()
 
@@ -66,7 +66,7 @@ class TimetableForm(forms.ModelForm):
     modCode = Module.objects.all()
     roomCode = Room.objects.all()
     lecCode = Lecturer.objects.all()
-    day = forms.CharField(max_length = 7)
+    day = forms.ChoiceField(Timetable.DAY_CHOICES)
     time = forms.CharField(max_length = 7)
     class Meta:
         model = Timetable

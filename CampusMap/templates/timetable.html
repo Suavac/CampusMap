@@ -67,12 +67,35 @@
         }
         document.getElementById("timetable").appendChild(retDiv);
 
+
+        /////////////////////////////////////////////////////////
+        // GET THE CELL INDEX
+        var table = document.getElementsByTagName("table")[0];
+        var cells = table.getElementsByTagName("td"); //
+
+        for(var i = 0; i < cells.length; i++){
+        // Cell Object
+        var cell = cells[i];
+        // Track with onclick
+            cell.onclick = function(){
+                var cellIndex  = this.cellIndex ;
+
+                var rowIndex = this.parentNode.rowIndex ;
+
+                alert("Column: " + cellIndex + " / Row: " + rowIndex );
+            }
+        }
     }
+
+
 
     </script>
 
 			
 <script>
+
+
+
 /*
 $('#myModal').on('show.bs.modal', function (event) {
 	  var button = $(event.relatedTarget) // Button that triggered the modal

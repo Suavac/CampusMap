@@ -27,7 +27,6 @@ class Building(models.Model):
         return "%s" % self.buildingName
 
 
-
 class Room(models.Model):
     roomCode = models.CharField(max_length = 15, primary_key=True) # changed to 15
     roomName = models.CharField(max_length = 30)
@@ -52,13 +51,25 @@ class Lecturer(models.Model):
 
 
 class Timetable(models.Model):
+
+    DAY_CHOICES = (
+    ('1', 'Monday'),
+    ('2', 'Tuesday'),
+    ('3', 'Wednesday'),
+    ('4', 'Thursday'),
+    ('5', 'Friday'),
+    )
+    HOURS_CHOICES = (
+
+    )
+
     courseCode = models.ForeignKey(Course)
     year = models.CharField(max_length = 1)
     semester = models.CharField(max_length = 1)
     modCode = models.ForeignKey(Module)
     roomCode = models.ForeignKey(Room)
     lecCode = models.ForeignKey(Lecturer)
-    day = models.CharField(max_length = 7)
+    day = models.CharField(max_length = 1, choices=DAY_CHOICES)
     time = models.CharField(max_length = 7)
 
     class Meta:
