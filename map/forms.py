@@ -66,7 +66,11 @@ class TimetableForm(forms.ModelForm):
     modCode = Module.objects.all()
     roomCode = Room.objects.all()
     lecCode = Lecturer.objects.all()
-    day = forms.ChoiceField(Timetable.DAY_CHOICES)
-    time = forms.CharField(max_length = 7)
+
+    day = forms.CharField(max_length = 1)
+    time = forms.CharField(max_length = 2)
+
+    #day = forms.ChoiceField(Timetable.DAY_CHOICES)
+    #time = forms.ChoiceField(Timetable.HOURS_CHOICES)
     class Meta:
         model = Timetable

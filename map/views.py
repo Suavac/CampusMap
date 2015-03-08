@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, JsonResponse
-from .forms import CourseForm, ModuleForm, RoomForm, LecturerForm, BuildingForm,TimetableForm, DepartmentForm
+from .forms import CourseForm, ModuleForm, RoomForm, LecturerForm, BuildingForm, TimetableForm, DepartmentForm
 
 from .models import Course, Timetable, Building, Module, Lecturer, Department
 from django.shortcuts import render_to_response
@@ -9,10 +9,31 @@ from django.template import RequestContext
 import json
 
 def editTimetable(request):
-    return render(request, 'timetable.html')
 
+    check = "false"
 
+    if request.method == 'POST': # If the form has been submitted...
+        form = TimetableForm(request.POST) # A form bound to the POST data
 
+        if form.is_valid(): # All validation rules pass
+            # Process the data in form.cleaned_data
+            # ...
+
+            save_it = form.save()
+            save_it.save()
+
+            check = "true"
+
+            return HttpResponseRedirect('/editTimetable/',
+                                        {'check' : check,
+                                         'course' : form.courseCode}) # Redirect after POST
+    else:
+        form = TimetableForm() # An unbound form
+
+    return render(request, 'timetable.html', {
+        'form': form,
+        'check': check
+    })
 
 # Handle JSON requests
 def JSON(request):
@@ -28,8 +49,6 @@ def JSON(request):
         temp = []
 
         for o in c.iterator():
-
-            print(o.courseCode)
 
             temp.append(o.courseCode)
 

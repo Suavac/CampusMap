@@ -27,7 +27,7 @@ function loadXMLDoc(req) {
         {
             document.getElementById("test").innerHTML=xmlhttp.responseText;
         }
-    }
+    };
 
     xmlhttp.open("GET","../json/?message=" + req ,true);
     xmlhttp.send();

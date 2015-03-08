@@ -22,9 +22,81 @@
 <div id="timetable" class="container" style="margin:20px"></div>
 
 
+<div id="cellModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Add a class to the timetable</h4>
+            </div>
+            <div class="modal-body" id="cellModalBody">
+
+
+
+            <form id="cellModalForm" action='' method='post' class="form-group">{% csrf_token %}
+
+
+            {{ form.courseCode }}
+            {{ form.year }}
+            {{ form.semester }}
+            {{ form.day }}
+            {{ form.time }}
+
+
+              <div class="form-group">
+                <label for="courseCode">Module Code</label>
+                  {{ form.modCode }}
+              </div>
+                <div class="form-group">
+                <label for="courseCode">Room Code</label>
+                    {{ form.roomCode }}
+              </div>
+                <div class="form-group">
+                <label for="courseCode">Lecturer Code</label>
+                    {{ form.lecCode }}
+              </div>
+
+
+
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"> Lab
+                </label>
+              </div>
+
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+
+
+
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
     <script>
 
-    window.onload=getCourses();
+    window.onload=function(){
+
+        getCourses();
+
+        if ({{ check }}){
+
+            loadTimetable({{ course }});
+
+        }
+    }
+
+
+
 
     function getCourses(){
 
@@ -38,13 +110,13 @@
 
         for(var i = 0; i<courses.courses.length; i++){
             var li = document.createElement("li");
-            li.setAttribute('role', 'presentation')
-            var a = document.createElement("a")
-            a.innerHTML = "" + courses.courses[i]
-            a.setAttribute('role', 'menuitem')
-            a.setAttribute('tabindex', '-1')
-            a.setAttribute('onclick', 'loadTimetable("' + courses.courses[i] + '")')
-            li.appendChild(a)
+            li.setAttribute('role', 'presentation');
+            var a = document.createElement("a");
+            a.innerHTML = "" + courses.courses[i];
+            a.setAttribute('role', 'menuitem');
+            a.setAttribute('tabindex', '-1');
+            a.setAttribute('onclick', 'loadTimetable("' + courses.courses[i] + '")');
+            li.appendChild(a);
             ul.appendChild(li);
         }
 
@@ -70,6 +142,8 @@
 
         /////////////////////////////////////////////////////////
         // GET THE CELL INDEX
+
+
         var table = document.getElementsByTagName("table")[0];
         var cells = table.getElementsByTagName("td"); //
 
@@ -78,35 +152,25 @@
         var cell = cells[i];
         // Track with onclick
             cell.onclick = function(){
-                var cellIndex  = this.cellIndex ;
 
-                var rowIndex = this.parentNode.rowIndex ;
+                document.getElementById('id_courseCode').value = course;
 
-                alert("Column: " + cellIndex + " / Row: " + rowIndex );
+                document.getElementById('id_day').value = this.getAttribute("day");
+
+                document.getElementById('id_time').value = this.getAttribute("time");
+
+                document.getElementById('id_year').value = '1';
+
+                document.getElementById('id_semester').value = '2';
+
+                $('#cellModal').modal('show');
+
             }
         }
     }
 
-
-
     </script>
 
-			
-<script>
 
-
-
-/*
-$('#myModal').on('show.bs.modal', function (event) {
-	  var button = $(event.relatedTarget) // Button that triggered the modal
-	  var cell = button.data('whatever') // Extract info from data-* attributes
-	  window.alert(cell);
-	  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-	  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-	  var modal = $(this)
-	  modal.find('.modal-title').text('New class for cell: ' + recipient)
-  })
-*/
-</script>
 	
 {%endblock%}

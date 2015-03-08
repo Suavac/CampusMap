@@ -63,6 +63,8 @@ function createTable(response) {
                 }
 
             }
+            cell.setAttribute("time", i);
+            cell.setAttribute("day", j);
             cell.innerHTML = cellText;
             row.appendChild(cell);
         }
