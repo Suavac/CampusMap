@@ -35,14 +35,23 @@
 
             <form id="cellModalForm" action='' method='post' class="form-group">{% csrf_token %}
 
+                <div style="visibility: hidden">
+                    {{ form.courseCode }}
+                    {{ form.year }}
+                    {{ form.semester }}
+                    {{ form.day }}
+                    {{ form.time }}
+                </div>
 
-            {{ form.courseCode }}
-            {{ form.year }}
-            {{ form.semester }}
-            {{ form.day }}
-            {{ form.time }}
-
-
+                
+              <div class="form-group">
+                <label for="courseCode">Year</label>
+                  {{ form.year }}
+              </div>
+              <div class="form-group">
+                <label for="courseCode">Semester</label>
+                  {{ form.semester }}
+              </div>
               <div class="form-group">
                 <label for="courseCode">Module Code</label>
                   {{ form.modCode }}
