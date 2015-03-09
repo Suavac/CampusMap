@@ -1,5 +1,33 @@
 {% extends "base.html" %}
 
+
+{%block header%}
+
+
+      <form class="col-md-9" role="form">
+        <div class="form-group">
+            <div class="col-md-3">
+              <select class="form-control" id="courseSelect">
+                <option value=''>Select Course</option>
+              </select>
+            </div>
+
+            <div class="col-md-3">
+              <select disabled class="form-control" id="yearSelect">
+                <option value=''>Select Year</option>
+              </select>
+            </div>
+
+            <div class="col-md-3">
+              <select disabled class="form-control" id="semesterSelect">
+                <option value=''>Select Semester</option>
+              </select>
+            </div>
+        </div>
+      </form>
+
+
+{%endblock header%}
 {%block content%}
 
 <script src="{{ STATIC_URL }}js/table.js"></script>
@@ -16,26 +44,9 @@ th {
 
 </style>
 
+<div class="container-fluid col-md-11"></div>
 
-<div class="container-fluid col-md-12" style="text-align: center; justify-content: center; display: flex">
-    <div class="jumbotron">
-        <ul class="nav nav-pills" >
-
-            <li class="dropdown active"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Select a Course <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu" id="courseDrop"></ul>
-
-            <li class="dropdown active"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Filter by Year <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu" id="yearDrop"></ul>
-
-            <li class="dropdown active"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Filter by Semester <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu" id="semesterDrop"></ul>
-
-        </ul>
-    </div>
-</div>
-
-<div id="timetable" class="container-fluid col-md-12" style="margin:20px"></div>
-
+<div id="timetable" class="container-fluid col-md-11" style="margin:20px"></div>
 
 <div id="cellModal" class="modal fade">
     <div class="modal-dialog">
@@ -83,7 +94,7 @@ th {
 </div>
 
 
-    <script>
+<script>
 
     window.onload=function(){
 
@@ -92,13 +103,9 @@ th {
         getCourses();
 
         if ({{ check }}){
-
             loadTimetable({{ course }});
-
         }
     }
-
-
 
 
     function getCourses(){
@@ -109,20 +116,20 @@ th {
 
         courses = JSON.parse(request.responseText);
 
-        ul = document.getElementById('courseDrop');
+        sel = document.getElementById('courseSelect');
 
         for(var i = 0; i<courses.courses.length; i++){
-            var li = document.createElement("li");
-            li.setAttribute('role', 'presentation');
-            var a = document.createElement("a");
-            a.innerHTML = "" + courses.courses[i];
-            a.setAttribute('role', 'menuitem');
-            a.setAttribute('tabindex', '-1');
-            a.setAttribute('onclick', 'loadTimetable("' + courses.courses[i] + '")');
-            li.appendChild(a);
-            ul.appendChild(li);
+            var op = document.createElement("option");
+            op.innerHTML = "" + courses.courses[i];
+            sel.setAttribute('onchange', 'OnSelectionChange(this)')
+            sel.appendChild(op);
         }
 
+    }
+
+    function OnSelectionChange (select) {
+        var selectedOption = select.options[select.selectedIndex]
+        loadTimetable(selectedOption.value)
     }
 
     function loadTimetable(course){
@@ -140,12 +147,8 @@ th {
         while (el.hasChildNodes()){
             el.removeChild(el.firstChild);
         }
+
         document.getElementById("timetable").appendChild(retDiv);
-
-
-        /////////////////////////////////////////////////////////
-        // GET THE CELL INDEX
-
 
         var table = document.getElementsByTagName("table")[0];
         var cells = table.getElementsByTagName("td"); //
@@ -171,9 +174,6 @@ th {
             }
         }
     }
+</script>
 
-    </script>
-
-
-	
 {%endblock%}

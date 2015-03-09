@@ -35,6 +35,10 @@ def editTimetable(request):
         'check': check
     })
 
+def editMap(request):
+    return render(request, 'map.html')
+
+
 # Handle JSON requests
 def JSON(request):
 

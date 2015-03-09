@@ -36,10 +36,10 @@
                     <a style="color:white" href="../home"><span class="glyphicon glyphicon-home" aria-hidden="false" ></span> Home</a>
                 </li>
                 <li>
-                    <a style="color:white" href="../editTimetable"><span class="glyphicon glyphicon-th-large" aria-hidden="false"></span> Update a Timetable</a>
+                    <a style="color:white" href="../edit-timetable"><span class="glyphicon glyphicon-th-large" aria-hidden="false"></span> Edit a Timetable</a>
                 </li>
                 <li>
-                    <a style="color:white" href="#"><span class="glyphicon glyphicon-map-marker" aria-hidden="false"></span> Update Campus Map</a>
+                    <a style="color:white" href="../edit-map"><span class="glyphicon glyphicon-map-marker" aria-hidden="false"></span> Edit the Map</a>
                 </li>
                 <hr>
                 <ul style="color:white"> <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="false"></span> Database
@@ -72,42 +72,44 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
+                <div class="row" >
+                    <div class="col-md-3" >
                         <a href="#menu-toggle" class="btn btn-primary" id="menu-toggle">Toggle Menu</a>
-                    </div>
-                    {% block content %}
-                    {% endblock %}
 
+                    </div>
+
+                    {% block header %}
+
+                    {% endblock header %}
                 </div>
+
+                {% block content %}
+
+                {% endblock content%}
+
             </div>
         </div>
         <!-- /#page-content-wrapper -->
 
 
-<!-- jQuery -->
-<script src="{{ STATIC_URL }}js/jquery.js"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-
-<!-- Menu Toggle Script -->
-<script>
-$("#menu-toggle").click(function(e) {
-    e.preventDefault();
-    $("#wrapper").toggleClass("toggled");
-});
-</script>
-
-
-{% block footer %}
       <hr>
       <footer class="footer" align="center" style="text-align: center">
         <p>&copy; CampusMap</p>
       </footer>
-{% endblock %}
-
      </div> <!-- /wrapper -->
-
   </body>
+
+<!-- jQuery -->
+<script src="{{ STATIC_URL }}js/jquery.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+<!-- Menu Toggle Script -->
+<script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+</script>
+
 </html>
