@@ -3,6 +3,8 @@ function createTable(response) {
     var div = document.createElement('div');
     var table = document.createElement('table');
 
+
+
     div.className = 'container';
     table.className = "table table-bordered table-striped table-condensed text-center";
 
@@ -59,7 +61,7 @@ function createTable(response) {
                     // otherwise, something default
                 } else {
 
-                    var cellText = "Empty"
+                    var cellText = ""
                 }
 
             }

@@ -26,21 +26,22 @@
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
+            <ul class="sidebar-nav" >
                 <li class="sidebar-brand">
                     <a style="color:white">
                         NUI Galway CampusMap
                     </a>
                 </li>
                 <li>
-                    <a href="../home"><span class="glyphicon glyphicon-home" aria-hidden="false"></span> Home</a>
+                    <a style="color:white" href="../home"><span class="glyphicon glyphicon-home" aria-hidden="false" ></span> Home</a>
                 </li>
                 <li>
-                    <a href="../editTimetable"><span class="glyphicon glyphicon-th-large" aria-hidden="false"></span> Update a Timetable</a>
+                    <a style="color:white" href="../editTimetable"><span class="glyphicon glyphicon-th-large" aria-hidden="false"></span> Update a Timetable</a>
                 </li>
                 <li>
-                    <a href="#"><span class="glyphicon glyphicon-map-marker" aria-hidden="false"></span> Update Campus Map</a>
+                    <a style="color:white" href="#"><span class="glyphicon glyphicon-map-marker" aria-hidden="false"></span> Update Campus Map</a>
                 </li>
+                <hr>
                 <ul style="color:white"> <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="false"></span> Database
                     <li>
                     <a href="../course">Add Course</a>
@@ -63,7 +64,6 @@
                     <li>
                     <a href="../timetable">Add Timetable</a>
                     </li>
-
                 </ul>
             </ul>
         </div>
@@ -74,46 +74,40 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                        <a href="#menu-toggle" class="btn btn-primary" id="menu-toggle">Toggle Menu</a>
                     </div>
+                    {% block content %}
+                    {% endblock %}
+
                 </div>
             </div>
         </div>
         <!-- /#page-content-wrapper -->
-		
-{% block content %}
 
-{% endblock %}
 
-    </div>
-    <!-- /#wrapper -->
+<!-- jQuery -->
+<script src="{{ STATIC_URL }}js/jquery.js"></script>
 
-    <!-- jQuery -->
-    <script src="{{ STATIC_URL }}js/jquery.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+<!-- Menu Toggle Script -->
+<script>
+$("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+});
+</script>
 
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
-
-</body>
-
-</html>
 
 {% block footer %}
       <hr>
-      <footer class="footer" align="center">
+      <footer class="footer" align="center" style="text-align: center">
         <p>&copy; CampusMap</p>
       </footer>
 {% endblock %}
 
-     </div> <!-- /container -->
+     </div> <!-- /wrapper -->
 
   </body>
 </html>

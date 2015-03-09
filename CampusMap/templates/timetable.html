@@ -2,24 +2,39 @@
 
 {%block content%}
 
-<script src="{{ STATIC_URL }}js/table3.js"></script>
+<script src="{{ STATIC_URL }}js/table.js"></script>
+
+<style>
+
+table {
+    width: 100%;
+}
+
+th {
+    height: 60px;
+}
+
+</style>
 
 
+<div class="container-fluid col-md-12" style="text-align: center; justify-content: center; display: flex">
+    <div class="jumbotron">
+        <ul class="nav nav-pills" >
 
-<div class="container">
-
-    <ul class="nav nav-pills">
-
-        <li class="dropdown active"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Select a Course <span class="caret"></span></a>
-
+            <li class="dropdown active"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Select a Course <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu" id="courseDrop"></ul>
 
-    </ul>
+            <li class="dropdown active"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Filter by Year <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu" id="yearDrop"></ul>
 
+            <li class="dropdown active"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Filter by Semester <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu" id="semesterDrop"></ul>
 
+        </ul>
+    </div>
 </div>
 
-<div id="timetable" class="container" style="margin:20px"></div>
+<div id="timetable" class="container-fluid col-md-12" style="margin:20px"></div>
 
 
 <div id="cellModal" class="modal fade">
@@ -32,54 +47,31 @@
             <div class="modal-body" id="cellModalBody">
 
 
+            <form id="cellModalForm" action='' method='post' class="form">{% csrf_token %}
 
-            <form id="cellModalForm" action='' method='post' class="form-group">{% csrf_token %}
-
-                <div style="visibility: hidden">
-                    {{ form.courseCode }}
-                    {{ form.year }}
-                    {{ form.semester }}
+                <!-- Always Hidden -->
+                <div style="display: none">
                     {{ form.day }}
                     {{ form.time }}
                 </div>
 
-                
-              <div class="form-group">
-                <label for="courseCode">Year</label>
-                  {{ form.year }}
-              </div>
-              <div class="form-group">
-                <label for="courseCode">Semester</label>
-                  {{ form.semester }}
-              </div>
-              <div class="form-group">
-                <label for="courseCode">Module Code</label>
-                  {{ form.modCode }}
-              </div>
-                <div class="form-group">
-                <label for="courseCode">Room Code</label>
-                    {{ form.roomCode }}
-              </div>
-                <div class="form-group">
-                <label for="courseCode">Lecturer Code</label>
-                    {{ form.lecCode }}
-              </div>
+                <!-- Visible when creating new timetable -->
+                <div id="newCourseOptions" style="display: none">
+                    <div class="form-group"> <label for="courseCode">Course Code</label>{{ form.courseCode }}</div>
+                    <div class="form-group"> <label for="year">Year</label>{{ form.year }}</div>
+                    <div class="form-group"> <label for="semester">Semester</label>{{ form.semester }}</div>
+                </div>
 
+                <!-- Always visible -->
+                <div class="form-group"> <label for="modCode">Module Code</label>{{ form.modCode }}</div>
+                <div class="form-group"> <label for="roomCode">Room Code</label>{{ form.roomCode }}</div>
+                <div class="form-group"> <label for="lecCode">Lecturer Code</label>{{ form.lecCode }}</div>
 
+                <div class="checkbox"> <label><input type="checkbox"> Lab </label></div>
 
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox"> Lab
-                </label>
-              </div>
+                <button type="submit" class="btn btn-default">Submit</button>
 
-              <button type="submit" class="btn btn-default">Submit</button>
             </form>
-
-
-
-
-
 
             </div>
             <div class="modal-footer">
@@ -94,6 +86,8 @@
     <script>
 
     window.onload=function(){
+
+        //loadTimetable();
 
         getCourses();
 
