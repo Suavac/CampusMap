@@ -2,6 +2,7 @@ from django.db import models
 
 class Department(models.Model):
     depName = models.CharField(max_length = 70, primary_key=True)
+    depShort = models.CharField(max_length=20)
 
     def __str__(self):
         return "%s" % self.depName
@@ -43,7 +44,8 @@ class Lecturer(models.Model):
     lecCode = models.CharField(max_length = 7, primary_key=True)
     lecFirst_Name = models.CharField(max_length = 50)
     lecLast_Name = models.CharField(max_length = 50)
-    lecEmail = models.EmailField();
+    lecEmail = models.EmailField()
+    #lecOffice = models.ForeignKey(Room)
 
     def __str__(self):
         return self.lecFirst_Name + " " + self.lecLast_Name
@@ -53,11 +55,11 @@ class Lecturer(models.Model):
 class Timetable(models.Model):
 
     DAY_CHOICES = (
-    ('1', 'Monday'),
-    ('2', 'Tuesday'),
-    ('3', 'Wednesday'),
-    ('4', 'Thursday'),
-    ('5', 'Friday'),
+        ('1', 'Monday'),
+        ('2', 'Tuesday'),
+        ('3', 'Wednesday'),
+        ('4', 'Thursday'),
+        ('5', 'Friday'),
     )
 
     HOURS_CHOICES = (
@@ -76,7 +78,7 @@ class Timetable(models.Model):
 
     courseCode = models.ForeignKey(Course)
     year = models.CharField(max_length = 1)
-    semester = models.CharField(max_length = 1)
+    semester = models.CharField(max_length = 1, choices=(('1','1'),('2','2')))
     modCode = models.ForeignKey(Module)
     roomCode = models.ForeignKey(Room)
     lecCode = models.ForeignKey(Lecturer)

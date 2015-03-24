@@ -6,7 +6,7 @@ from .models import Course, Timetable, Building, Module, Lecturer, Department
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-import json
+import json, urllib
 
 def editTimetable(request):
 
@@ -24,9 +24,9 @@ def editTimetable(request):
 
             check = "true"
 
-            return HttpResponseRedirect('/editTimetable/',
-                                        {'check' : check,
-                                         'course' : form.courseCode}) # Redirect after POST
+            #return HttpResponseRedirect('/editTimetable/',
+             #                           {'check' : check,
+              #                           'course' : form.courseCode}) # Redirect after POST
     else:
         form = TimetableForm() # An unbound form
 
@@ -43,7 +43,9 @@ def editMap(request):
 def JSON(request):
 
     message = request.GET.get('message')
+    print message
 
+    d = Department.objects.all()
     c = Course.objects.all()
     exists = False
 
@@ -57,6 +59,37 @@ def JSON(request):
             temp.append(o.courseCode)
 
         data = {'courses' : temp}
+
+        return JsonResponse(data)
+
+
+    elif (message == 'departments'):
+        temp = []
+
+
+        for dept in d.iterator():
+            temp2 = []
+            temp2.append(dept.depName)
+            temp2.append(dept.depShort)
+            temp.append(temp2)
+
+            print temp
+        data = {'departments' : temp}
+        #print data
+
+        return JsonResponse(data)
+
+    elif (message == 'Arts' or message == 'Engineering' or message == 'Medicine' or message == 'Business' or message == 'Science'):
+        courses = []
+
+        for f in c.iterator():
+            if f.department.depShort == message:
+
+                courses.append(f.courseCode)
+                print('match')
+
+        print courses
+        data = {'courses' : courses}
 
         return JsonResponse(data)
 
@@ -97,9 +130,6 @@ def JSON(request):
 
     else:
         return JsonResponse({'Invalid Query' : 'null'})
-
-
-
 
 
 

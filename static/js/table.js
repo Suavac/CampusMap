@@ -7,6 +7,7 @@ function createTable(response) {
 
     div.className = 'container';
     table.className = "table table-bordered table-striped table-condensed text-center";
+    //table.setAttribute('valign', 'center');
 
     var trh = document.createElement('tr');
 
@@ -41,7 +42,9 @@ function createTable(response) {
 
         // for every row, create 5 days
         for (var j = 1; j <= 5; j++) {
-
+         var button = document.createElement('button');
+            button.className = "btn btn-info";
+            button.innerHTML = "Click to add a class";
             var cell = document.createElement("td");
 
             // loop over all elements in time table, looking for a match
@@ -55,19 +58,19 @@ function createTable(response) {
                     response.timetable[k].mod + "<br>" +
                     response.timetable[k].lect + "<br>");
 					//cell.style.backgroundColor = response.timetable[i].colour;
-
+                     cell.innerHTML = cellText;
                     break; // important
 
                     // otherwise, something default
                 } else {
 
-                    var cellText = ""
+                    cell.appendChild(button);
                 }
 
             }
             cell.setAttribute("time", i);
             cell.setAttribute("day", j);
-            cell.innerHTML = cellText;
+
             row.appendChild(cell);
         }
         tbody.appendChild(row);
