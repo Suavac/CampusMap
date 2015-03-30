@@ -7,6 +7,12 @@
       <form class="col-md-9" role="form">
         <div class="form-group">
             <div class="col-md-3">
+              <select class="form-control" id="departmentSelect">
+                <option value=''>Select Department</option>
+              </select>
+            </div>
+
+            <div class="col-md-3" id = "courses">
               <select class="form-control" id="courseSelect">
                 <option value=''>Select Course</option>
               </select>
@@ -76,19 +82,20 @@ th {
                 <!-- Always visible -->
                 <div class="form-group"> <label for="modCode">Module Code</label>{{ form.modCode }}</div>
                 <div class="form-group"> <label for="roomCode">Room Code</label>{{ form.roomCode }}</div>
-                <div class="form-group"> <label for="lecCode">Lecturer Code</label>{{ form.lecCode }}</div>
+                <div class="form-group"> <label for="lecCode">Lecturer Name</label>{{ form.lecCode }}</div>
 
                 <div class="checkbox"> <label><input type="checkbox"> Lab </label></div>
 
-                <button type="submit" class="btn btn-default">Submit</button>
+                <!--<button type="submit" class="btn btn-default">Submit</button>-->
 
-            </form>
+            <!--</form>-->
 
-            </div>
+            <!--</div>-->
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
@@ -97,10 +104,7 @@ th {
 <script>
 
     window.onload=function(){
-
-        //loadTimetable();
-
-        getCourses();
+        getDepartments();
 
         if ({{ check }}){
             loadTimetable({{ course }});
@@ -108,23 +112,52 @@ th {
     }
 
 
-    function getCourses(){
+    function getCourses(dept){
 
         var request = new XMLHttpRequest();
-        request.open('GET', '../json/?message=courses', false);  // `false` makes the request synchronous
+        request.open('GET', '../json/?message='+dept, false);  // `false` makes the request synchronous
         request.send(null);
 
         courses = JSON.parse(request.responseText);
+        //console.log(courses);
 
         sel = document.getElementById('courseSelect');
 
+        //Clear dropdown each time a new department is chosen
+        while(sel.firstChild){
+            sel.removeChild(sel.firstChild);
+        }
+
+        //Set the first element in the dropdown
+        var option = document.createElement("option");
+        option.innerHTML = "Select a course";
+        sel.appendChild(option);
+
+        //Set every other element int the dropdown
         for(var i = 0; i<courses.courses.length; i++){
             var op = document.createElement("option");
             op.innerHTML = "" + courses.courses[i];
             sel.setAttribute('onchange', 'OnSelectionChange(this)')
             sel.appendChild(op);
         }
+        //document.getElementById('courses').style.display = '';
+    }
 
+    function getDepartments(){
+        var request = new XMLHttpRequest();
+        request.open('GET', '../json/?message=departments', false);
+        request.send(null);
+
+        departments = JSON.parse(request.responseText);
+
+        sel = document.getElementById('departmentSelect');
+
+        for(var i=0; i<departments.departments.length; i++){
+            var op = document.createElement("option");
+            op.innerHTML = "" + departments.departments[i][0];
+            op.setAttribute('onClick', 'getCourses('+"'"+departments.departments[i][1]+"'"+')');
+            sel.appendChild(op);
+        }
     }
 
     function OnSelectionChange (select) {

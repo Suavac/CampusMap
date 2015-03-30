@@ -22,6 +22,8 @@ function loadXMLDoc(req) {
 
     xmlhttp=new XMLHttpRequest();
 
+    console.log(req);
+
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState==4 && xmlhttp.status==200)
         {
