@@ -2,15 +2,15 @@ function createTable(response) {
 
     var div = document.createElement('div');
     var table = document.createElement('table');
+    var title = document.createElement('p');
 
-
+    title.innerHTML = response.title + " " + response.year;
 
     div.className = 'container';
+    div.appendChild(title);
     table.className = "table table-bordered table-striped table-condensed text-center";
-    //table.setAttribute('valign', 'center');
 
     var trh = document.createElement('tr');
-
     var tbody = document.createElement('tbody');
 
     var rowHeader = ['Time/Day', 'Monday', 'Tuesday',
@@ -78,5 +78,4 @@ function createTable(response) {
 
     div.appendChild(table);
     return div;
-
 }

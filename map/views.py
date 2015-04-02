@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, JsonResponse
-from .forms import CourseForm, ModuleForm, RoomForm, LecturerForm, BuildingForm, TimetableForm, DepartmentForm
+from .forms import CourseForm, ModuleForm, RoomForm, LecturerForm, BuildingForm, TimetableForm, DepartmentForm, TimeForm
 
-from .models import Course, Timetable, Building, Module, Lecturer, Department
+from .models import Course, Timetable, Building, Module, Lecturer, Department, Time
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
@@ -93,6 +93,17 @@ def JSON(request):
 
         return JsonResponse(data)
 
+    '''
+    courses = []
+    for e in c.iterator():
+        if e.department.depShort == message:
+            courses.append(e.courseCode)
+
+        data = {'courses' : courses}
+
+    return JsonResponse(data)
+    '''
+
     # checks for queried course
     for o in c.iterator():
         if message == o.courseCode:
@@ -104,7 +115,7 @@ def JSON(request):
 
         timetable = []
 
-        t = Timetable.objects.filter(courseCode=Course.objects.get(courseCode=message))
+        t = Time.objects.filter(timeTable=Timetable.objects.get(courseCode=message))
 
         for o in t.iterator():
 
@@ -130,7 +141,6 @@ def JSON(request):
 
     else:
         return JsonResponse({'Invalid Query' : 'null'})
-
 
 
 def home(request):
@@ -258,4 +268,3 @@ def timetable(request):
     return render(request, 'dbstuff/addtimetable.html', {
         'form': form,
     })
-

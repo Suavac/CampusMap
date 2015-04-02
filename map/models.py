@@ -2,7 +2,7 @@ from django.db import models
 
 class Department(models.Model):
     depName = models.CharField(max_length = 70, primary_key=True)
-    depShort = models.CharField(max_length=20)
+    depShort = models.CharField(max_length = 20)
 
     def __str__(self):
         return "%s" % self.depName
@@ -21,7 +21,6 @@ class Module(models.Model):
         return self.modCode
 
 class Building(models.Model):
-
     buildingName = models.CharField(max_length = 75, primary_key=True)
 
     def __str__(self):
@@ -39,20 +38,28 @@ class Room(models.Model):
         return self.roomCode
 
 
-
 class Lecturer(models.Model):
     lecCode = models.CharField(max_length = 7, primary_key=True)
     lecFirst_Name = models.CharField(max_length = 50)
     lecLast_Name = models.CharField(max_length = 50)
-    lecEmail = models.EmailField()
-    #lecOffice = models.ForeignKey(Room)
+    lecEmail = models.EmailField();
+    lecDepartment = models.ForeignKey(Department) #Added department for lecturer
+    lecOffice = models.ForeignKey(Room) #Added ability to have lecturers office associated with them
 
     def __str__(self):
         return self.lecFirst_Name + " " + self.lecLast_Name
 
 
-
 class Timetable(models.Model):
+    courseCode = models.ForeignKey(Course)
+    year = models.CharField(max_length = 1)
+    semester = models.CharField(max_length = 1)
+
+    class Meta:
+        unique_together = (("year", "semester", "courseCode"),)
+
+
+class Time(models.Model):
 
     DAY_CHOICES = (
         ('1', 'Monday'),
@@ -76,14 +83,9 @@ class Timetable(models.Model):
         ('11', '19:00'),
     )
 
-    courseCode = models.ForeignKey(Course)
-    year = models.CharField(max_length = 1)
-    semester = models.CharField(max_length = 1, choices=(('1','1'),('2','2')))
+    timeTable = models.ForeignKey(Timetable)
     modCode = models.ForeignKey(Module)
     roomCode = models.ForeignKey(Room)
-    lecCode = models.ForeignKey(Lecturer)
     day = models.CharField(max_length = 1, choices=DAY_CHOICES)
     time = models.CharField(max_length = 2, choices=HOURS_CHOICES)
-
-    class Meta:
-        unique_together = (("year", "semester", "courseCode", "modCode", "day", "time"),)
+    lecCode = models.ForeignKey(Lecturer)
