@@ -51,7 +51,6 @@ class Lecturer(models.Model):
 
 
 class Timetable(models.Model):
-
     courseCode = models.ForeignKey(Course)
     year = models.CharField(max_length = 1)
     semester = models.CharField(max_length = 1)

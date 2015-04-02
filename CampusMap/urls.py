@@ -1,7 +1,5 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from django.views.generic import TemplateView
-
 
 admin.autodiscover()
 
@@ -18,9 +16,7 @@ urlpatterns = patterns('map.views',
     url(r'^edit-timetable/$', 'editTimetable'),
     url(r'^department/$', 'department'),
     url(r'^edit-map/$', 'editMap'),
-
     url(r'^json/', 'JSON'),
     url(r'^JSON/', 'JSON'),
 
 )
-

@@ -13,7 +13,6 @@ class CourseAdmin(admin.ModelAdmin):
     list_filter = ('courseCode',)
 
 
-
 class ModuleAdmin(admin.ModelAdmin):
     list_display = ('modCode', 'modName')
     list_filter = ('modCode',)
@@ -28,6 +27,11 @@ class LecturerAdmin(admin.ModelAdmin):
     list_display = ('lecFirst_Name', 'lecLast_Name', 'lecCode')
     list_filter = ('lecFirst_Name', 'lecLast_Name',)
 
+class TimeEntryAdmin(admin.ModelAdmin):
+    list_display = ('modCode', 'roomCode', 'day', 'time', 'lecCode')
+    list_filter = ('day', 'roomCode',)
+
+admin.site.register(TimeEntry, TimeEntryAdmin)
 admin.site.register(Course, CourseAdmin)
 admin.site.register(Module, ModuleAdmin)
 admin.site.register(Building)

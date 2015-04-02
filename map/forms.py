@@ -45,8 +45,6 @@ class RoomForm(forms.ModelForm):
     class Meta:
         model = Room
 
-
-
 class LecturerForm(forms.ModelForm):
 
     lecCode = forms.CharField(max_length = 7,label = mark_safe('<strong>Code</strong>'),)
@@ -57,21 +55,11 @@ class LecturerForm(forms.ModelForm):
         model = Lecturer
 
 
-
 class TimetableForm(forms.ModelForm):
 
     courseCode = Course.objects.all()
     year = forms.CharField(max_length = 1)
     semester = forms.CharField(max_length = 1)
-    #modCode = Module.objects.all()
-    #roomCode = Room.objects.all()
-    #lecCode = Lecturer.objects.all()
-
-    #day = forms.CharField(max_length = 1)
-    #time = forms.CharField(max_length = 2)
-
-    #day = forms.ChoiceField(Timetable.DAY_CHOICES)
-    #time = forms.ChoiceField(Timetable.HOURS_CHOICES)
     class Meta:
         model = Timetable
 
@@ -84,28 +72,5 @@ class TimeEntry(forms.ModelForm):
     day = forms.CharField(max_length = 1)
     time = forms.CharField(max_length = 2)
 
-    #day = forms.ChoiceField(Timetable.DAY_CHOICES)
-    #time = forms.ChoiceField(Timetable.HOURS_CHOICES)
     class meta:
         model = TimeEntry
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
