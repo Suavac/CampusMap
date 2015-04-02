@@ -1,7 +1,7 @@
 from django import forms
 from django.template.defaultfilters import mark_safe
 
-from .models import Course, Module, Lecturer, Room, Building, Timetable, Department, Time
+from .models import Course, Module, Lecturer, Room, Building, Timetable, Department, TimeEntry
 
 class DepartmentForm(forms.ModelForm):
 
@@ -75,7 +75,7 @@ class TimetableForm(forms.ModelForm):
     class Meta:
         model = Timetable
 
-class Time(forms.ModelForm):
+class TimeEntry(forms.ModelForm):
 
     timeTable = Timetable.objects.all()
     modCode = Module.objects.all()
@@ -87,7 +87,7 @@ class Time(forms.ModelForm):
     #day = forms.ChoiceField(Timetable.DAY_CHOICES)
     #time = forms.ChoiceField(Timetable.HOURS_CHOICES)
     class meta:
-        model = Time
+        model = TimeEntry
 
 
 

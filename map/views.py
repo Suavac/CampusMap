@@ -2,11 +2,11 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, JsonResponse
 from .forms import CourseForm, ModuleForm, RoomForm, LecturerForm, BuildingForm, TimetableForm, DepartmentForm
 
-from .models import Course, Timetable, Building, Module, Lecturer, Department
+from .models import Course, Timetable, Building, Module, Lecturer, Department, TimeEntry
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-import json, urllib
+import json
 
 def editTimetable(request):
 
@@ -258,4 +258,3 @@ def timetable(request):
     return render(request, 'dbstuff/addtimetable.html', {
         'form': form,
     })
-

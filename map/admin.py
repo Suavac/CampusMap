@@ -1,11 +1,11 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Course, Module, Lecturer, Building, Timetable, Department
+from .models import Course, Module, Lecturer, Building, Timetable, Department, TimeEntry
 
 class TimetableAdmin(admin.ModelAdmin):
-    list_display = ('courseCode', 'modCode', 'day', 'time')
-    list_filter = ('courseCode','modCode',)
+    list_display = ('courseCode', 'year', 'semester')
+    list_filter = ('courseCode','year',)
 
 
 class CourseAdmin(admin.ModelAdmin):

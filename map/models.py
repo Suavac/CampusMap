@@ -55,16 +55,12 @@ class Timetable(models.Model):
     courseCode = models.ForeignKey(Course)
     year = models.CharField(max_length = 1)
     semester = models.CharField(max_length = 1)
-    #modCode = models.ForeignKey(Module)
-    #roomCode = models.ForeignKey(Room)
-    #lecCode = models.ForeignKey(Lecturer)
-    #day = models.CharField(max_length = 1, choices=DAY_CHOICES)
-    #time = models.CharField(max_length = 2, choices=HOURS_CHOICES)
 
     class Meta:
         unique_together = (("year", "semester", "courseCode"),)
 
-class Time(models.model):
+
+class TimeEntry(models.Model):
 
     DAY_CHOICES = (
     ('1', 'Monday'),
@@ -73,6 +69,7 @@ class Time(models.model):
     ('4', 'Thursday'),
     ('5', 'Friday'),
     )
+
     HOURS_CHOICES = (
         ('1', '09:00'),
         ('2', '10:00'),
@@ -93,3 +90,6 @@ class Time(models.model):
     day = models.CharField(max_length = 1, choices=DAY_CHOICES)
     time = models.CharField(max_length = 2, choices=HOURS_CHOICES)
     lecCode = models.ForeignKey(Lecturer)
+
+    class Meta:
+        unique_together = (("timeTable", "day", "time"),)
