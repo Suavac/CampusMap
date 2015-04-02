@@ -46,6 +46,7 @@ table {
 
 th {
     height: 60px;
+    align: center;
 }
 
 </style>
@@ -112,14 +113,14 @@ th {
     }
 
 
-    function getCourses(dept){
+    function getCourses(depShort){
 
         var request = new XMLHttpRequest();
-        request.open('GET', '../json/?message='+dept, false);  // `false` makes the request synchronous
+        request.open('GET', '../json/?message='+depShort, false);  // `false` makes the request synchronous
         request.send(null);
 
         courses = JSON.parse(request.responseText);
-        //console.log(courses);
+        console.log(courses);
 
         sel = document.getElementById('courseSelect');
 
@@ -159,7 +160,7 @@ th {
             sel.appendChild(op);
         }
     }
-
+    
     function OnSelectionChange (select) {
         var selectedOption = select.options[select.selectedIndex]
         loadTimetable(selectedOption.value)
