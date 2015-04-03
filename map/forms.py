@@ -9,6 +9,7 @@ class DepartmentForm(forms.ModelForm):
 
     class Meta:
         model = Department
+        fields = "__all__"
 
 class CourseForm(forms.ModelForm):
 
@@ -18,6 +19,7 @@ class CourseForm(forms.ModelForm):
 
     class Meta:
         model = Course
+        fields = "__all__"
 
 class ModuleForm(forms.ModelForm):
 
@@ -26,6 +28,7 @@ class ModuleForm(forms.ModelForm):
 
     class Meta:
         model = Module
+        fields = "__all__"
 
 class BuildingForm(forms.ModelForm):
 
@@ -33,6 +36,7 @@ class BuildingForm(forms.ModelForm):
 
     class Meta:
         model = Building
+        fields = "__all__"
 
 class RoomForm(forms.ModelForm):
 
@@ -44,6 +48,7 @@ class RoomForm(forms.ModelForm):
 
     class Meta:
         model = Room
+        fields = "__all__"
 
 class LecturerForm(forms.ModelForm):
 
@@ -53,7 +58,7 @@ class LecturerForm(forms.ModelForm):
     lecEmail = forms.EmailField(label = mark_safe('<strong>Email</strong>'))
     class Meta:
         model = Lecturer
-
+        fields = "__all__"
 
 class TimetableForm(forms.ModelForm):
 
@@ -62,6 +67,7 @@ class TimetableForm(forms.ModelForm):
     semester = forms.CharField(max_length = 1)
     class Meta:
         model = Timetable
+        fields = "__all__"
 
 class TimeEntry(forms.ModelForm):
 
@@ -74,3 +80,4 @@ class TimeEntry(forms.ModelForm):
 
     class meta:
         model = TimeEntry
+        fields = "__all__"
