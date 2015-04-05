@@ -6,7 +6,7 @@ from .models import Course, Timetable, Building, Module, Lecturer, Department, T
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-import json
+import json, urllib
 
 def editTimetable(request):
 
@@ -42,91 +42,76 @@ def editMap(request):
 # Handle JSON requests
 def JSON(request):
 
-    message = request.GET.get('message')
-    print message
+    message = urllib.unquote(request.get_full_path()).split('/json/?message=') # Gets JSON message
+    #Splits message into parts
+    submessage = message[1].split('&')
+    dept = submessage[1].split('department=')[1]
+    course = submessage[2].split('course=')[1]
+    year = submessage[3].split('year=')[1]
+    semester = submessage[4].split('semester=')[1]
 
     d = Department.objects.all()
     c = Course.objects.all()
     exists = False
 
+    print dept + " " + course + " " + year + " " + semester
+
     # returns list of available courses
-    if (message == 'courses'):
+    if (submessage[0] == 'courses'):
 
         temp = []
 
         for o in c.iterator():
-
-            temp.append(o.courseCode)
+            if o.department.depName == dept:
+                temp.append(o.courseCode)
 
         data = {'courses' : temp}
 
         return JsonResponse(data)
 
 
-    elif (message == 'departments'):
+    elif (submessage[0] == 'departments'):
         temp = []
 
-
         for dept in d.iterator():
-            temp2 = []
-            temp2.append(dept.depName)
-            temp2.append(dept.depShort)
-            temp.append(temp2)
+            temp.append(dept.depName)
 
-            print temp
         data = {'departments' : temp}
-        #print data
 
         return JsonResponse(data)
 
-    elif (message == 'Arts' or message == 'Engineering' or message == 'Medicine' or message == 'Business' or message == 'Science'):
-        courses = []
+    elif (submessage[0] =='load'):
+        # checks for queried course
+        for o in c.iterator():
+            if course == o.courseCode:
+                exists = True
 
-        for f in c.iterator():
-            if f.department.depShort == message:
+        if (exists):
 
-                courses.append(f.courseCode)
-                print('match')
+            cs = Course.objects.get(courseCode=course)
 
-        print courses
-        data = {'courses' : courses}
+            timetable = []
 
-        return JsonResponse(data)
+            t = TimeEntry.objects.filter(timeTable=Timetable.objects.get(courseCode=cs,year=year,semester=semester)) #filters out timetable
 
-    # checks for queried course
-    for o in c.iterator():
-        if message == o.courseCode:
-            exists = True
+            for o in t.iterator():
 
-    if (exists):
+                tempData = {
+                'mod' : o.modCode.modCode,
+                'room' : o.roomCode.roomCode,
+                'lec' : o.lecCode.lecFirst_Name + " " + o.lecCode.lecLast_Name,
+                'day' : o.day,
+                'time' : o.time
+                }
 
-        course = Course.objects.get(courseCode=message)
+                tempData2json = json.dumps(tempData)
 
-        timetable = []
+                timetable.append(tempData)
 
-        t = Timetable.objects.filter(courseCode=Course.objects.get(courseCode=message))
+            data = {'code' : message, 'title' : cs.courseName, 'department'  : cs.department.depName,
+            'timetable' : timetable}
 
-        for o in t.iterator():
-
-            tempData = {
-            'mod' : o.modCode.modCode,
-            'room' : o.roomCode.roomCode,
-            'lec' : o.lecCode.lecFirst_Name + " " + o.lecCode.lecLast_Name,
-            'day' : o.day,
-            'time' : o.time
-            }
-
-            tempData2json = json.dumps(tempData)
-
-            timetable.append(tempData)
-
-        #temp2json = json.dumps(timetable)
-
-        data = {'code' : message, 'title' : course.courseName, 'department'  : course.department.depName,
-        'timetable' : timetable}
-
-
-        return JsonResponse(data)
+            return JsonResponse(data)
 
     else:
         return JsonResponse({'Invalid Query' : 'null'})

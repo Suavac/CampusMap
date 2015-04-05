@@ -4,7 +4,7 @@
 {%block header%}
 
 
-      <form class="col-md-9" role="form">
+    <form class="col-md-9" role="form" xmlns="http://www.w3.org/1999/html">
         <div class="form-group">
             <div class="col-md-3">
               <select class="form-control" id="departmentSelect">
@@ -19,16 +19,23 @@
             </div>
 
             <div class="col-md-3">
-              <select disabled class="form-control" id="yearSelect">
+              <select class="form-control" id="yearSelect">
                 <option value=''>Select Year</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
               </select>
             </div>
 
             <div class="col-md-3">
-              <select disabled class="form-control" id="semesterSelect">
+              <select class="form-control" id="semesterSelect">
                 <option value=''>Select Semester</option>
+                <option value="1" onclick=sem()>1</option>
+                <option value="2" onclick=sem()>2</option>
               </select>
             </div>
+
         </div>
       </form>
 
@@ -112,11 +119,22 @@ th {
         }
     }
 
+    var department, course, year, semester;
 
-    function getCourses(depShort){
+    //Builds up URL to be sent as http request
+    function buildURL(message, dept, course, year, semester){
+        var msg = '../json/?message=' + message + "&department=" + dept + "&course=" + course + "&year=" + year + "&semester=" + semester;
+
+        return msg;
+    }
+
+    function getCourses(dept){
+
+        department = dept;
 
         var request = new XMLHttpRequest();
-        request.open('GET', '../json/?message='+depShort, false);  // `false` makes the request synchronous
+        var message = buildURL("courses",dept,null,null,null);
+        request.open('GET', message, false);  // `false` makes the request synchronous
         request.send(null);
 
         courses = JSON.parse(request.responseText);
@@ -138,15 +156,15 @@ th {
         for(var i = 0; i<courses.courses.length; i++){
             var op = document.createElement("option");
             op.innerHTML = "" + courses.courses[i];
-            sel.setAttribute('onchange', 'OnSelectionChange(this)')
+            //sel.setAttribute('onchange', 'OnSelectionChange(this)')
             sel.appendChild(op);
         }
-        //document.getElementById('courses').style.display = '';
     }
 
     function getDepartments(){
         var request = new XMLHttpRequest();
-        request.open('GET', '../json/?message=departments', false);
+        var message = buildURL("departments",null,null,null,null)
+        request.open('GET', message, false);
         request.send(null);
 
         departments = JSON.parse(request.responseText);
@@ -155,8 +173,8 @@ th {
 
         for(var i=0; i<departments.departments.length; i++){
             var op = document.createElement("option");
-            op.innerHTML = "" + departments.departments[i][0];
-            op.setAttribute('onClick', 'getCourses('+"'"+departments.departments[i][1]+"'"+')');
+            op.innerHTML = "" + departments.departments[i];
+            op.setAttribute('onClick', 'getCourses('+"'"+departments.departments[i]+"'"+')');
             sel.appendChild(op);
         }
     }
@@ -166,10 +184,23 @@ th {
         loadTimetable(selectedOption.value)
     }
 
-    function loadTimetable(course){
+    //Onclick to load timetable when semester is chosen
+    function sem(){
+        sem = document.getElementById('semesterSelect');
+        year = document.getElementById('yearSelect');
+        course = document.getElementById('courseSelect');
+        var val1 = course.options[course.selectedIndex].value;
+        var val2 = sem.options[year.selectedIndex].value;
+        var val3 = year.options[sem.selectedIndex].value;
+        console.log(val1 + " " + val2 + " " + val3);
+        sem.setAttribute('onClick', loadTimetable(department,val1,val2,val3));
+    }
+
+    function loadTimetable(department,course,year,semester){
 
         var request = new XMLHttpRequest();
-        request.open('GET', '../json/?message=' + course, false);  // `false` makes the request synchronous
+        var message = buildURL("load",department,course,year,semester);
+        request.open('GET', message, false);  // `false` makes the request synchronous
         request.send(null);
 
         timeTable = JSON.parse(request.responseText);
