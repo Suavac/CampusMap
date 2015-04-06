@@ -190,8 +190,8 @@ th {
         year = document.getElementById('yearSelect');
         course = document.getElementById('courseSelect');
         var val1 = course.options[course.selectedIndex].value;
-        var val2 = sem.options[sem.selectedIndex].value;
-        var val3 = year.options[year.selectedIndex].value;
+        var val2 = year.options[year.selectedIndex].value;
+        var val3 = sem.options[sem.selectedIndex].value;
         console.log(val1 + " " + val2 + " " + val3);
         sem.setAttribute('onClick', loadTimetable(department,val1,val2,val3));
     }
