@@ -14,13 +14,13 @@
 
             <div class="col-md-3" id = "courses">
               <select class="form-control" id="courseSelect">
-                <option value=''>Select Course</option>
+                <option value='0'>Select Course</option>
               </select>
             </div>
 
             <div class="col-md-3">
               <select class="form-control" id="yearSelect">
-                <option value=''>Select Year</option>
+                <option value='0'>Select Year</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -190,8 +190,8 @@ th {
         year = document.getElementById('yearSelect');
         course = document.getElementById('courseSelect');
         var val1 = course.options[course.selectedIndex].value;
-        var val2 = sem.options[year.selectedIndex].value;
-        var val3 = year.options[sem.selectedIndex].value;
+        var val2 = sem.options[sem.selectedIndex].value;
+        var val3 = year.options[year.selectedIndex].value;
         console.log(val1 + " " + val2 + " " + val3);
         sem.setAttribute('onClick', loadTimetable(department,val1,val2,val3));
     }
