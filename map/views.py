@@ -2,11 +2,11 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, JsonResponse
 from .forms import CourseForm, ModuleForm, RoomForm, LecturerForm, BuildingForm, TimetableForm, DepartmentForm
 
-from .models import Course, Timetable, Building, Module, Lecturer, Department, TimeEntry
+from .models import Course, Timetable, Building, Module, Lecturer, Department, TimeEntry, Room
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-import json, urllib
+import json, urllib, urlparse
 
 def editTimetable(request):
 
@@ -15,18 +15,10 @@ def editTimetable(request):
     if request.method == 'POST': # If the form has been submitted...
         form = TimetableForm(request.POST) # A form bound to the POST data
 
-        if form.is_valid(): # All validation rules pass
-            # Process the data in form.cleaned_data
-            # ...
-
+        if form.is_valid():
             save_it = form.save()
             save_it.save()
-
             check = "true"
-
-            #return HttpResponseRedirect('/editTimetable/',
-             #                           {'check' : check,
-              #                           'course' : form.courseCode}) # Redirect after POST
     else:
         form = TimetableForm() # An unbound form
 
@@ -35,8 +27,52 @@ def editTimetable(request):
         'check': check
     })
 
+
+
+
+
 def editMap(request):
+
     return render(request, 'map.html')
+
+
+def editMapJson(request):
+
+    message = request.GET.get('message')
+
+    if (message == 'buildings'):
+
+        b = Building.objects.all()
+
+        temp = []
+
+        for o in b.iterator():
+            temp.append(o.buildingName)
+        data = {'buildings' : temp}
+
+        return JsonResponse(data)
+
+    elif (message == 'rooms'):
+
+        print message
+
+        r = Room.objects.all()
+        b = request.GET.get('building')
+
+        temp = []
+        for o in r.iterator():
+            if o.building.buildingName == b:
+                temp.append(o.roomCode)
+
+        data = {'rooms' : temp}
+
+        print data
+
+        return JsonResponse(data)
+
+    else:
+
+        return JsonResponse({'Invalid Query' : 'null'})
 
 
 # Handle JSON requests

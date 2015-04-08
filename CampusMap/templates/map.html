@@ -1,6 +1,94 @@
 {% extends "base.html" %}
 
+{% block header %}
 
+    <form class="col-md-9" role="form" xmlns="http://www.w3.org/1999/html">
+        <div class="form-group">
+
+            <div class="col-md-3">
+              <select class="form-control" id="buildingSelect" >
+                <option value=''>Select Building</option>
+              </select>
+            </div>
+
+            <div class="col-md-3" id = "courses">
+              <select disabled class="form-control" id="roomSelect">
+                <option value='0'>Select Room</option>
+              </select>
+            </div>
+
+        </div>
+      </form>
+
+    <script>
+
+    window.onload=function() {
+        getBuildings();
+    }
+
+    function getBuildings(){
+        var request = new XMLHttpRequest();
+
+        var param = '../edit-map-json/?message=buildings';
+
+        request.open('GET', param, false);
+        request.send(null);
+
+        buildings = JSON.parse(request.responseText);
+
+        sel = document.getElementById('buildingSelect');
+
+        for(var i=0; i < buildings.buildings.length; i++){
+            var op = document.createElement("option");
+            op.innerHTML = "" + buildings.buildings[i];
+            sel.setAttribute('onchange', 'onBuildingSelect(this)');
+            sel.appendChild(op);
+        }
+    }
+
+    function onBuildingSelect(select) {
+        var selectedOption = select.options[select.selectedIndex]
+        getRooms(selectedOption.value)
+    }
+
+    function getRooms(building){
+
+        console.log(building)
+
+        var param = '../edit-map-json/?message=' + 'rooms' + '&building=' + building;
+
+        var request = new XMLHttpRequest();
+        request.open('GET', param, false);  // `false` makes the request synchronous
+        request.send(null);
+
+        rooms = JSON.parse(request.responseText);
+
+        sel = document.getElementById('roomSelect');
+        sel.disabled = false;
+
+        //Set every other element int the dropdown
+        for(var i = 0; i < rooms.rooms.length; i++){
+            var op = document.createElement("option");
+            op.innerHTML = "" + rooms.rooms[i];
+            sel.setAttribute('onchange', 'onRoomSelect(this)');
+            sel.appendChild(op);
+        }
+    }
+
+    function onRoomSelect(select) {
+        var selectedOption = select.options[select.selectedIndex]
+        loadPin(selectedOption.value)
+    }
+
+    function loadPin(room){
+
+        console.log(room);
+
+    }
+
+    </script>
+
+{% endblock header %}
 
 
 {%block content%}
@@ -8,17 +96,41 @@
 <style type="text/css">
 
     #map-canvas {
-        height: 600px;
-        width: 90%;
-        margin-left: 5%;
-        margin-right: 5%;
+        height: 100%;
+        width: 100%;
+        margin-left: 50px;
+        margin-right: 50px;
         margin-top: 30px;
         padding: 0;
     }
 
+    .full-height{
+        height: 450px;
+    }
+
+    @media (min-height: 800px) {
+        .full-height{
+            height: 600px;
+        }
+    }
+
+    @media (min-height: 900px) {
+        .full-height{
+            height: 700px;
+        }
+    }
+
+    @media (min-height: 1000px) {
+        .full-height{
+            height: 850px;
+        }
+    }
+
 </style>
 
-<div class="container" id="map-canvas"></div>
+    <div class="container full-height">
+        <div id="map-canvas"></div>
+    </div>
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJJEeE5dn-hk6w1MoBSn2-Q3p4TfBcbMk"> </script>
 

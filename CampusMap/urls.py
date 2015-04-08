@@ -16,6 +16,7 @@ urlpatterns = patterns('map.views',
     url(r'^edit-timetable/$', 'editTimetable'),
     url(r'^department/$', 'department'),
     url(r'^edit-map/$', 'editMap'),
+    url(r'^edit-map-json/$', 'editMapJson'),
     url(r'^json/', 'JSON'),
     url(r'^JSON/', 'JSON'),
 
