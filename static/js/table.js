@@ -55,7 +55,7 @@ function createTable(response) {
             for (var k = 0; k < response.timetable.length; k++) {
 
                 // place in cell
-                if ((response.timetable[k].day == j) && (response.timetable[k].time == i )) {
+                if ((response.timetable[k].day == j) && (response.timetable[k].time == i)) {
 
                     var cellText = (
                         response.timetable[k].mod + "<br>" +

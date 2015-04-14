@@ -11,6 +11,7 @@ class Course(models.Model):
     courseCode = models.CharField(max_length = 7, primary_key=True)
     courseName = models.CharField(max_length = 50)
     department = models.ForeignKey(Department)
+
     def __str__(self):
         return self.courseCode
 
@@ -49,7 +50,6 @@ class Room(models.Model):
         return self.roomCode
 
 
-
 class Lecturer(models.Model):
     lecCode = models.CharField(max_length = 7, primary_key=True)
     lecFirst_Name = models.CharField(max_length = 50)
@@ -64,7 +64,7 @@ class Lecturer(models.Model):
 class Timetable(models.Model):
     courseCode = models.ForeignKey(Course)
     year = models.CharField(max_length = 1)
-    semester = models.CharField(max_length = 1)
+    semester = models.CharField(max_length = 1, choices=(('1','1'), ('2','2')))
 
     class Meta:
         unique_together = (("year", "semester", "courseCode"),)
@@ -76,11 +76,11 @@ class Timetable(models.Model):
 class TimeEntry(models.Model):
 
     DAY_CHOICES = (
-    ('1', 'Monday'),
-    ('2', 'Tuesday'),
-    ('3', 'Wednesday'),
-    ('4', 'Thursday'),
-    ('5', 'Friday'),
+        ('1', 'Monday'),
+        ('2', 'Tuesday'),
+        ('3', 'Wednesday'),
+        ('4', 'Thursday'),
+        ('5', 'Friday'),
     )
 
     HOURS_CHOICES = (

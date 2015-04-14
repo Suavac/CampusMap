@@ -20,7 +20,7 @@ class ModuleAdmin(admin.ModelAdmin):
 
 class RoomAdmin(admin.ModelAdmin):
     list_display = ('roomName', 'roomCode', 'building')
-    list_filter = ('roomName',)
+    list_filter = ('building',)
 
 
 class LecturerAdmin(admin.ModelAdmin):
@@ -29,7 +29,7 @@ class LecturerAdmin(admin.ModelAdmin):
 
 class TimeEntryAdmin(admin.ModelAdmin):
     list_display = ('modCode', 'roomCode', 'day', 'time', 'lecCode')
-    list_filter = ('day', 'roomCode',)
+    list_filter = ('day', 'modCode', 'roomCode',)
 
 class ColourAdmin(admin.ModelAdmin):
     list_display = ('colour', 'hex')

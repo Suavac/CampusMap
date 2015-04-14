@@ -21,10 +21,7 @@
             <div class="col-md-2">
               <select class="form-control" id="yearSelect">
                 <option value='0'>Select Year</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
+
               </select>
             </div>
 
@@ -162,6 +159,33 @@ th {
             var op = document.createElement("option");
             op.innerHTML = "" + courses.courses[i];
             //sel.setAttribute('onchange', 'OnSelectionChange(this)')
+            op.setAttribute('onClick', 'getYears('+"'"+ departments.departments[i] +"'" + "," + "'"+ courses.courses[i] +"'"+')')
+            sel.appendChild(op);
+        }
+    }
+
+    //Loads years by course. Allows for courses of various lengths without errors
+    //ie: arts is 3 years long vs engineering is 4. This would throw an error with static year values
+    function getYears(dept, course){
+        var message = buildURL("years", dept, course, null, null);
+        var request = new XMLHttpRequest();
+        request.open('GET', message, false);
+        request.send(null);
+
+        years = JSON.parse(request.responseText);
+
+        sel = document.getElementById('yearSelect');
+
+         while(sel.firstChild){
+            sel.removeChild(sel.firstChild);
+        }
+        var option = document.createElement("option")
+        option.innerHTML = "Select a year"
+        sel.appendChild(option)
+
+        for(var i=0; i<years.years.length; i++){
+            var op = document.createElement("option");
+            op.innerHTML = i+1;
             sel.appendChild(op);
         }
     }

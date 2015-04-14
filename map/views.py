@@ -52,11 +52,12 @@ def JSON(request):
 
     d = Department.objects.all()
     c = Course.objects.all()
+    t = Timetable.objects.all()
+
     exists = False
 
     # returns list of available courses
     if (submessage[0] == 'courses'):
-
         temp = []
 
         for o in c.iterator():
@@ -78,7 +79,19 @@ def JSON(request):
 
         return JsonResponse(data)
 
-    elif (submessage[0] =='load'):
+
+    elif (submessage[0] == 'years'):
+        temp = []
+        for o in t.iterator():
+            if course == o.courseCode.courseCode and o.semester == '1':
+                temp.append(o.courseCode.courseCode)
+
+        data = {'years' : temp}
+
+        return JsonResponse(data)
+
+
+    elif (submessage[0] == 'load'):
         # checks for queried course
         for o in c.iterator():
             if course == o.courseCode:
@@ -100,17 +113,26 @@ def JSON(request):
                     'lec' : o.lecCode.lecFirst_Name + " " + o.lecCode.lecLast_Name,
                     'day' : o.day,
                     'time' : o.time,
-                    'colour':o.modCode.color.hex
+                    'colour' : o.modCode.color.hex
                 }
 
                 #tempData2json = json.dumps(tempData)
 
                 timetable.append(tempData)
 
-            data = {'code' : message, 'title' : cs.courseName, 'year':year, 'semester':semester,'department'  : cs.department.depName,
-            'timetable' : timetable}
+            data = {
+                'code' : message,
+                'title' : cs.courseName,
+                'year':year,
+                'semester':semester,
+                'department' : cs.department.depName,
+                'timetable' : timetable
+            }
 
             return JsonResponse(data)
+
+        else:
+            return JsonResponse({'Course Not Found' : 'null'})
 
     else:
         return JsonResponse({'Invalid Query' : 'null'})
