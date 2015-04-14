@@ -95,12 +95,12 @@ def JSON(request):
             for o in t.iterator():
 
                 tempData = {
-                'mod' : o.modCode.modCode,
-                'room' : o.roomCode.roomCode,
-                'lec' : o.lecCode.lecFirst_Name + " " + o.lecCode.lecLast_Name,
-                'day' : o.day,
-                'time' : o.time,
-                'colour':o.modCode.color.hex
+                    'mod' : o.modCode.modCode,
+                    'room' : o.roomCode.roomCode,
+                    'lec' : o.lecCode.lecFirst_Name + " " + o.lecCode.lecLast_Name,
+                    'day' : o.day,
+                    'time' : o.time,
+                    'colour':o.modCode.color.hex
                 }
 
                 #tempData2json = json.dumps(tempData)
@@ -114,7 +114,6 @@ def JSON(request):
 
     else:
         return JsonResponse({'Invalid Query' : 'null'})
-
 
 
 def home(request):
