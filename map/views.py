@@ -54,8 +54,6 @@ def JSON(request):
     c = Course.objects.all()
     exists = False
 
-    print dept + " " + course + " " + year + " " + semester
-
     # returns list of available courses
     if (submessage[0] == 'courses'):
 
@@ -92,7 +90,7 @@ def JSON(request):
 
             timetable = []
 
-            t = TimeEntry.objects.filter(timeTable=Timetable.objects.get(courseCode=cs,year=year,semester=semester)) #filters out timetable
+            t = TimeEntry.objects.filter(timeTable=Timetable.objects.get(courseCode=cs,year=year,semester=semester)) #filters out desired timetable
 
             for o in t.iterator():
 
@@ -101,14 +99,15 @@ def JSON(request):
                 'room' : o.roomCode.roomCode,
                 'lec' : o.lecCode.lecFirst_Name + " " + o.lecCode.lecLast_Name,
                 'day' : o.day,
-                'time' : o.time
+                'time' : o.time,
+                'colour':o.modCode.color.hex
                 }
 
-                tempData2json = json.dumps(tempData)
+                #tempData2json = json.dumps(tempData)
 
                 timetable.append(tempData)
 
-            data = {'code' : message, 'title' : cs.courseName, 'department'  : cs.department.depName,
+            data = {'code' : message, 'title' : cs.courseName, 'year':year, 'semester':semester,'department'  : cs.department.depName,
             'timetable' : timetable}
 
             return JsonResponse(data)

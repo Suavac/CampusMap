@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Department(models.Model):
     depName = models.CharField(max_length = 70, primary_key=True)
 
@@ -13,11 +14,21 @@ class Course(models.Model):
     def __str__(self):
         return self.courseCode
 
+class Colour(models.Model):
+    colour = models.CharField(max_length = 10)
+    hex = models.CharField(max_length=6, primary_key=True)
+
+    def __str__(self):
+        return "%s" % self.colour
+
 class Module(models.Model):
     modCode = models.CharField(max_length = 7, primary_key=True)
     modName = models.CharField(max_length = 70)
+    color = models.ForeignKey(Colour, default='FFFFFF')
+
     def __str__(self):
         return self.modCode
+
 
 class Building(models.Model):
 
@@ -58,6 +69,9 @@ class Timetable(models.Model):
     class Meta:
         unique_together = (("year", "semester", "courseCode"),)
 
+    def __str__(self):
+        return "%s" % self.courseCode + " year:" + self.year + " sem:" + self.semester
+
 
 class TimeEntry(models.Model):
 
@@ -92,3 +106,4 @@ class TimeEntry(models.Model):
 
     class Meta:
         unique_together = (("timeTable", "day", "time"),)
+

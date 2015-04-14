@@ -4,7 +4,7 @@ function createTable(response) {
     var table = document.createElement('table');
     var title = document.createElement('p');
 
-    title.innerHTML = response.title + " " + response.year;
+    title.innerHTML = "<b>" + response.title + "</b><br>" + " Year " + response.year + " Semester " + response.semester;
 
     div.className = 'container';
     div.appendChild(title);
@@ -54,11 +54,12 @@ function createTable(response) {
                 if ((response.timetable[k].day == j) && (response.timetable[k].time == i )) {
 
                     var cellText = (
-                    response.timetable[k].room + "<br>" +
                     response.timetable[k].mod + "<br>" +
-                    response.timetable[k].lect + "<br>");
-					//cell.style.backgroundColor = response.timetable[i].colour;
-                     cell.innerHTML = cellText;
+                    response.timetable[k].room + "<br>" +
+                    response.timetable[k].lec + "<br>");
+
+                    cell.style.backgroundColor = '#'+response.timetable[k].colour;
+                    cell.innerHTML = cellText;
                     break; // important
 
                     // otherwise, something default
