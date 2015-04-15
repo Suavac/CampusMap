@@ -14,9 +14,13 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="{{ STATIC_URL }}css/simple-sidebar.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="{{ STATIC_URL }}js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    <!-- Menu Toggle Script -->
 
 </head>
 
@@ -72,10 +76,9 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
-                <div class="row" >
-                    <div class="col-md-1" >
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" style="margin-top:10px; margin-bottom:10px">
                         <a href="#menu-toggle" class="btn btn-primary" id="menu-toggle">Toggle Menu</a>
-
                     </div>
 
                     {% block header %}
@@ -100,11 +103,6 @@
      </div> <!-- /wrapper -->
   </body>
 
-<!-- jQuery -->
-<script src="{{ STATIC_URL }}js/jquery.js"></script>
-<!-- Bootstrap Core JavaScript -->
-<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-<!-- Menu Toggle Script -->
 <script>
     $("#menu-toggle").click(function(e) {
         e.preventDefault();

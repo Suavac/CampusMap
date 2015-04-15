@@ -43,8 +43,8 @@ class RoomForm(forms.ModelForm):
     roomCode = forms.CharField(max_length = 15,label = mark_safe('<strong>Room Code</strong>'))
     roomName = forms.CharField(max_length = 30,label = mark_safe('<strong>Room Name</strong>'))
     building = queryset=Building.objects.all()
-    lat = forms.CharField(max_length = 9, label = mark_safe('<strong>Latitude</strong>'))
-    lon = forms.CharField(max_length = 9, label = mark_safe('<strong>Longitude</strong>'))
+    lat = forms.CharField(max_length = 19, label = mark_safe('<strong>Latitude</strong>'))
+    lng = forms.CharField(max_length = 19, label = mark_safe('<strong>Longitude</strong>'))
 
     class Meta:
         model = Room

@@ -77,12 +77,8 @@ th {
 
                 <!-- Always Hidden -->
                 <div style="display: none">
-                    {{ form.day }}
-                    {{ form.time }}
-                </div>
-
-                <!-- Visible when creating new timetable -->
-                <div id="newCourseOptions" style="display: none">
+                    <div class="form-group"> <label for="day" id="id_day">Day</label>{{ form.day }}</div>
+                    <div class="form-group"> <label for="time" id="id_time">Time</label>{{ form.time }}</div>
                     <div class="form-group"> <label for="courseCode">Course Code</label>{{ form.courseCode }}</div>
                     <div class="form-group"> <label for="year">Year</label>{{ form.year }}</div>
                     <div class="form-group"> <label for="semester">Semester</label>{{ form.semester }}</div>
@@ -259,6 +255,7 @@ th {
                 document.getElementById('id_courseCode').value = course;
 
                 console.log(this.getAttribute("day"));
+                console.log(this.getAttribute("time"));
 
                 document.getElementById('id_day').value = this.getAttribute("day");
 

@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from .forms import CourseForm, ModuleForm, RoomForm, LecturerForm, BuildingForm, TimetableForm, DepartmentForm
 
 from .models import Course, Timetable, Building, Module, Lecturer, Department, TimeEntry, Room
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+
 
 import json, urllib, urlparse
 
@@ -70,9 +71,36 @@ def editMapJson(request):
 
         return JsonResponse(data)
 
+    elif (message == 'coord'):
+
+        room = request.GET.get('room')
+
+        r = Room.objects.get(roomCode=room)
+
+        print r.lat
+
+        data = {'lat' : r.lat, 'lng' : r.lng}
+
+        return JsonResponse(data)
+
+    elif (message == 'newCoord'):
+
+        try:
+            room = request.GET.get('room')
+            r = Room.objects.get(roomCode=room)
+            print str(request.GET.get('lat'))
+            r.lat = float(request.GET.get('lat'))
+            r.lng = float(request.GET.get('lng'))
+            r.save()
+            response = HttpResponse("success")
+        except Exception:
+            response = HttpResponse("failed")
+
+        return response
+
     else:
 
-        return JsonResponse({'Invalid Query' : 'null'})
+        return HttpResponse("Invalid Query")
 
 
 # Handle JSON requests
