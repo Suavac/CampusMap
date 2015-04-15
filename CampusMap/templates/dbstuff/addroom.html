@@ -13,8 +13,17 @@
 
             <h1>Add New Room</h1>
 
+<script>
 
-            <table class="table">
+    $(document).ready(function () {
+    $('#tableid').on('click', 'tr', function (event) {
+        $(this).children().each(function(){
+            alert($(this).text())
+        })
+    });
+});
+</script>
+            <table class="table" id="test">
             <!-- PRINT COLUMN NAME -->
                 <tr>
                     <th>Room Code</th>
