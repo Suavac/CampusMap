@@ -18,22 +18,23 @@
               </select>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-2">
               <select class="form-control" id="yearSelect">
                 <option value='0'>Select Year</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
+
               </select>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-2">
               <select class="form-control" id="semesterSelect">
-                <option value=''>Select Semester</option>
-                <option value="1" onclick=sem()>1</option>
-                <option value="2" onclick=sem()>2</option>
+                <option value='0'>Select Semester</option>
+                <option value="1" >1</option>
+                <option value="2" >2</option>
               </select>
+            </div>
+
+            <div class="col-md-2">
+                <btn class="btn btn-primary" onclick="submit()">Submit</btn>
             </div>
 
         </div>
@@ -91,6 +92,7 @@ th {
                 <div class="form-group"> <label for="modCode">Module Code</label>{{ form.modCode }}</div>
                 <div class="form-group"> <label for="roomCode">Room Code</label>{{ form.roomCode }}</div>
                 <div class="form-group"> <label for="lecCode">Lecturer Name</label>{{ form.lecCode }}</div>
+                <div class="form-group"><label for="colour">Colour</label>{{ form.colour }}</div>
 
                 <div class="checkbox"> <label><input type="checkbox"> Lab </label></div>
 
@@ -121,7 +123,7 @@ th {
 
     var department, course, year, semester;
 
-    //Builds up URL to be sent as http request
+    //Builds up URL to be sent as json request
     function buildURL(message, dept, course, year, semester){
         var msg = '../json/?message=' + message + "&department=" + dept + "&course=" + course + "&year=" + year + "&semester=" + semester;
 
@@ -157,6 +159,33 @@ th {
             var op = document.createElement("option");
             op.innerHTML = "" + courses.courses[i];
             //sel.setAttribute('onchange', 'OnSelectionChange(this)')
+            op.setAttribute('onClick', 'getYears('+"'"+ departments.departments[i] +"'" + "," + "'"+ courses.courses[i] +"'"+')')
+            sel.appendChild(op);
+        }
+    }
+
+    //Loads years by course. Allows for courses of various lengths without errors
+    //ie: arts is 3 years long vs engineering is 4. This would throw an error with static year values
+    function getYears(dept, course){
+        var message = buildURL("years", dept, course, null, null);
+        var request = new XMLHttpRequest();
+        request.open('GET', message, false);
+        request.send(null);
+
+        years = JSON.parse(request.responseText);
+
+        sel = document.getElementById('yearSelect');
+
+         while(sel.firstChild){
+            sel.removeChild(sel.firstChild);
+        }
+        var option = document.createElement("option")
+        option.innerHTML = "Select a year"
+        sel.appendChild(option)
+
+        for(var i=0; i<years.years.length; i++){
+            var op = document.createElement("option");
+            op.innerHTML = i+1;
             sel.appendChild(op);
         }
     }
@@ -185,15 +214,18 @@ th {
     }
 
     //Onclick to load timetable when semester is chosen
-    function sem(){
+    function submit(){
         sem = document.getElementById('semesterSelect');
         year = document.getElementById('yearSelect');
         course = document.getElementById('courseSelect');
         var val1 = course.options[course.selectedIndex].value;
         var val2 = year.options[year.selectedIndex].value;
         var val3 = sem.options[sem.selectedIndex].value;
-        console.log(val1 + " " + val2 + " " + val3);
+        console.log('Course = ' + val1 + ' Year= ' + val2 + ' Semester = ' + val3);
         sem.setAttribute('onClick', loadTimetable(department,val1,val2,val3));
+
+        year = val2;
+        semester = val3;
     }
 
     function loadTimetable(department,course,year,semester){
@@ -226,13 +258,15 @@ th {
 
                 document.getElementById('id_courseCode').value = course;
 
+                console.log(this.getAttribute("day"));
+
                 document.getElementById('id_day').value = this.getAttribute("day");
 
                 document.getElementById('id_time').value = this.getAttribute("time");
 
-                document.getElementById('id_year').value = '1';
+                document.getElementById('id_year').value = year;
 
-                document.getElementById('id_semester').value = '2';
+                document.getElementById('id_semester').value = semester;
 
                 $('#cellModal').modal('show');
 
