@@ -43,8 +43,8 @@ class Room(models.Model):
     roomCode = models.CharField(max_length = 15, primary_key=True) # changed to 15
     roomName = models.CharField(max_length = 30)
     building = models.ForeignKey(Building)
-    lat = models.FloatField(max_length = 19)
-    lng = models.FloatField(max_length = 19)
+    lat = models.FloatField(max_length = 19, default= 53.27980291, editable=False)
+    lng = models.FloatField(max_length = 19, default=-9.06089351, editable=False)
 
     def __str__(self):
         return self.roomCode
