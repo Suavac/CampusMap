@@ -5,14 +5,48 @@
 
 <div class="container"> <!-- Container -->
 	  
-  <div class="jumbotron">
-      <h1>Test JSON API</h1>
-        <p class="lead">This button gets a list of courses </p>
-        <p><a class="btn btn-lg btn-success"  onclick="loadXMLDoc('years&department=College of Engineering and Informatics&course=BCT&year=1&semester=null')" role="button">loadXMLDoc('courses')</a></p>
-        <p class="lead">This button gets details for 2BCT </p>
-        <p><a class="btn btn-lg btn-success"  onclick="loadXMLDoc('2BCT')" role="button">loadXMLDoc('2BCT')</a></p>
-        <p id="test"></p>
-  </div>
+    <div class="jumbotron">
+        <div class="row">
+          <div class="col-xs-12" style="text-align: center">
+            <h2>Welcome to the NUIG CampusMap</h2>
+          </div>
+        </div>
+    </div>
+
+    <div class="container"> <!-- Container -->
+
+        <form class="col-lg-12" style="text-align: center" role="form" xmlns="http://www.w3.org/1999/html">
+            <div class="form-group">
+
+            <div class="col-lg-3 col-xs-6" style="margin-top:10px; margin-bottom:10px">
+              <select class="form-control" id="buildingSelect" >
+                <option value=''>Select a Course</option>
+              </select>
+            </div>
+
+            <div class="col-lg-3 col-xs-6" style="margin-top:10px; margin-bottom:10px" id="courses">
+              <select disabled class="form-control" id="roomSelect">
+                <option value='0'>Select a Year</option>
+              </select>
+            </div>
+
+            <div class="col-lg-3 col-xs-6" style="margin-top:10px; margin-bottom:10px" id="courses">
+              <select disabled class="form-control" id="roomSelect">
+                <option value='0'>Select a Semester</option>
+              </select>
+            </div>
+
+            <div class="col-lg-3 col-xs-6" style="margin-top:10px; margin-bottom:10px" id="courses">
+              <button disabled type="button" id="saveButton" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">
+                View Timetable
+               </button>
+            </div>
+
+            </div>
+        </form>
+
+    </div>
+
 
 </div>
 

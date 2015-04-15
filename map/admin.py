@@ -36,6 +36,7 @@ class ColourAdmin(admin.ModelAdmin):
 
 admin.site.register(TimeEntry, TimeEntryAdmin)
 admin.site.register(Course, CourseAdmin)
+admin.site.register(Colour, ColourAdmin)
 admin.site.register(Module, ModuleAdmin)
 admin.site.register(Building)
 admin.site.register(Room, RoomAdmin)
