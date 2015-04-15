@@ -63,8 +63,9 @@ class LecturerForm(forms.ModelForm):
 class TimetableForm(forms.ModelForm):
 
     courseCode = Course.objects.all()
-    semester = forms.CharField(max_length = 1)
     year = forms.CharField(max_length = 1)
+    semester = forms.CharField(max_length = 1)
+
     class Meta:
         model = Timetable
         fields = "__all__"
