@@ -243,6 +243,7 @@ def module(request):
 
 
 def room(request):
+    query_results = Room.objects.all().order_by('roomCode', 'building')
     if request.method == 'POST': # If the form has been submitted...
         form = RoomForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
@@ -255,9 +256,7 @@ def room(request):
     else:
         form = RoomForm() # An unbound form
 
-    return render(request, 'dbstuff/addroom.html', {
-        'form': form,
-    })
+    return render(request, 'dbstuff/addroom.html', locals(),context_instance=RequestContext(request))
 
 def lecturer(request):
      # get all data from lecturer table in ascending order

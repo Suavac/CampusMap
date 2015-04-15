@@ -13,42 +13,91 @@
 
             <h1>Add New Room</h1>
 
-            <form class="form-contact" action="" method="POST">
-            {% csrf_token %}
-            {% for field in form %}
-                <fieldset class="form-group">
+
+            <table class="table">
+            <!-- PRINT COLUMN NAME -->
+                <tr>
+                    <th>Room Code</th>
+                    <th>Room Name</th>
+                    <th>Building</th>
+                    <th>Location</th>
+                </tr>
+                <!-- FILL ONE ROW - 3 COLUMNS  -->
+                {% for item in query_results %}
+                 <tr>
+                    <td >{{  item.roomCode }}</td>
+
+                    <td>{{  item.roomName }}</td>
+
+                    <td>{{  item.building }}</td>
+                    <td> <button type="submit" class="btn btn-default" data-toggle="modal" data-target="#largeModal">Edit</button> </td>
+                 </tr>
+                {% endfor %}
 
 
 
-                {% ifequal field.name "building" %}
-                   <div style= "color: red">
+                <tr>
+                <!-- PRINT FORM IN THE LAST ROW -->
+                <form class="form-contact" action="" method="POST">
+                {% csrf_token %}
 
-                    <label style= "color: black" for="id_{{ field.name }}">{{ field.label }}</label>
-                        {{ field.errors|striptags }}
-                     </div>
-                    <select class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
-                    <option value= {{ form.building }}
+                    {% for field in form %}
 
-                    </select>
-                    <p class="help-text">{{ field.help_text }} </p>
+                    <td>
 
-                {% else %}
-                    <div style= "color: red">
+                        {% ifequal field.name "building" %}
 
-                    <label style= "color: black" for="id_{{ field.name }}">{{ field.label }}</label>
-                        {{ field.errors|striptags }}
-                     </div>
-                    <input type="text" class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
-                    <p class="help-text">{{ field.help_text }} </p>
-                {% endifequal %}
+                            <select class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
+                                <option value= {{ form.building }}
 
-                 </fieldset>
+                            <div style= "color: red"> {{ field.errors|striptags }}</div>
+                            <p class="help-text">{{ field.help_text }} </p>
+                            </select>
+                        {% else %}
+
+                            <input type="text" class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
+                            <div style= "color: red" >{{ field.errors|striptags }} </div>
+
+                        {% endifequal %}
 
 
-            {% endfor %}
-             <input type="submit" value="Submit"  class="btn btn-primary">
-            </form>
-        </div>
+                    </td>
+
+                    {% endfor %}
+                    <td><input type="submit" value="Submit"  class="btn btn-primary">
+                    </td>
+
+                    </form>
+
+            </table>
+
+
+
+
+
+<div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Large Modal</h4>
+      </div>
+      <div class="modal-body">
+        <h3>Modal Body</h3>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
 </body>
 </html>
 
