@@ -108,15 +108,14 @@ var lng = null;
 
 function initialize() {
     var mapOptions = {
-        center: {lat: 53.277700, lng: -9.062016},
-        zoom: 18
+        center: {lat: 53.278, lng: -9.061608463525772},
+        zoom: 17
     };
 
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         marker = new google.maps.Marker({
-        position: {lat: 53.277700, lng: -9.062016},
+        position: {lat: 53.27665459354239, lng: -9.061608463525772},
         map: map,
-        title: 'Hello World!',
         draggable: true
     });
 
