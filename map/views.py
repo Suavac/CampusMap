@@ -312,6 +312,8 @@ def department(request):
     return render_to_response('dbstuff/adddepartment.html', locals(),context_instance=RequestContext(request))
 
 def timetable(request):
+    # get all data from timetable table in ascending order
+    query_results = Timetable.objects.all().order_by('courseCode', 'semester')
     if request.method == 'POST': # If the form has been submitted...
         form = TimetableForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
@@ -324,6 +326,4 @@ def timetable(request):
     else:
         form = TimetableForm() # An unbound form
 
-    return render(request, 'dbstuff/addtimetable.html', {
-        'form': form,
-    })
+    return render(request, 'dbstuff/addtimetable.html', locals(),context_instance=RequestContext(request))

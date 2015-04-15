@@ -63,8 +63,8 @@ class Lecturer(models.Model):
 
 class Timetable(models.Model):
     courseCode = models.ForeignKey(Course)
-    year = models.CharField(max_length = 1)
     semester = models.CharField(max_length = 1, choices=(('1','1'), ('2','2')))
+    year = models.CharField(max_length = 1)
 
     class Meta:
         unique_together = (("year", "semester", "courseCode"),)
