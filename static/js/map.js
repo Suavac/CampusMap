@@ -151,6 +151,4 @@ function initialize() {
         lat = event.latLng.lat();
         lng = event.latLng.lng();
     });
-
-
 }
