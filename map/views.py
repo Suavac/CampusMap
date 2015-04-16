@@ -39,8 +39,8 @@ def editTimetable(request):
         'form': form,
         'check': check,
         'course': c,
-        'year':y,
-        'sem':s
+        'year': y,
+        'sem': s
     })
 
 
@@ -188,7 +188,7 @@ def JSON(request):
 
                 tempData = {
                     'mod' : o.modCode.modCode,
-                    'room' : o.roomCode.roomCode,
+                    'room' : o.roomCode.roomName,
                     'lec' : o.lecCode.lecFirst_Name + " " + o.lecCode.lecLast_Name,
                     'day' : o.day,
                     'time' : o.time,
@@ -218,7 +218,38 @@ def JSON(request):
 
 
 def home(request):
-    return render(request, 'home.html')
+
+    check = 'false'
+    c = 'null'
+    y = 'null'
+    s = 'null'
+
+    t = Timetable.objects.all()
+    if request.method == 'POST': # If the form has been submitted...
+        form = TimeEntryForm(request.POST) # A form bound to the POST data
+
+        if form.is_valid():
+            save_it = form.save()
+            save_it.save()
+
+            id = request.POST.get('timeTable','')
+            t = Timetable.objects.all().get(id=id)
+            tt = str(t)
+            ttt = tt.split(' ')
+            c = ttt[0]
+            y = ttt[1].split('year:')[1]
+            s = ttt[2].split('sem:')[1]
+            check = 'true'
+    else:
+        form = TimeEntryForm() # An unbound form
+
+    return render(request, 'home.html', {
+        'form': form,
+        'check': check,
+        'course': c,
+        'year':y,
+        'sem':s
+    })
 
 def course(request):
     # get all data from course table in ascending order

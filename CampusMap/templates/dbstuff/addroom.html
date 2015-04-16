@@ -13,21 +13,22 @@
 
             <h1>Add New Room</h1>
 <script type="text/javascript" src="{{ STATIC_URL }}js/map.js"> </script>
+
+<!-- script reads course code from the selected row of the course table on the page
+ and stores this info in a cookie, then later calls the loadPin-->
 <script>
+
 function getRoomDetails() {
 
-    var r;
-    var b;
+
     $(document).ready(function () {
     $('#test').on('click', 'tr', function (event) {
         var texts = $(this).children().map(function(){
             return $.trim($(this).html())
         }).get();
-        r = texts[0];
-        b = texts[2]
-           // alert(r + b)
+
         document.cookie = "room="+texts[0]+"; expires=0; path=/";
-        document.cookie = "building="+texts[2]+"; expires=0; path=/";
+
 loadPin(texts[0]);
     });
 });

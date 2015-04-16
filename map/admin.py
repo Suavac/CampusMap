@@ -28,8 +28,8 @@ class LecturerAdmin(admin.ModelAdmin):
     list_filter = ('lecFirst_Name', 'lecLast_Name',)
 
 class TimeEntryAdmin(admin.ModelAdmin):
-    list_display = ('modCode', 'roomCode', 'day', 'time', 'lecCode')
-    list_filter = ('day', 'modCode', 'roomCode',)
+    list_display = ('modCode', 'roomCode', 'day', 'time', 'lecCode', 'timeTable')
+    list_filter = ('day', 'modCode', 'roomCode','timeTable',)
 
 class ColourAdmin(admin.ModelAdmin):
     list_display = ('colour', 'hex')

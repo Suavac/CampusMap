@@ -9,15 +9,7 @@ $('#saveButton').on('click', function () {
     $(this).button('reset');
 })
 
-function displayCookies() {
-var fname=getCookie("room");
-if (fname==null) {fname="";}
-if (fname!="") {fname=fname;}
-var lname=getCookie("building");
-if (lname==null) {lname="";}
-if (lname!="") {lname=lname;}
-alert (fname + " " + lname);
-}
+
 function getCookie(name) {
 var nameEQ = name + "=";
 //alert(document.cookie);
