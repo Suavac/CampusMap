@@ -2,7 +2,29 @@
 
 {% block header %}
 
+  <form class="col-lg-9" role="form" xmlns="http://www.w3.org/1999/html">
+        <div class="form-group">
 
+            <div class="col-lg-3 col-xs-6" style="visibility:hidden; margin-top:10px; margin-bottom:10px">
+              <select class="form-control" id="buildingSelect" >
+                <option value=''>Select Building</option>
+              </select>
+            </div>
+
+            <div class="col-lg-3 col-xs-6" style="visibility:hidden; margin-top:10px; margin-bottom:10px" id="courses">
+              <select disabled class="form-control" id="roomSelect">
+                <option value='0'>Select Room</option>
+              </select>
+            </div>
+
+            <div class="col-lg-3 col-xs-6" style="margin-top:10px; margin-bottom:10px" id="courses">
+              <button disabled type="button" id="saveButton" data-loading-text="Saving..." class="btn btn-primary" autocomplete="off">
+                Save Pin
+               </button>
+            </div>
+
+        </div>
+      </form>
 
 {% endblock header %}
 
@@ -51,28 +73,6 @@
 <script type="text/javascript" src="{{ STATIC_URL }}js/map.js"> </script>
 
 
-    <form class="col-lg-9" role="form" xmlns="http://www.w3.org/1999/html">
-        <div class="form-group">
 
-            <div class="col-lg-3 col-xs-6" style="visibility:hidden; margin-top:10px; margin-bottom:10px">
-              <select class="form-control" id="buildingSelect" >
-                <option value=''>Select Building</option>
-              </select>
-            </div>
-
-            <div class="col-lg-3 col-xs-6" style="visibility:hidden; margin-top:10px; margin-bottom:10px" id="courses">
-              <select disabled class="form-control" id="roomSelect">
-                <option value='0'>Select Room</option>
-              </select>
-            </div>
-
-            <div class="col-lg-3 col-xs-6" style="margin-top:10px; margin-bottom:10px" id="courses">
-              <button disabled type="button" id="saveButton" data-loading-text="Saving..." class="btn btn-primary" autocomplete="off">
-                Save Pin
-               </button>
-            </div>
-
-        </div>
-      </form>
 
 {%endblock%}
