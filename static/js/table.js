@@ -74,6 +74,11 @@ function createTable(response) {
                 }
 
             }
+
+            if(response.timetable.length == 0){
+                cell.appendChild(button);
+            }
+
             cell.setAttribute("time", i);
             cell.setAttribute("day", j);
 

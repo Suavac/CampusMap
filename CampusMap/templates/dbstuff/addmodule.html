@@ -18,20 +18,20 @@
                 <fieldset class="form-group">
                     {% ifequal field.name "color" %}
                          <select class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
-                                <option value= {{ form.color }}
+                             <option value= {{ form.color }}
 
                             <div style= "color: red"> {{ field.errors|striptags }}</div>
                             <p class="help-text">{{ field.help_text }} </p>
                             </select>
                     {% else %}
-                    <div style= "color: red">
-                    <label style= "color: black" for="id_{{ field.name }}">{{ field.label }}</label>
-                        {{ field.errors|striptags }}
-                     </div>
-                    <input type="text" class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
-                    <p class="help-text">{{ field.help_text }} </p>
-                    </fieldset>
-                {% endifequal %}
+                        <div style= "color: red">
+                        <label style= "color: black" for="id_{{ field.name }}">{{ field.label }}</label>
+                            {{ field.errors|striptags }}
+                         </div>
+                        <input type="text" class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
+                        <p class="help-text">{{ field.help_text }} </p>
+                        </fieldset>
+                    {% endifequal %}
             {% endfor %}
              <input type="submit" value="Submit"  class="btn btn-primary">
             </form>

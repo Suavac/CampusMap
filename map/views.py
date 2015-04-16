@@ -11,12 +11,12 @@ import json, urllib, urlparse
 
 def editTimetable(request):
 
+    #Variables that are sent back to timetable.html to reload timetable after post
     check = 'false'
     c = 'null'
     y = 'null'
     s = 'null'
 
-    t = Timetable.objects.all()
     if request.method == 'POST': # If the form has been submitted...
         form = TimeEntryForm(request.POST) # A form bound to the POST data
 
@@ -24,13 +24,14 @@ def editTimetable(request):
             save_it = form.save()
             save_it.save()
 
+            #gets timeTable object from database and extracts course, year and semester values from it
             id = request.POST.get('timeTable','')
             t = Timetable.objects.all().get(id=id)
-            tt = str(t)
-            ttt = tt.split(' ')
-            c = ttt[0]
-            y = ttt[1].split('year:')[1]
-            s = ttt[2].split('sem:')[1]
+            t = str(t)
+            t = t.split(' ')
+            c = t[0]
+            y = t[1].split('year:')[1]
+            s = t[2].split('sem:')[1]
             check = 'true'
     else:
         form = TimeEntryForm() # An unbound form
@@ -42,9 +43,6 @@ def editTimetable(request):
         'year': y,
         'sem': s
     })
-
-
-
 
 
 def editMap(request):
@@ -118,10 +116,10 @@ def editMapJson(request):
         return HttpResponse("Invalid Query")
 
 
-# Handle JSON requests
+# Handles JSON requests
 def JSON(request):
 
-    message = urllib.unquote(request.get_full_path()).split('/json/?message=') # Gets JSON message
+    message = urllib.unquote(request.get_full_path()).split('/json/?message=') # Gets JSON message sent from webpage
     #Splits message into parts
     submessage = message[1].split('&')
     dept = submessage[1].split('department=')[1]
@@ -147,7 +145,7 @@ def JSON(request):
 
         return JsonResponse(data)
 
-
+    #returns a list of available departments
     elif (submessage[0] == 'departments'):
         temp = []
 
@@ -158,7 +156,7 @@ def JSON(request):
 
         return JsonResponse(data)
 
-
+    #returns course codes for year filtering in timetable.html
     elif (submessage[0] == 'years'):
         temp = []
         for o in t.iterator():
@@ -169,7 +167,7 @@ def JSON(request):
 
         return JsonResponse(data)
 
-
+    #loads timetable
     elif (submessage[0] == 'load'):
         # checks for queried course
         for o in c.iterator():
@@ -182,7 +180,7 @@ def JSON(request):
 
             timetable = []
 
-            t = TimeEntry.objects.filter(timeTable=Timetable.objects.get(courseCode=cs,year=year,semester=semester)) #filters out desired timetable
+            t = TimeEntry.objects.filter(timeTable=Timetable.objects.get(courseCode=cs,year=year,semester=semester)) #filters out desired timetable using variables obtained from JSON message
 
             for o in t.iterator():
 
@@ -194,8 +192,6 @@ def JSON(request):
                     'time' : o.time,
                     'colour' : o.modCode.color.hex
                 }
-
-                #tempData2json = json.dumps(tempData)
 
                 timetable.append(tempData)
 
@@ -211,7 +207,7 @@ def JSON(request):
             return JsonResponse(data)
 
         else:
-            return JsonResponse({'Course Not Found' : 'null'})
+            return JsonResponse({'Timetable Not Found' : 'null'})
 
     else:
         return JsonResponse({'Invalid Query' : 'null'})
@@ -224,7 +220,6 @@ def home(request):
     y = 'null'
     s = 'null'
 
-    t = Timetable.objects.all()
     if request.method == 'POST': # If the form has been submitted...
         form = TimeEntryForm(request.POST) # A form bound to the POST data
 

@@ -75,17 +75,9 @@ th {
 
             <form id="cellModalForm" action='' method='post' class="form">{% csrf_token %}
 
-                <!-- Always Hidden -->
-                <div style="">
-                    <div class="form-group"> <label for="day" id="id_day">Day</label>{{ form.day }}</div>
-                    <div class="form-group"> <label for="time" id="id_time">Time</label>{{ form.time }}</div>
-                    <!--<div class="form-group"> <label for="courseCode" id = "id_courseCode">Course Code</label>{{ form.timeTable.courseCode }}</div>
-                    <div class="form-group"> <label for="year" id ="id_year">Year</label>{{ form.timeTable.year }}</div>
-                    <div class="form-group"> <label for="semester" id = "id_semester">Semester</label>{{ form.timeTable.semester }}</div>!-->
-                    <div class="form-group"> <label for="timeTable" id="id_timeTable">Timetable</label>{{ form.timeTable }}</div>
-                </div>
-
-                <!-- Always visible -->
+                <div class="form-group"> <label for="timeTable" id="id_timeTable">Timetable</label>{{ form.timeTable }}</div>
+                <div class="form-group"> <label for="day" id="id_day">Day</label>{{ form.day }}</div>
+                <div class="form-group"> <label for="time" id="id_time">Time</label>{{ form.time }}</div>
                 <div class="form-group"> <label for="modCode">Module Code</label>{{ form.modCode }}</div>
                 <div class="form-group"> <label for="roomCode">Room Code</label>{{ form.roomCode }}</div>
                 <div class="form-group"> <label for="lecCode">Lecturer Name</label>{{ form.lecCode }}</div>
@@ -107,12 +99,15 @@ th {
     window.onload=function(){
         getDepartments();
 
+        //reloads the correct timetable after a class is added using the modal to allow you to enter multiple classes without having to filter the timetable out
+        //values for course, year and sem are returned from views.py
         if (({{ check }})==true){
             loadTimetable('load','{{ course }}','{{ year }}','{{ sem }}')
         }
 
     }
 
+    //Global variables to store data about timetable selected
     var department, course, year, semester;
 
     //Builds up URL to be sent as json request
@@ -146,20 +141,25 @@ th {
         option.innerHTML = "Select a course";
         sel.appendChild(option);
 
-        //Set every other element int the dropdown
+        //Set every other element in the dropdown
         for(var i = 0; i<courses.courses.length; i++){
             var op = document.createElement("option");
             op.innerHTML = "" + courses.courses[i];
             //sel.setAttribute('onchange', 'OnSelectionChange(this)')
-            op.setAttribute('onClick', 'getYears('+"'"+ departments.departments[i] +"'" + "," + "'"+ courses.courses[i] +"'"+')')
+            sel.setAttribute('onchange', 'onCourseSelection(this)')
             sel.appendChild(op);
         }
     }
 
+    function onCourseSelection (select) {
+        var selectedOption = select.options[select.selectedIndex]
+        getYears(selectedOption.value)
+    }
+
     //Loads years by course. Allows for courses of various lengths without errors
-    //ie: arts is 3 years long vs engineering is 4. This would throw an error with static year values
-    function getYears(dept, course){
-        var message = buildURL("years", dept, course, null, null);
+    //ie: arts is 3 years long vs engineering is 4. This would throw an error when selected using the filters with static year values
+    function getYears(course){
+        var message = buildURL("years", null, course, null, null);
         var request = new XMLHttpRequest();
         request.open('GET', message, false);
         request.send(null);
@@ -175,6 +175,7 @@ th {
         option.innerHTML = "Select a year"
         sel.appendChild(option)
 
+        //uses length of the request to generate year values, not the actual data in the request
         for(var i=0; i<years.years.length; i++){
             var op = document.createElement("option");
             op.innerHTML = i+1;
@@ -182,6 +183,7 @@ th {
         }
     }
 
+    //Gets a list of departments from the database
     function getDepartments(){
         var request = new XMLHttpRequest();
         var message = buildURL("departments",null,null,null,null)
@@ -192,17 +194,18 @@ th {
 
         sel = document.getElementById('departmentSelect');
 
+        //Creates selects in department dropdown with onclick events that call getCourses for that department
         for(var i=0; i<departments.departments.length; i++){
             var op = document.createElement("option");
             op.innerHTML = "" + departments.departments[i];
-            op.setAttribute('onClick', 'getCourses('+"'"+departments.departments[i]+"'"+')');
+            sel.setAttribute('onchange', 'onDepartmentSelection(this)');
             sel.appendChild(op);
         }
     }
     
-    function OnSelectionChange (select) {
+    function onDepartmentSelection (select) {
         var selectedOption = select.options[select.selectedIndex]
-        loadTimetable(selectedOption.value)
+        getCourses(selectedOption.value)
     }
 
     //Onclick to load timetable when semester is chosen
@@ -210,16 +213,18 @@ th {
         sem = document.getElementById('semesterSelect');
         year = document.getElementById('yearSelect');
         course = document.getElementById('courseSelect');
+
         var val1 = course.options[course.selectedIndex].value;
         var val2 = year.options[year.selectedIndex].value;
         var val3 = sem.options[sem.selectedIndex].value;
-        console.log('Course = ' + val1 + ' Year= ' + val2 + ' Semester = ' + val3);
-        sem.setAttribute('onClick', loadTimetable(department,val1,val2,val3));
+
+        sem.setAttribute('onchange', loadTimetable(department,val1,val2,val3));
 
         year = val2;
         semester = val3;
     }
 
+    //Loads the timetable
     function loadTimetable(department,course,year,semester){
 
         var request = new XMLHttpRequest();
@@ -233,6 +238,7 @@ th {
 
         el = document.getElementById("timetable");
 
+        //Clears div when a new timetable is selected
         while (el.hasChildNodes()){
             el.removeChild(el.firstChild);
         }
@@ -242,29 +248,13 @@ th {
         var table = document.getElementsByTagName("table")[0];
         var cells = table.getElementsByTagName("td"); //
 
-        var tt = course + ' year:' + year + ' sem:' + semester;
-        console.log(tt);
-
+        //Adds onclick events to each cell to load the modal for data input
         for(var i = 0; i < cells.length; i++){
         // Cell Object
         var cell = cells[i];
         // Track with onclick
             cell.onclick = function(){
-
-                //document.getElementById('id_courseCode').value = course;
-
-               // document.getElementById('id_day').value = this.getAttribute("day");
-
-                //document.getElementById('id_time').value = this.getAttribute("time");
-
-                //document.getElementById('id_year').value = year;
-
-                //document.getElementById('id_semester').value = semester;
-
-                document.getElementById('id_timeTable').value = tt;
-
                 $('#cellModal').modal('show');
-
             }
         }
     }
