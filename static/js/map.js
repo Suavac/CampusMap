@@ -9,11 +9,32 @@ $('#saveButton').on('click', function () {
     $(this).button('reset');
 })
 
+function displayCookies() {
+var fname=getCookie("room");
+if (fname==null) {fname="";}
+if (fname!="") {fname=fname;}
+var lname=getCookie("building");
+if (lname==null) {lname="";}
+if (lname!="") {lname=lname;}
+alert (fname + " " + lname);
+}
+function getCookie(name) {
+var nameEQ = name + "=";
+//alert(document.cookie);
+var ca = document.cookie.split(';');
+for(var i=0;i < ca.length;i++) {
+var c = ca[i];
+while (c.charAt(0)==' ') c = c.substring(1);
+if (c.indexOf(nameEQ) != -1) return c.substring(nameEQ.length,c.length);
+}
+return null;
+}
+
 function saveCoord(){
 
     var request = new XMLHttpRequest();
 
-    var param = '../edit-map-json/?message=newCoord' + '&room=' + room + '&lat=' + lat + '&lng=' + lng;
+    var param = '../edit-map-json/?message=newCoord' + '&room=' +  getCookie("room") + '&lat=' + lat + '&lng=' + lng;
 
     request.open('GET', param, false);
     request.send(null);
@@ -26,6 +47,7 @@ function saveCoord(){
 }
 
 function getBuildings(){
+    //displayCookies();
     var request = new XMLHttpRequest();
 
     var param = '../edit-map-json/?message=buildings';

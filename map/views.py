@@ -312,7 +312,7 @@ def department(request):
 
 def timetable(request):
     # get all data from timetable table in ascending order
-    query_results = Timetable.objects.all().order_by('courseCode', 'semester')
+    query_results = Timetable.objects.all().order_by('courseCode', 'year', 'semester')
     if request.method == 'POST': # If the form has been submitted...
         form = TimetableForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass

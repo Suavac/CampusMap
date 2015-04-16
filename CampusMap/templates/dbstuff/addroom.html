@@ -12,16 +12,48 @@
 <div class="container">
 
             <h1>Add New Room</h1>
-
+<script type="text/javascript" src="{{ STATIC_URL }}js/map.js"> </script>
 <script>
+function getRoomDetails() {
 
+    var r;
+    var b;
     $(document).ready(function () {
-    $('#tableid').on('click', 'tr', function (event) {
-        $(this).children().each(function(){
-            alert($(this).text())
-        })
+    $('#test').on('click', 'tr', function (event) {
+        var texts = $(this).children().map(function(){
+            return $.trim($(this).html())
+        }).get();
+        r = texts[0];
+        b = texts[2]
+           // alert(r + b)
+        document.cookie = "room="+texts[0]+"; expires=0; path=/";
+        document.cookie = "building="+texts[2]+"; expires=0; path=/";
+loadPin(texts[0]);
     });
 });
+}
+
+function loadPin(room){
+    console.log(room);
+
+    var param = '../edit-map-json/?message=' + 'coord' + '&room=' + room;
+
+    var request = new XMLHttpRequest();
+    request.open('GET', param, false);  // `false` makes the request synchronous
+    request.send(null);
+
+    coords = JSON.parse(request.responseText);
+
+    marker.setPosition(new google.maps.LatLng(coords.lat, coords.lng));
+    map.setCenter(new google.maps.LatLng(coords.lat, coords.lng));
+
+    lat = coords.lat;
+    lng = coords.lng;
+
+    document.getElementById('saveButton').disabled = false;
+}
+
+
 </script>
             <table class="table" id="test">
             <!-- PRINT COLUMN NAME -->
@@ -39,7 +71,7 @@
                     <td>{{  item.roomName }}</td>
 
                     <td>{{  item.building }}</td>
-                    <td> <button type="submit" class="btn btn-default" data-toggle="modal" data-target="#largeModal">Edit</button> </td>
+                    <td> <button type="submit" onclick="getRoomDetails()" class="btn btn-default" data-toggle="modal" data-target="#largeModal">Edit</button> </td>
                  </tr>
                 {% endfor %}
 
@@ -85,15 +117,10 @@
 
 
 <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Large Modal</h4>
-      </div>
-      <div class="modal-body">
-        <h3> MAP WILL BE IN HERE, need to find the way of feeding info about the roomw</h3>
-      </div>
+
+
+          {% include "map.html" %}
+
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
