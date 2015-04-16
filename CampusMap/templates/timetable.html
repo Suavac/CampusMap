@@ -117,6 +117,31 @@ th {
         return msg;
     }
 
+    //Gets a list of departments from the database
+    function getDepartments(){
+        var request = new XMLHttpRequest();
+        var message = buildURL("departments",null,null,null,null)
+        request.open('GET', message, false);
+        request.send(null);
+
+        departments = JSON.parse(request.responseText);
+
+        sel = document.getElementById('departmentSelect');
+
+        //Creates selects in department dropdown with onclick events that call getCourses for that department
+        for(var i=0; i<departments.departments.length; i++){
+            var op = document.createElement("option");
+            op.innerHTML = "" + departments.departments[i];
+            sel.setAttribute('onchange', 'onDepartmentSelection(this)');
+            sel.appendChild(op);
+        }
+    }
+
+    function onDepartmentSelection (select) {
+        var selectedOption = select.options[select.selectedIndex]
+        getCourses(selectedOption.value)
+    }
+
     function getCourses(dept){
 
         department = dept;
@@ -181,31 +206,6 @@ th {
             op.innerHTML = i+1;
             sel.appendChild(op);
         }
-    }
-
-    //Gets a list of departments from the database
-    function getDepartments(){
-        var request = new XMLHttpRequest();
-        var message = buildURL("departments",null,null,null,null)
-        request.open('GET', message, false);
-        request.send(null);
-
-        departments = JSON.parse(request.responseText);
-
-        sel = document.getElementById('departmentSelect');
-
-        //Creates selects in department dropdown with onclick events that call getCourses for that department
-        for(var i=0; i<departments.departments.length; i++){
-            var op = document.createElement("option");
-            op.innerHTML = "" + departments.departments[i];
-            sel.setAttribute('onchange', 'onDepartmentSelection(this)');
-            sel.appendChild(op);
-        }
-    }
-    
-    function onDepartmentSelection (select) {
-        var selectedOption = select.options[select.selectedIndex]
-        getCourses(selectedOption.value)
     }
 
     //Onclick to load timetable when semester is chosen
