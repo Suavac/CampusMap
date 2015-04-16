@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
-from .forms import CourseForm, ModuleForm, RoomForm, LecturerForm, BuildingForm, TimetableForm, DepartmentForm
+from .forms import CourseForm, ModuleForm, RoomForm, LecturerForm, BuildingForm, TimetableForm, DepartmentForm,TimeEntryForm
 
 from .models import Course, Timetable, Building, Module, Lecturer, Department, TimeEntry, Room
 from django.shortcuts import render_to_response
@@ -11,21 +11,36 @@ import json, urllib, urlparse
 
 def editTimetable(request):
 
-    check = "false"
+    check = 'false'
+    c = 'null'
+    y = 'null'
+    s = 'null'
 
+    t = Timetable.objects.all()
     if request.method == 'POST': # If the form has been submitted...
-        form = TimetableForm(request.POST) # A form bound to the POST data
+        form = TimeEntryForm(request.POST) # A form bound to the POST data
 
         if form.is_valid():
             save_it = form.save()
             save_it.save()
-            check = "true"
+
+            id = request.POST.get('timeTable','')
+            t = Timetable.objects.all().get(id=id)
+            tt = str(t)
+            ttt = tt.split(' ')
+            c = ttt[0]
+            y = ttt[1].split('year:')[1]
+            s = ttt[2].split('sem:')[1]
+            check = 'true'
     else:
-        form = TimetableForm() # An unbound form
+        form = TimeEntryForm() # An unbound form
 
     return render(request, 'timetable.html', {
         'form': form,
-        'check': check
+        'check': check,
+        'course': c,
+        'year':y,
+        'sem':s
     })
 
 

@@ -1,7 +1,7 @@
 from django import forms
 from django.template.defaultfilters import mark_safe
 
-from .models import Course, Module, Lecturer, Room, Building, Timetable, Department, TimeEntry
+from .models import Course, Module, Lecturer, Room, Building, Timetable, Department, TimeEntry, Colour
 
 class DepartmentForm(forms.ModelForm):
 
@@ -69,15 +69,37 @@ class TimetableForm(forms.ModelForm):
         model = Timetable
         fields = "__all__"
 
-class TimeEntry(forms.ModelForm):
+class TimeEntryForm(forms.ModelForm):
+
+    DAY_CHOICES = (
+        ('1', 'Monday'),
+        ('2', 'Tuesday'),
+        ('3', 'Wednesday'),
+        ('4', 'Thursday'),
+        ('5', 'Friday'),
+    )
+
+    HOURS_CHOICES = (
+        ('1', '09:00'),
+        ('2', '10:00'),
+        ('3', '11:00'),
+        ('4', '12:00'),
+        ('5', '13:00'),
+        ('6', '14:00'),
+        ('7', '15:00'),
+        ('8', '16:00'),
+        ('9', '17:00'),
+        ('10', '18:00'),
+        ('11', '19:00'),
+    )
 
     timeTable = Timetable.objects.all()
     modCode = Module.objects.all()
     roomCode = Room.objects.all()
     lecCode = Lecturer.objects.all()
-    day = forms.CharField(max_length = 1)
-    time = forms.CharField(max_length = 2)
+    day = forms.ChoiceField(choices=DAY_CHOICES)
+    time = forms.ChoiceField(choices=HOURS_CHOICES)
 
-    class meta:
+    class Meta:
         model = TimeEntry
         fields = "__all__"

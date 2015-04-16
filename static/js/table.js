@@ -46,7 +46,7 @@ function createTable(response) {
         for (var j = 1; j <= 5; j++) {
             //Create button to display in each cell
             var button = document.createElement('button');
-            button.className = "btn btn-info";
+            button.className = "btn";
             button.innerHTML = "Click to add a class";
 
             var cell = document.createElement("td");
