@@ -10,11 +10,13 @@
             {% csrf_token %}
             {% for field in form %}
                 <fieldset class="form-group">
+
                     {% ifequal field.name "color" %}
+
                         <select class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
                             <option value= {{ form.color }}
 
-                                            <div style= "color: red"> {{ field.errors|striptags }}</div>
+                        <div style= "color: red"> {{ field.errors|striptags }}</div>
                         <p class="help-text">{{ field.help_text }} </p>
                         </select>
                     {% else %}

@@ -101,8 +101,9 @@
             window.onload=function(){
                 getDepartments();
 
-                //reloads the correct timetable after a class is added using the modal to allow you to enter multiple classes without having to filter the timetable out
-                //values for course, year and sem are returned from views.py
+                // reloads the correct timetable after a class is added using the modal to allow you to
+                // enter multiple classes without having to filter the timetable out
+                // values for course, year and sem are returned from views.py
                 if (({{ check }})==true){
                     loadTimetable('load','{{ course }}','{{ year }}','{{ sem }}')
                 }

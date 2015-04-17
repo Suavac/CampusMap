@@ -45,11 +45,6 @@ def editTimetable(request):
     })
 
 
-def editMap(request):
-
-    return render(request, 'map.html')
-
-
 def editMapJson(request):
 
     message = request.GET.get('message')
