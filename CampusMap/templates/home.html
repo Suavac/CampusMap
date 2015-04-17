@@ -21,13 +21,15 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
     <!-- Menu Toggle Script -->
+    <script src="{{ STATIC_URL }}js/table.js"></script>
+    <script src="{{ STATIC_URL }}js/timetableFilters.js"></script>
 
 </head>
 
 <body>
 
 <div class="container"> <!-- Container -->
-	  
+
     <div class="jumbotron" style="padding:20px; margin-top:30px">
         <div class="row">
           <div class="col-xs-12" style="text-align: center">
@@ -131,14 +133,7 @@
 <script>
 
 window.onload=function(){
-
     getDepartments();
-
-    if (({{ check }})==true){
-        loadTimetable('load','{{ course }}','{{ year }}','{{ sem }}')
-        console.log(test)
-    }
-
 }
 
 
@@ -194,100 +189,6 @@ function initialize() {
 
 }
 
-
-
-    var department, course, year, semester;
-
-    //Builds up URL to be sent as json request
-    function buildURL(message, dept, course, year, semester){
-        var msg = '../json/?message=' + message + "&department=" + dept + "&course=" + course + "&year=" + year + "&semester=" + semester;
-
-        return msg;
-    }
-
-    function getCourses(dept){
-
-        department = dept;
-
-        var request = new XMLHttpRequest();
-        var message = buildURL("courses",dept,null,null,null);
-        request.open('GET', message, false);  // `false` makes the request synchronous
-        request.send(null);
-
-        courses = JSON.parse(request.responseText);
-        console.log(courses);
-
-        sel = document.getElementById('courseSelect');
-
-        //Clear dropdown each time a new department is chosen
-        while(sel.firstChild){
-            sel.removeChild(sel.firstChild);
-        }
-
-        //Set the first element in the dropdown
-        var option = document.createElement("option");
-        option.innerHTML = "Select a course";
-        sel.appendChild(option);
-
-        //Set every other element int the dropdown
-        for(var i = 0; i<courses.courses.length; i++){
-            var op = document.createElement("option");
-            op.innerHTML = "" + courses.courses[i];
-            //sel.setAttribute('onchange', 'OnSelectionChange(this)')
-            op.setAttribute('onClick', 'getYears('+"'"+ departments.departments[i] +"'" + "," + "'"+ courses.courses[i] +"'"+')')
-            sel.appendChild(op);
-        }
-    }
-
-    //Loads years by course. Allows for courses of various lengths without errors
-    //ie: arts is 3 years long vs engineering is 4. This would throw an error with static year values
-    function getYears(dept, course){
-        var message = buildURL("years", dept, course, null, null);
-        var request = new XMLHttpRequest();
-        request.open('GET', message, false);
-        request.send(null);
-
-        years = JSON.parse(request.responseText);
-
-        sel = document.getElementById('yearSelect');
-
-         while(sel.firstChild){
-            sel.removeChild(sel.firstChild);
-        }
-        var option = document.createElement("option")
-        option.innerHTML = "Select a year"
-        sel.appendChild(option)
-
-        for(var i=0; i<years.years.length; i++){
-            var op = document.createElement("option");
-            op.innerHTML = i+1;
-            sel.appendChild(op);
-        }
-    }
-
-    function getDepartments(){
-        var request = new XMLHttpRequest();
-        var message = buildURL("departments",null,null,null,null)
-        request.open('GET', message, false);
-        request.send(null);
-
-        departments = JSON.parse(request.responseText);
-
-        sel = document.getElementById('departmentSelect');
-
-        for(var i=0; i<departments.departments.length; i++){
-            var op = document.createElement("option");
-            op.innerHTML = "" + departments.departments[i];
-            op.setAttribute('onClick', 'getCourses('+"'"+departments.departments[i]+"'"+')');
-            sel.appendChild(op);
-        }
-    }
-
-    function OnSelectionChange (select) {
-        var selectedOption = select.options[select.selectedIndex]
-        loadTimetable(selectedOption.value)
-    }
-
     //Onclick to load timetable when semester is chosen
     function submit(){
         sem = document.getElementById('semesterSelect');
@@ -312,7 +213,7 @@ function initialize() {
 
         timeTable = JSON.parse(request.responseText);
 
-        retDiv = createTable(timeTable);
+        retDiv = createTable(timeTable, 'user');
 
         el = document.getElementById("timetable");
 
@@ -325,9 +226,6 @@ function initialize() {
         var table = document.getElementsByTagName("table")[0];
         var cells = table.getElementsByTagName("td"); //
 
-        var tt = course + ' year:' + year + ' sem:' + semester;
-        console.log(tt);
-
         for(var i = 0; i < cells.length; i++){
         // Cell Object
         var cell = cells[i];
@@ -335,7 +233,6 @@ function initialize() {
             cell.onclick = function(){
 
                 var room = this.getAttribute("room");
-
                 $('#mapModal').modal('show');
 
                 initialize();
@@ -346,91 +243,5 @@ function initialize() {
             }
         }
     }
-
-function createTable(response) {
-
-    var div = document.createElement('div');
-    var table = document.createElement('table');
-    var title = document.createElement('p');
-
-    title.innerHTML = "<b>" + response.title + "</b><br>" + " Year " + response.year + " Semester " + response.semester;
-
-    div.className = 'container';
-    div.appendChild(title);
-    table.className = "table table-bordered table-striped table-condensed text-center";
-
-    var trh = document.createElement('tr');
-    var tbody = document.createElement('tbody');
-
-    var rowHeader = [
-            'Time/Day', 'Monday', 'Tuesday',
-            'Wednesday', 'Thursday', 'Friday'
-    ];
-
-    var colHeader = [
-            '09:00 AM', '10:00 AM', '11:00 AM', '12:00 AM',
-            '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM',
-            '5:00 PM', '6:00 PM', '7:00 PM'
-    ];
-
-    for (var i = 0; i < 6; i++) {
-        trh.appendChild(document.createElement('th'));
-        trh.lastChild.innerHTML = (rowHeader[i]);
-    }
-
-    tbody.appendChild(trh);
-    table.appendChild(tbody);
-
-    // for every hour
-    for (var i = 1; i <= 11; i++) {
-
-        // create a row
-        var row = document.createElement("tr");
-
-        // start with a time
-        row.appendChild(document.createElement("th"));
-        row.lastChild.innerHTML = colHeader[i - 1];
-
-        // for every row, create 5 days
-        for (var j = 1; j <= 5; j++) {
-
-            var cell = document.createElement("td");
-
-            // loop over all elements in time table, looking for a match
-            for (var k = 0; k < response.timetable.length; k++) {
-
-                // place in cell
-                if ((response.timetable[k].day == j) && (response.timetable[k].time == i)) {
-
-                    var cellText = (
-                        response.timetable[k].mod + "<br>" +
-                        response.timetable[k].room + "<br>" +
-                        response.timetable[k].lec + "<br>"
-                    );
-
-                    cell.setAttribute("room", response.timetable[k].room);
-
-                    cell.style.backgroundColor = '#' + response.timetable[k].colour;
-                    cell.innerHTML = cellText;
-
-                    break; // important
-
-                    // otherwise, something default
-                } else {
-                    cell.innerHTML = "<br> <br> <br>";
-                }
-
-            }
-            cell.setAttribute("time", i);
-            cell.setAttribute("day", j);
-
-            row.appendChild(cell);
-        }
-        tbody.appendChild(row);
-    }
-
-    div.appendChild(table);
-    return div;
-}
 
 </script>

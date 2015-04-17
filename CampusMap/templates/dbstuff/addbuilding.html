@@ -9,11 +9,13 @@
     <title></title>
 </head>
 <body>
+
+ <script type="text/javascript" src="{{ STATIC_URL }}js/sm.js"> </script>
 <div class="container">
 
             <h1>Add New Building</h1>
 
-            <table class="table">
+            <table class="table" id="test">
             <!-- PRINT COLUMN NAME -->
                 <tr>
 
@@ -26,7 +28,11 @@
                  <tr>
 
                     <td>{{  item.buildingName }}</td>
-
+                    <td>
+                        <button type="submit" onclick="getRecordDetails('building');" class="btn btn-default" aria-label="Left Align" style="color: red">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
+                    </td>
 
                  </tr>
                 {% endfor %}

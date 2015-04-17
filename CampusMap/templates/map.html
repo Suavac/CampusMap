@@ -2,23 +2,23 @@
 
 {% block header %}
 
-    <form class="col-lg-9" role="form" xmlns="http://www.w3.org/1999/html">
+  <form class="col-lg-9" role="form" xmlns="http://www.w3.org/1999/html">
         <div class="form-group">
 
-            <div class="col-lg-3 col-xs-6" style="margin-top:10px; margin-bottom:10px">
+            <div class="col-lg-3 col-xs-6" style="visibility:hidden; margin-top:10px; margin-bottom:10px">
               <select class="form-control" id="buildingSelect" >
                 <option value=''>Select Building</option>
               </select>
             </div>
 
-            <div class="col-lg-3 col-xs-6" style="margin-top:10px; margin-bottom:10px" id="courses">
+            <div class="col-lg-3 col-xs-6" style="visibility:hidden; margin-top:10px; margin-bottom:10px" id="courses">
               <select disabled class="form-control" id="roomSelect">
                 <option value='0'>Select Room</option>
               </select>
             </div>
 
             <div class="col-lg-3 col-xs-6" style="margin-top:10px; margin-bottom:10px" id="courses">
-              <button disabled type="button" id="saveButton" data-loading-text="Saving..." class="btn btn-primary" autocomplete="off">
+              <button type="button" id="saveButton" data-loading-text="Saving..." class="btn btn-primary" autocomplete="off">
                 Save Pin
                </button>
             </div>
@@ -71,6 +71,8 @@
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJJEeE5dn-hk6w1MoBSn2-Q3p4TfBcbMk"> </script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/map.js"> </script>
+
+
 
 
 {%endblock%}

@@ -25,6 +25,7 @@ class ModuleForm(forms.ModelForm):
 
     modCode = forms.CharField(max_length=7, label = mark_safe('<strong>Module Code</strong>'))
     modName = forms.CharField(max_length=70,label = mark_safe('<strong>Module Name</strong>'))
+    colour = Colour.objects.all()
 
     class Meta:
         model = Module

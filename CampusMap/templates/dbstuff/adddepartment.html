@@ -9,10 +9,11 @@
     <title></title>
 </head>
 <div class="container">
+<script type="text/javascript" src="{{ STATIC_URL }}js/sm.js"> </script>
 
             <h1>Add New Department</h1>
 
-            <table class="table">
+            <table class="table" id="test">
             <!-- PRINT COLUMN NAME -->
                 <tr>
                     <th>Department Name</th>
@@ -22,7 +23,11 @@
                 {% for item in query_results %}
                  <tr>
                     <td>{{  item.depName }}</td>
-
+                    <td>
+                        <button type="submit" onclick="getRecordDetails('department')" class="btn btn-default" aria-label="Left Align" style="color: red">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
+                    </td>
                  </tr>
                 {% endfor %}
 
