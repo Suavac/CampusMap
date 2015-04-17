@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="0d88e420-6be3-4149-84af-1704f5e47018" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CampusMap/templates/dbstuff/addroom.html" afterPath="$PROJECT_DIR$/CampusMap/templates/dbstuff/addroom.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/sm.js" afterPath="$PROJECT_DIR$/static/js/sm.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CampusMap/templates/dbstuff/addbuilding.html" afterPath="$PROJECT_DIR$/CampusMap/templates/dbstuff/addbuilding.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CampusMap/templates/dbstuff/addcourse.html" afterPath="$PROJECT_DIR$/CampusMap/templates/dbstuff/addcourse.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CampusMap/templates/dbstuff/adddepartment.html" afterPath="$PROJECT_DIR$/CampusMap/templates/dbstuff/adddepartment.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CampusMap/templates/dbstuff/addlecturer.html" afterPath="$PROJECT_DIR$/CampusMap/templates/dbstuff/addlecturer.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="CampusMap.iws" />
@@ -34,41 +35,71 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="timetable.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CampusMap/templates/timetable.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="24.846153" vertical-offset="1020" max-vertical-offset="2941">
-              <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/map/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.76" vertical-offset="744" max-vertical-offset="1955">
+            <state vertical-scroll-proportion="0.0" vertical-offset="744" max-vertical-offset="1955">
               <caret line="64" column="42" selection-start-line="64" selection-start-column="42" selection-end-line="64" selection-end-column="42" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sm.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="sm.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/js/sm.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.15111111" vertical-offset="0" max-vertical-offset="1326">
+            <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="1326">
               <caret line="6" column="67" selection-start-line="6" selection-start-column="67" selection-end-line="6" selection-end-column="67" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CampusMap/templates/home.html">
+      <file leaf-file-name="addbuilding.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/addbuilding.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.115385" vertical-offset="0" max-vertical-offset="4420">
-              <caret line="17" column="34" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
+            <state vertical-scroll-proportion="-19.73077" vertical-offset="405" max-vertical-offset="1054">
+              <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="addcourse.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/addcourse.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-19.73077" vertical-offset="1204" max-vertical-offset="1853">
+              <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="adddepartment.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/adddepartment.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-19.73077" vertical-offset="337" max-vertical-offset="986">
+              <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="addlecturer.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/addlecturer.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-19.73077" vertical-offset="541" max-vertical-offset="1190">
+              <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="addmodule.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/addmodule.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-20.923077" vertical-offset="0" max-vertical-offset="663">
+              <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -77,7 +108,7 @@
       <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CampusMap/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.8846154" vertical-offset="442" max-vertical-offset="2074">
+            <state vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="2074">
               <caret line="35" column="6" selection-start-line="35" selection-start-column="6" selection-end-line="35" selection-end-column="6" />
               <folding />
             </state>
@@ -87,8 +118,18 @@
       <file leaf-file-name="addroom.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/addroom.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.076923" vertical-offset="1479" max-vertical-offset="2873">
-              <caret line="107" column="71" selection-start-line="107" selection-start-column="71" selection-end-line="107" selection-end-column="71" />
+            <state vertical-scroll-proportion="14.923077" vertical-offset="2224" max-vertical-offset="2873">
+              <caret line="108" column="71" selection-start-line="108" selection-start-column="71" selection-end-line="108" selection-end-column="71" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="addtimetable.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/addtimetable.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.5978428" vertical-offset="1272" max-vertical-offset="1921">
+              <caret line="52" column="16" selection-start-line="52" selection-start-column="16" selection-end-line="52" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -137,15 +178,15 @@
         <option value="$PROJECT_DIR$/static/js/timetableFilters.js" />
         <option value="$PROJECT_DIR$/CampusMap/templates/dbstuff/addmodule.html" />
         <option value="$PROJECT_DIR$/CampusMap/templates/dbstuff/addtimetable.html" />
-        <option value="$PROJECT_DIR$/CampusMap/templates/dbstuff/addlecturer.html" />
-        <option value="$PROJECT_DIR$/CampusMap/templates/dbstuff/adddepartment.html" />
-        <option value="$PROJECT_DIR$/CampusMap/templates/dbstuff/addcourse.html" />
-        <option value="$PROJECT_DIR$/CampusMap/templates/dbstuff/addbuilding.html" />
         <option value="$PROJECT_DIR$/CampusMap/templates/base.html" />
         <option value="$PROJECT_DIR$/CampusMap/templates/timetable.html" />
         <option value="$PROJECT_DIR$/CampusMap/templates/home.html" />
         <option value="$PROJECT_DIR$/CampusMap/templates/dbstuff/addroom.html" />
         <option value="$PROJECT_DIR$/static/js/sm.js" />
+        <option value="$PROJECT_DIR$/CampusMap/templates/dbstuff/addbuilding.html" />
+        <option value="$PROJECT_DIR$/CampusMap/templates/dbstuff/addcourse.html" />
+        <option value="$PROJECT_DIR$/CampusMap/templates/dbstuff/adddepartment.html" />
+        <option value="$PROJECT_DIR$/CampusMap/templates/dbstuff/addlecturer.html" />
       </list>
     </option>
   </component>
@@ -196,7 +237,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -317,6 +357,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -572,8 +613,8 @@
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
-        <env name="DJANGO_SETTINGS_MODULE" value="CampusMap.settings" />
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="CampusMap.settings" />
       </envs>
       <option name="SDK_HOME" value="C:\Program Files (x86)\My Tools\Python\2\python.exe" />
       <option name="WORKING_DIRECTORY" value="" />
@@ -1092,9 +1133,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.5779703" vertical-offset="926" max-vertical-offset="1887">
           <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#24#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1134,7 +1172,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.31559405" vertical-offset="850" max-vertical-offset="1768">
           <caret line="65" column="74" selection-start-line="65" selection-start-column="74" selection-end-line="65" selection-end-column="74" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1142,65 +1179,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.210396" vertical-offset="722" max-vertical-offset="1802">
           <caret line="100" column="0" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/addtimetable.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.69756097" vertical-offset="169" max-vertical-offset="1921">
-          <caret line="52" column="16" selection-start-line="52" selection-start-column="16" selection-end-line="52" selection-end-column="31" />
-          <folding>
-            <element signature="e#1934#1952#0#HTML" expanded="false" />
-            <element signature="e#2719#2738#0#HTML" expanded="false" />
-            <element signature="e#3096#3115#0#HTML" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/addmodule.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.516129" vertical-offset="0" max-vertical-offset="1054">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/addlecturer.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24193548" vertical-offset="17" max-vertical-offset="1479">
-          <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/adddepartment.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4032258" vertical-offset="0" max-vertical-offset="1275">
-          <caret line="25" column="21" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/addcourse.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22580644" vertical-offset="0" max-vertical-offset="2159">
-          <caret line="14" column="35" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/addbuilding.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2580645" vertical-offset="0" max-vertical-offset="1360">
-          <caret line="16" column="35" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CampusMap/templates/timetable.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="24.846153" vertical-offset="1020" max-vertical-offset="2941">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1020" max-vertical-offset="2941">
           <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
           <folding />
         </state>
@@ -1208,7 +1192,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CampusMap/templates/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.115385" vertical-offset="0" max-vertical-offset="4420">
+        <state vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="4420">
           <caret line="17" column="34" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
           <folding />
         </state>
@@ -1216,7 +1200,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/map/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.76" vertical-offset="744" max-vertical-offset="1955">
+        <state vertical-scroll-proportion="0.0" vertical-offset="744" max-vertical-offset="1955">
           <caret line="64" column="42" selection-start-line="64" selection-start-column="42" selection-end-line="64" selection-end-column="42" />
           <folding />
         </state>
@@ -1224,24 +1208,72 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CampusMap/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.8846154" vertical-offset="442" max-vertical-offset="2074">
+        <state vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="2074">
           <caret line="35" column="6" selection-start-line="35" selection-start-column="6" selection-end-line="35" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/addroom.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.076923" vertical-offset="1479" max-vertical-offset="2873">
-          <caret line="107" column="71" selection-start-line="107" selection-start-column="71" selection-end-line="107" selection-end-column="71" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static/js/sm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15111111" vertical-offset="0" max-vertical-offset="1326">
+        <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="1326">
           <caret line="6" column="67" selection-start-line="6" selection-start-column="67" selection-end-line="6" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/addbuilding.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.73077" vertical-offset="405" max-vertical-offset="1054">
+          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/addcourse.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.73077" vertical-offset="1204" max-vertical-offset="1853">
+          <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/adddepartment.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.73077" vertical-offset="337" max-vertical-offset="986">
+          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/addlecturer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.73077" vertical-offset="541" max-vertical-offset="1190">
+          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/addmodule.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.923077" vertical-offset="0" max-vertical-offset="663">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/addroom.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="14.923077" vertical-offset="2224" max-vertical-offset="2873">
+          <caret line="108" column="71" selection-start-line="108" selection-start-column="71" selection-end-line="108" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/addtimetable.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.5978428" vertical-offset="1272" max-vertical-offset="1921">
+          <caret line="52" column="16" selection-start-line="52" selection-start-column="16" selection-end-line="52" selection-end-column="31" />
           <folding />
         </state>
       </provider>
