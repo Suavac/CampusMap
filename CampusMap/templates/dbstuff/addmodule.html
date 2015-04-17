@@ -10,10 +10,10 @@
             {% csrf_token %}
             {% for field in form %}
                 <fieldset class="form-group">
-                    <div style= "color: red">
-                            <label style= "color: black" for="id_{{ field.name }}">{{ field.label }}</label>
-                    {% ifequal field.name "color" %}
 
+                    {% ifequal field.name "color" %}
+                        <div style= "color: red">
+                            <label style= "color: black" for="id_{{ field.name }}">{{ field.label }}</label>
                         <select class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
                             <option value= {{ form.color }}
 
