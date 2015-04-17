@@ -3,17 +3,22 @@
     var rowUniqueIdentifier;
 
     function getRecordDetails( url ) {
-
-        $(document).ready(function () {
-            $('#test').on('click', 'tr', function (event) {
-                var texts = $(this).children().map(function () {
-                    return $.trim($(this).html())
-                }).get();
-                rowUniqueIdentifier=texts[0];
-                deleteRecord();
-                location.reload();
+        var x;
+        if (confirm("Are You Sure?") == true) { // confirm deletion
+             $(document).ready(function () {
+                $('#test').on('click', 'tr', function (event) {
+                    var texts = $(this).children().map(function () {
+                        return $.trim($(this).html())
+                    }).get();
+                    rowUniqueIdentifier=texts[0];
+                    deleteRecord();
+                    location.reload();
+                });
             });
-        });
+    } else {
+        return;
+    }
+
 
     function deleteRecord() {
 
