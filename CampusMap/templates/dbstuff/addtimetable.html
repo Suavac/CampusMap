@@ -5,44 +5,6 @@
     <div class="container">
         <h1>Add New Timetable</h1>
 
-        <script>
-
-            var course, year, semester;
-
-            function getTimetableDetails() {
-
-                $(document).ready(function () {
-                    $('#test').on('click', 'tr', function (event) {
-                        var texts = $(this).children().map(function () {
-                            return $.trim($(this).html())
-                        }).get();
-                        course = texts[0];
-                        year=texts[1];
-                        semester=texts[2];
-                        deleteRecord();
-                        location.reload();
-                    });
-                });
-
-                function deleteRecord() {
-
-                    var request = new XMLHttpRequest();
-
-                    var param = '../timetable/?message=delete' + '&course=' + course + '&year=' + year + '&semester=' + semester;
-
-                    request.open('GET', param, false);
-                    request.send(null);
-
-                    if (request.responseText == 'success') {
-
-                        console.log("message received")
-                    }
-
-                }
-            }
-
-        </script>
-
 
         <table class="table" id="test">
             <!-- PRINT COLUMN NAME -->
@@ -61,7 +23,7 @@
                     <td>{{  item.semester }}</td>
 
                     <td>
-                        <button type="submit" onclick="getTimetableDetails();" class="btn btn-default" aria-label="Left Align" style="color: red">
+                        <button type="submit" onclick="deleteTimetable();" class="btn btn-default" aria-label="Left Align" style="color: red">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         </button>
                     </td>

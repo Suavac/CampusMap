@@ -72,3 +72,24 @@
     }
 
 
+
+    function deleteTimetable() {
+
+       $(document).ready(function () {
+               $('#test').on('click', 'tr', function (event) {
+                   var texts = $(this).children().map(function () {
+                        return $.trim($(this).html())
+                   }).get();
+                   var course = texts[0];
+                   var year = texts[1];
+                   var semester = texts[2];
+                   var request = new XMLHttpRequest();
+
+                   var param = '../timetable/?message=delete' + '&course=' + course + '&year=' + year + '&semester=' + semester;
+
+                   request.open('GET', param, false);
+                   request.send(null);
+                   location.reload();
+               });
+          });
+       }
