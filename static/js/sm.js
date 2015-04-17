@@ -5,22 +5,22 @@
     function getRecordDetails( url ) {
         var x;
         if (confirm("Are You Sure?") == true) { // confirm deletion
-             $(document).ready(function () {
+            $(document).ready(function () {
                 $('#test').on('click', 'tr', function (event) {
                     var texts = $(this).children().map(function () {
                         return $.trim($(this).html())
                     }).get();
-                    rowUniqueIdentifier=texts[0];
-                    deleteRecord();
+                    rowUniqueIdentifier = texts[0];
+                    deleteRecord(url);
                     location.reload();
                 });
             });
-    } else {
-        return;
+        } else {
+            return;
+        }
     }
 
-
-    function deleteRecord() {
+    function deleteRecord( url ) {
 
         var request = new XMLHttpRequest();
 
@@ -34,10 +34,9 @@
            console.log("message received")
         }
 
-        }
     }
 
-    function getRoomDetails() {
+    function editRoomLocation() {
 
         $(document).ready(function () {
             $('#test').on('click', 'tr', function (event) {
@@ -52,22 +51,24 @@
         });
     }
 
-function loadPin(room){
-    console.log(room);
+    function loadPin(room){
+        console.log(room);
 
-    var param = '../edit-map-json/?message=' + 'coord' + '&room=' + room;
+        var param = '../edit-map-json/?message=' + 'coord' + '&room=' + room;
 
-    var request = new XMLHttpRequest();
-    request.open('GET', param, false);  // `false` makes the request synchronous
-    request.send(null);
+        var request = new XMLHttpRequest();
+        request.open('GET', param, false);  // `false` makes the request synchronous
+        request.send(null);
 
-    coords = JSON.parse(request.responseText);
+        coords = JSON.parse(request.responseText);
 
-    marker.setPosition(new google.maps.LatLng(coords.lat, coords.lng));
-    map.setCenter(new google.maps.LatLng(coords.lat, coords.lng));
+        marker.setPosition(new google.maps.LatLng(coords.lat, coords.lng));
+        map.setCenter(new google.maps.LatLng(coords.lat, coords.lng));
 
-    lat = coords.lat;
-    lng = coords.lng;
+        lat = coords.lat;
+        lng = coords.lng;
 
-    document.getElementById('saveButton').disabled = false;
-}
+        document.getElementById('saveButton').disabled = false;
+    }
+
+

@@ -2,88 +2,10 @@
 
 {% block content %}
 
-
-
     <div class="container">
 
         <h1>Add New Room</h1>
-        <script type="text/javascript" src="{{ STATIC_URL }}js/map.js"> </script>
-        <script type="text/javascript" src="{{ STATIC_URL }}js/sm.js"> </script>
-        <!-- script reads course code from the selected row of the course table on the page
-         and stores this info in a cookie, then later calls the loadPin-->
-        <script>
 
-            var room;
-
-            function getRDetails() {
-
-                $(document).ready(function () {
-                    $('#test').on('click', 'tr', function (event) {
-                        var texts = $(this).children().map(function () {
-                            return $.trim($(this).html())
-                        }).get();
-
-                        room = texts[0];
-                        deleteRecord();
-                        location.reload();
-                    });
-                });
-
-                function deleteRecord() {
-
-                    var request = new XMLHttpRequest();
-
-                    var param = '../room/?message=delete' + '&room=' + room;
-
-                    request.open('GET', param, false);
-                    request.send(null);
-                    if (request.responseText == 'success') {
-
-                        console.log("message received")
-                    }
-                }
-            }
-
-
-
-            function getRoomDetails() {
-
-
-                $(document).ready(function () {
-                    $('#test').on('click', 'tr', function (event) {
-                        var texts = $(this).children().map(function(){
-                            return $.trim($(this).html())
-                        }).get();
-
-                        document.cookie = "room="+texts[0]+"; expires=0; path=/";
-
-                        loadPin(texts[0]);
-                    });
-                });
-            }
-
-            function loadPin(room){
-                console.log(room);
-
-                var param = '../edit-map-json/?message=' + 'coord' + '&room=' + room;
-
-                var request = new XMLHttpRequest();
-                request.open('GET', param, false);  // `false` makes the request synchronous
-                request.send(null);
-
-                coords = JSON.parse(request.responseText);
-
-                marker.setPosition(new google.maps.LatLng(coords.lat, coords.lng));
-                map.setCenter(new google.maps.LatLng(coords.lat, coords.lng));
-
-                lat = coords.lat;
-                lng = coords.lng;
-
-                document.getElementById('saveButton').disabled = false;
-            }
-
-
-        </script>
         <table class="table" id="test">
             <!-- PRINT COLUMN NAME -->
             <tr>
@@ -101,7 +23,7 @@
                     <td>{{  item.roomName }}</td>
 
                     <td>{{  item.building }}</td>
-                    <td> <button type="submit" onclick="getRoomDetails()" class="btn btn-default" data-toggle="modal" data-target="#largeModal">
+                    <td> <button type="submit" onclick="editRoomLocation();" class="btn btn-default" data-toggle="modal" data-target="#largeModal">
                         <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
                     </button> </td>
                     <td>
