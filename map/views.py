@@ -249,6 +249,15 @@ def home(request):
 def course(request):
     # get all data from course table in ascending order
     query_results = Course.objects.all().order_by('courseCode')
+
+    if request.method == 'GET':
+        message = request.GET.get('message')
+
+        if message == 'delete':
+            record = request.GET.get('toDelete')
+            Course.objects.filter(courseCode=record).delete()
+            #return HttpResponseRedirect('/timetable/')
+
     if request.method == 'POST': # If the form has been submitted...
         form = CourseForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
@@ -285,6 +294,15 @@ def module(request):
 
 def room(request):
     query_results = Room.objects.all().order_by('roomCode', 'building')
+
+    if request.method == 'GET':
+        message = request.GET.get('message')
+
+        if message == 'delete':
+            record = request.GET.get('toDelete')
+            Room.objects.filter(roomCode=record).delete()
+            #return HttpResponseRedirect('/timetable/')
+
     if request.method == 'POST': # If the form has been submitted...
         form = RoomForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
@@ -302,6 +320,15 @@ def room(request):
 def lecturer(request):
      # get all data from lecturer table in ascending order
     query_results = Lecturer.objects.all()
+
+    if request.method == 'GET':
+        message = request.GET.get('message')
+
+        if message == 'delete':
+            record = request.GET.get('toDelete')
+            Lecturer.objects.filter(lecCode=record).delete()
+            #return HttpResponseRedirect('/timetable/')
+
     if request.method == 'POST': # If the form has been submitted...
         form = LecturerForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
@@ -321,6 +348,14 @@ def building(request):
     # get all data from building table in ascending order
     query_results = Building.objects.all().order_by('buildingName')
 
+    if request.method == 'GET':
+        message = request.GET.get('message')
+
+        if message == 'delete':
+            record = request.GET.get('toDelete')
+            Building.objects.filter(buildingName=record).delete()
+            #return HttpResponseRedirect('/timetable/')
+
     if request.method == 'POST': # If the form has been submitted...
         form = BuildingForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
@@ -332,11 +367,20 @@ def building(request):
             return HttpResponseRedirect('/building/') # Redirect after POST
     else:
         form = BuildingForm() # An unbound form
+
     return render_to_response('dbstuff/addbuilding.html', locals(),context_instance=RequestContext(request))
 
 def department(request):
     # get all data from building table in ascending order
-    query_results = Department.objects.all()
+    query_results = Department.objects.all().order_by('depName')
+
+    if request.method == 'GET':
+        message = request.GET.get('message')
+
+        if message == 'delete':
+            record = request.GET.get('toDelete')
+            Department.objects.filter(depName=record).delete()
+            #return HttpResponseRedirect('/timetable/')
 
     if request.method == 'POST': # If the form has been submitted...
         form = DepartmentForm(request.POST) # A form bound to the POST data
@@ -354,6 +398,17 @@ def department(request):
 def timetable(request):
     # get all data from timetable table in ascending order
     query_results = Timetable.objects.all().order_by('courseCode', 'year', 'semester')
+
+    if request.method == 'GET':
+        message = request.GET.get('message')
+
+        if message == 'delete':
+            cc = request.GET.get('course')
+            yr = request.GET.get('year')
+            sr = request.GET.get('semester')
+            Timetable.objects.filter(courseCode=cc, year=yr, semester=sr).delete()
+            #return HttpResponseRedirect('/timetable/')
+
     if request.method == 'POST': # If the form has been submitted...
         form = TimetableForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass

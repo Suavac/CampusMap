@@ -13,10 +13,43 @@
 
             <h1>Add New Room</h1>
 <script type="text/javascript" src="{{ STATIC_URL }}js/map.js"> </script>
-
+<script type="text/javascript" src="{{ STATIC_URL }}js/sm.js"> </script>
 <!-- script reads course code from the selected row of the course table on the page
  and stores this info in a cookie, then later calls the loadPin-->
 <script>
+
+    var room;
+
+    function getRDetails() {
+
+        $(document).ready(function () {
+            $('#test').on('click', 'tr', function (event) {
+                var texts = $(this).children().map(function () {
+                    return $.trim($(this).html())
+                }).get();
+
+                room = texts[0];
+                deleteRecord();
+                location.reload();
+            });
+        });
+
+        function deleteRecord() {
+
+            var request = new XMLHttpRequest();
+
+            var param = '../room/?message=delete' + '&room=' + room;
+
+            request.open('GET', param, false);
+            request.send(null);
+            if (request.responseText == 'success') {
+
+                console.log("message received")
+            }
+        }
+    }
+
+
 
 function getRoomDetails() {
 
@@ -29,7 +62,7 @@ function getRoomDetails() {
 
         document.cookie = "room="+texts[0]+"; expires=0; path=/";
 
-loadPin(texts[0]);
+    loadPin(texts[0]);
     });
 });
 }
@@ -63,6 +96,8 @@ function loadPin(room){
                     <th>Room Name</th>
                     <th>Building</th>
                     <th>Location</th>
+
+                    <th></th>
                 </tr>
                 <!-- FILL ONE ROW - 3 COLUMNS  -->
                 {% for item in query_results %}
@@ -72,7 +107,14 @@ function loadPin(room){
                     <td>{{  item.roomName }}</td>
 
                     <td>{{  item.building }}</td>
-                    <td> <button type="submit" onclick="getRoomDetails()" class="btn btn-default" data-toggle="modal" data-target="#largeModal">Edit</button> </td>
+                    <td> <button type="submit" onclick="getRoomDetails()" class="btn btn-default" data-toggle="modal" data-target="#largeModal">
+                            <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+                        </button> </td>
+                    <td>
+                        <button type="submit" onclick="getRecordDetails('room')" class="btn btn-default" aria-label="Left Align" style="color: red">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
+                    </td>
                  </tr>
                 {% endfor %}
 
