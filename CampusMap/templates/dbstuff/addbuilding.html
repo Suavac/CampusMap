@@ -2,15 +2,9 @@
 
 {% block content %}
 
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<script type="text/javascript" src="{{ STATIC_URL }}js/sm.js"> </script>
 
- <script type="text/javascript" src="{{ STATIC_URL }}js/sm.js"> </script>
+
 <div class="container">
 
             <h1>Add New Building</h1>
@@ -20,8 +14,7 @@
                 <tr>
 
                     <th>Building Name</th>
-
-                    <th></th>
+                    <th>Delete</th>
                 </tr>
                 <!-- FILL ONE ROW - 3 COLUMNS  -->
                 {% for item in query_results %}
@@ -78,7 +71,5 @@
             </form>
         </div>
 -->
-</body>
-</html>
 
 {%  endblock %}

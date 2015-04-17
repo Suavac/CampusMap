@@ -2,182 +2,161 @@
 
 {% block content %}
 
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-<div class="container">
+    <div class="container">
 
-            <h1>Add New Room</h1>
-<script type="text/javascript" src="{{ STATIC_URL }}js/map.js"> </script>
-<script type="text/javascript" src="{{ STATIC_URL }}js/sm.js"> </script>
-<!-- script reads course code from the selected row of the course table on the page
- and stores this info in a cookie, then later calls the loadPin-->
-<script>
+        <h1>Add New Room</h1>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/map.js"> </script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/sm.js"> </script>
+        <!-- script reads course code from the selected row of the course table on the page
+         and stores this info in a cookie, then later calls the loadPin-->
+        <script>
 
-    var room;
+            var room;
 
-    function getRDetails() {
+            function getRDetails() {
 
-        $(document).ready(function () {
-            $('#test').on('click', 'tr', function (event) {
-                var texts = $(this).children().map(function () {
-                    return $.trim($(this).html())
-                }).get();
+                $(document).ready(function () {
+                    $('#test').on('click', 'tr', function (event) {
+                        var texts = $(this).children().map(function () {
+                            return $.trim($(this).html())
+                        }).get();
 
-                room = texts[0];
-                deleteRecord();
-                location.reload();
-            });
-        });
+                        room = texts[0];
+                        deleteRecord();
+                        location.reload();
+                    });
+                });
 
-        function deleteRecord() {
+                function deleteRecord() {
 
-            var request = new XMLHttpRequest();
+                    var request = new XMLHttpRequest();
 
-            var param = '../room/?message=delete' + '&room=' + room;
+                    var param = '../room/?message=delete' + '&room=' + room;
 
-            request.open('GET', param, false);
-            request.send(null);
-            if (request.responseText == 'success') {
+                    request.open('GET', param, false);
+                    request.send(null);
+                    if (request.responseText == 'success') {
 
-                console.log("message received")
+                        console.log("message received")
+                    }
+                }
             }
-        }
-    }
 
 
 
-function getRoomDetails() {
+            function getRoomDetails() {
 
 
-    $(document).ready(function () {
-    $('#test').on('click', 'tr', function (event) {
-        var texts = $(this).children().map(function(){
-            return $.trim($(this).html())
-        }).get();
+                $(document).ready(function () {
+                    $('#test').on('click', 'tr', function (event) {
+                        var texts = $(this).children().map(function(){
+                            return $.trim($(this).html())
+                        }).get();
 
-        document.cookie = "room="+texts[0]+"; expires=0; path=/";
+                        document.cookie = "room="+texts[0]+"; expires=0; path=/";
 
-    loadPin(texts[0]);
-    });
-});
-}
+                        loadPin(texts[0]);
+                    });
+                });
+            }
 
-function loadPin(room){
-    console.log(room);
+            function loadPin(room){
+                console.log(room);
 
-    var param = '../edit-map-json/?message=' + 'coord' + '&room=' + room;
+                var param = '../edit-map-json/?message=' + 'coord' + '&room=' + room;
 
-    var request = new XMLHttpRequest();
-    request.open('GET', param, false);  // `false` makes the request synchronous
-    request.send(null);
+                var request = new XMLHttpRequest();
+                request.open('GET', param, false);  // `false` makes the request synchronous
+                request.send(null);
 
-    coords = JSON.parse(request.responseText);
+                coords = JSON.parse(request.responseText);
 
-    marker.setPosition(new google.maps.LatLng(coords.lat, coords.lng));
-    map.setCenter(new google.maps.LatLng(coords.lat, coords.lng));
+                marker.setPosition(new google.maps.LatLng(coords.lat, coords.lng));
+                map.setCenter(new google.maps.LatLng(coords.lat, coords.lng));
 
-    lat = coords.lat;
-    lng = coords.lng;
+                lat = coords.lat;
+                lng = coords.lng;
 
-    document.getElementById('saveButton').disabled = false;
-}
+                document.getElementById('saveButton').disabled = false;
+            }
 
 
-</script>
-            <table class="table" id="test">
+        </script>
+        <table class="table" id="test">
             <!-- PRINT COLUMN NAME -->
+            <tr>
+                <th>Room Code</th>
+                <th>Room Name</th>
+                <th>Building</th>
+                <th>Location</th>
+                <th>Delete</th>
+            </tr>
+            <!-- FILL ONE ROW - 3 COLUMNS  -->
+            {% for item in query_results %}
                 <tr>
-                    <th>Room Code</th>
-                    <th>Room Name</th>
-                    <th>Building</th>
-                    <th>Location</th>
-
-                    <th></th>
-                </tr>
-                <!-- FILL ONE ROW - 3 COLUMNS  -->
-                {% for item in query_results %}
-                 <tr>
                     <td >{{  item.roomCode }}</td>
 
                     <td>{{  item.roomName }}</td>
 
                     <td>{{  item.building }}</td>
                     <td> <button type="submit" onclick="getRoomDetails()" class="btn btn-default" data-toggle="modal" data-target="#largeModal">
-                            <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-                        </button> </td>
+                        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+                    </button> </td>
                     <td>
                         <button type="submit" onclick="getRecordDetails('room')" class="btn btn-default" aria-label="Left Align" style="color: red">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         </button>
                     </td>
-                 </tr>
-                {% endfor %}
+                </tr>
+            {% endfor %}
 
 
 
-                <tr>
+            <tr>
                 <!-- PRINT FORM IN THE LAST ROW -->
                 <form class="form-contact" action="" method="POST">
-                {% csrf_token %}
+                    {% csrf_token %}
 
                     {% for field in form %}
 
-                    <td>
+                        <td>
 
-                        {% ifequal field.name "building" %}
+                            {% ifequal field.name "building" %}
 
-                            <select class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
-                                <option value= {{ form.building }}
+                                <select class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
+                                    <option value= {{ form.building }}
 
-                            <div style= "color: red"> {{ field.errors|striptags }}</div>
-                            <p class="help-text">{{ field.help_text }} </p>
-                            </select>
-                        {% else %}
+                                                    <div style= "color: red"> {{ field.errors|striptags }}</div>
+                                <p class="help-text">{{ field.help_text }} </p>
+                                </select>
+                            {% else %}
 
-                            <input type="text" class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
-                            <div style= "color: red" >{{ field.errors|striptags }} </div>
+                                <input type="text" class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
+                                <div style= "color: red" >{{ field.errors|striptags }} </div>
 
-                        {% endifequal %}
+                            {% endifequal %}
 
 
-                    </td>
+                        </td>
 
                     {% endfor %}
-                    <td><input type="submit" value="Submit"  class="btn btn-primary">
-                    </td>
+    <td><input type="submit" value="Submit"  class="btn btn-primary">
+    </td>
 
-                    </form>
+    </form>
 
-            </table>
-
-
+    </table>
 
 
+    <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
 
-<div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
 
+        {% include "map.html" %}
 
-          {% include "map.html" %}
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
     </div>
-  </div>
-</div>
-
-
-
-
-
-
-</body>
-</html>
 
 {%  endblock %}

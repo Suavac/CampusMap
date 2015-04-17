@@ -2,41 +2,33 @@
 
 {% block content %}
 
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<div class="container">
+    <div class="container">
 
-            <h1>Add New Module</h1>
+        <h1>Add New Module</h1>
 
-            <form class="form-contact" action="" method="POST">
+        <form class="form-contact" action="" method="POST">
             {% csrf_token %}
             {% for field in form %}
                 <fieldset class="form-group">
                     {% ifequal field.name "color" %}
-                         <select class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
-                             <option value= {{ form.color }}
+                        <select class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
+                            <option value= {{ form.color }}
 
-                            <div style= "color: red"> {{ field.errors|striptags }}</div>
-                            <p class="help-text">{{ field.help_text }} </p>
-                            </select>
+                                            <div style= "color: red"> {{ field.errors|striptags }}</div>
+                        <p class="help-text">{{ field.help_text }} </p>
+                        </select>
                     {% else %}
                         <div style= "color: red">
-                        <label style= "color: black" for="id_{{ field.name }}">{{ field.label }}</label>
+                            <label style= "color: black" for="id_{{ field.name }}">{{ field.label }}</label>
                             {{ field.errors|striptags }}
-                         </div>
+                        </div>
                         <input type="text" class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
                         <p class="help-text">{{ field.help_text }} </p>
                         </fieldset>
                     {% endifequal %}
             {% endfor %}
-             <input type="submit" value="Submit"  class="btn btn-primary">
-            </form>
-        </div>
-</body>
-</html>
+    <input type="submit" value="Submit"  class="btn btn-primary">
+    </form>
+    </div>
 
 {%  endblock %}

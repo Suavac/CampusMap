@@ -2,58 +2,53 @@
 
 {% block content %}
 
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<div class="container">
-<script type="text/javascript" src="{{ STATIC_URL }}js/sm.js"> </script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/sm.js"> </script>
 
-            <h1>Add New Department</h1>
+    <div class="container">
 
-            <table class="table" id="test">
+        <h1>Add New Department</h1>
+
+        <table class="table" id="test">
             <!-- PRINT COLUMN NAME -->
+            <tr>
+                <th>Department Name</th>
+                <th>Delete</th>
+            </tr>
+            <!-- FILL ONE ROW for each COLUMNS  -->
+            {% for item in query_results %}
                 <tr>
-                    <th>Department Name</th>
-                    <th></th>
-                </tr>
-                <!-- FILL ONE ROW for each COLUMNS  -->
-                {% for item in query_results %}
-                 <tr>
                     <td>{{  item.depName }}</td>
                     <td>
                         <button type="submit" onclick="getRecordDetails('department')" class="btn btn-default" aria-label="Left Align" style="color: red">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         </button>
                     </td>
-                 </tr>
-                {% endfor %}
+                </tr>
+            {% endfor %}
 
-                <tr>
+            <tr>
                 <!-- PRINT FORM IN THE LAST ROW -->
                 <form class="form-contact" action="" method="POST">
-                {% csrf_token %}
+                    {% csrf_token %}
 
                     {% for field in form %}
-                    <td>
+                        <td>
 
-                    <input type="text" class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
-                    <div style= "color: red" >
-                        {{ field.errors|striptags }}
-                     </div>
-                    </td>
+                            <input type="text" class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
+                            <div style= "color: red" >
+                                {{ field.errors|striptags }}
+                            </div>
+                        </td>
 
                     {% endfor %}
                     <td><input type="submit" value="Submit"  class="btn btn-primary">
                     </td>
 
-                    </form>
+                </form>
 
-            </table>
-</div>
-<!--
+        </table>
+    </div>
+    <!--
             <form class="form-contact" action="" method="POST">
             {% csrf_token %}
             {% for field in form %}
@@ -71,7 +66,5 @@
             </form>
         </div>
 -->
-</body>
-</html>
 
 {%  endblock %}

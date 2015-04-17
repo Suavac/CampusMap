@@ -24,82 +24,88 @@
 
 </head>
 
+<style>
+
+    .top-custom{
+        padding:15px
+    }
+
+</style>
+
+
 <body>
+<div id="wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav" >
+            <li class="sidebar-brand">
+                <a style="color:white">
+                    NUI Galway CampusMap
+                </a>
+            </li>
+            <li>
+                <a style="color:white" href="../home"><span class="glyphicon glyphicon-home" aria-hidden="false" ></span> Home</a>
+            </li>
+            <li>
+                <a style="color:white" href="../edit-timetable"><span class="glyphicon glyphicon-th-large" aria-hidden="false"></span> Edit a Timetable</a>
+            </li>
 
-    <div id="wrapper">
-
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav" >
-                <li class="sidebar-brand">
-                    <a style="color:white">
-                        NUI Galway CampusMap
-                    </a>
-                </li>
+            <hr>
+            <ul style="color:white"> <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="false"></span> Database
                 <li>
-                    <a style="color:white" href="../home"><span class="glyphicon glyphicon-home" aria-hidden="false" ></span> Home</a>
-                </li>
-                <li>
-                    <a style="color:white" href="../edit-timetable"><span class="glyphicon glyphicon-th-large" aria-hidden="false"></span> Edit a Timetable</a>
-                </li>
-
-                <hr>
-                <ul style="color:white"> <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="false"></span> Database
-                    <li>
                     <a href="../course">Add Course</a>
-                    </li>
-                    <li>
+                </li>
+                <li>
                     <a href="../module">Add Module</a>
-                    </li>
-                    <li>
+                </li>
+                <li>
                     <a href="../room">Add Room</a>
-                    </li>
-                    <li>
+                </li>
+                <li>
                     <a href="../building">Add Building</a>
-                    </li>
-                    <li>
+                </li>
+                <li>
                     <a href="../department">Add Department</a>
-                    </li>
-                    <li>
+                </li>
+                <li>
                     <a href="../lecturer">Add Lecturer</a>
-                    </li>
-                    <li>
+                </li>
+                <li>
                     <a href="../timetable">Add Timetable</a>
-                    </li>
-                </ul>
+                </li>
             </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
+        </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
 
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" style="margin-top:10px; margin-bottom:10px">
-                        <a href="#menu-toggle" class="btn btn-primary" id="menu-toggle">Toggle Menu</a>
-                    </div>
-
-                    {% block header %}
-
-                    {% endblock header %}
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 text-center top-custom">
+                    <a href="#menu-toggle" class="btn btn-primary" id="menu-toggle">Toggle Menu</a>
                 </div>
 
-                {% block content %}
+                {% block header %}
 
-                {% endblock content%}
-
+                {% endblock header %}
             </div>
+
+            {% block content %}
+
+            {% endblock content%}
+
         </div>
-        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#page-content-wrapper -->
 
-
-
-      <hr>
-      <footer class="footer" align="center" style="text-align: center">
+    <hr>
+    <footer class="footer" align="center" style="text-align: center">
         <p>&copy; CampusMap 2015</p>
-      </footer>
-     </div> <!-- /wrapper -->
-  </body>
+    </footer>
+
+</div> <!-- /wrapper -->
+</body>
 
 <script>
     $("#menu-toggle").click(function(e) {

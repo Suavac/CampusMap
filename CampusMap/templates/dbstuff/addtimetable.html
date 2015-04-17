@@ -2,67 +2,60 @@
 
 {% block content %}
 
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-<div class="container">
-<h1>Add New Timetable</h1>
+    <div class="container">
+        <h1>Add New Timetable</h1>
 
-<script>
+        <script>
 
-    var course, year, semester;
+            var course, year, semester;
 
-    function getTimetableDetails() {
+            function getTimetableDetails() {
 
-        $(document).ready(function () {
-            $('#test').on('click', 'tr', function (event) {
-                var texts = $(this).children().map(function () {
-                    return $.trim($(this).html())
-                }).get();
-                course = texts[0];
-                year=texts[1];
-                semester=texts[2];
-                deleteRecord();
-                location.reload();
-            });
-        });
+                $(document).ready(function () {
+                    $('#test').on('click', 'tr', function (event) {
+                        var texts = $(this).children().map(function () {
+                            return $.trim($(this).html())
+                        }).get();
+                        course = texts[0];
+                        year=texts[1];
+                        semester=texts[2];
+                        deleteRecord();
+                        location.reload();
+                    });
+                });
 
-        function deleteRecord() {
+                function deleteRecord() {
 
-            var request = new XMLHttpRequest();
+                    var request = new XMLHttpRequest();
 
-            var param = '../timetable/?message=delete' + '&course=' + course + '&year=' + year + '&semester=' + semester;
+                    var param = '../timetable/?message=delete' + '&course=' + course + '&year=' + year + '&semester=' + semester;
 
-            request.open('GET', param, false);
-            request.send(null);
+                    request.open('GET', param, false);
+                    request.send(null);
 
-            if (request.responseText == 'success') {
+                    if (request.responseText == 'success') {
 
-                console.log("message received")
+                        console.log("message received")
+                    }
+
+                }
             }
 
-        }
-    }
-
-</script>
+        </script>
 
 
-    <table class="table" id="test">
+        <table class="table" id="test">
             <!-- PRINT COLUMN NAME -->
-                <tr>
-                    <th>Course Code</th>
-                    <th>Year</th>
-                    <th>Semester</th>
-                    <th></th>
+            <tr>
+                <th>Course Code</th>
+                <th>Year</th>
+                <th>Semester</th>
+                <th>Delete</th>
 
-                </tr>
-                <!-- FILL ONE ROW - 3 COLUMNS  -->
-                {% for item in query_results %}
-                 <tr>
+            </tr>
+            <!-- FILL ONE ROW - 3 COLUMNS  -->
+            {% for item in query_results %}
+                <tr>
                     <td >{{  item.courseCode }}</td>
                     <td>{{  item.year }}</td>
                     <td>{{  item.semester }}</td>
@@ -72,48 +65,44 @@
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         </button>
                     </td>
-                 </tr>
-                {% endfor %}
+                </tr>
+            {% endfor %}
 
 
 
-                <tr>
+            <tr>
                 <!-- PRINT FORM IN THE LAST ROW -->
                 <form class="form-contact" action="" method="POST">
-                {% csrf_token %}
+                    {% csrf_token %}
 
                     {% for field in form %}
 
-                    <td>
+                        <td>
 
-                        {% ifequal field.name "courseCode" %}
+                            {% ifequal field.name "courseCode" %}
 
-                            <select class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
-                                <option value= {{ form.courseCode }}
+                                <select class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
+                                    <option value= {{ form.courseCode }}
 
-                            <div style= "color: red"> {{ field.errors|striptags }}</div>
-                            <p class="help-text">{{ field.help_text }} </p>
-                            </select>
-                        {% else %}
+                                                    <div style= "color: red"> {{ field.errors|striptags }}</div>
+                                <p class="help-text">{{ field.help_text }} </p>
+                                </select>
+                            {% else %}
 
-                            <input type="text" class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
-                            <div style= "color: red" >{{ field.errors|striptags }} </div>
+                                <input type="text" class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
+                                <div style= "color: red" >{{ field.errors|striptags }} </div>
 
-                        {% endifequal %}
+                            {% endifequal %}
 
 
-                    </td>
+                        </td>
 
                     {% endfor %}
-                    <td><input name="delete" type="submit" value="Submit"  class="btn btn-primary">
-                    </td>
+    <td><input name="delete" type="submit" value="Submit"  class="btn btn-primary">
+    </td>
 
-                    </form>
+    </form>
 
-            </table>
-
-</div>
-</body>
-</html>
+    </table>
 
 {%  endblock %}

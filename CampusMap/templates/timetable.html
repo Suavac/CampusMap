@@ -1,168 +1,168 @@
 {% extends "base.html" %}
 
-
 {%block header%}
 
-
-    <form class="col-md-9" role="form" xmlns="http://www.w3.org/1999/html">
-        <div class="form-group">
-            <div class="col-md-3">
-              <select class="form-control" id="departmentSelect" >
-                <option value=''>Select Department</option>
-              </select>
+    <form role="form" xmlns="http://www.w3.org/1999/html">
+        <div class="form-group container-fluid">
+            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 text-center top-custom">
+                <select class="form-control" id="departmentSelect" >
+                    <option value=''>Select Department</option>
+                </select>
             </div>
 
-            <div class="col-md-3" id = "courses">
-              <select class="form-control" id="courseSelect">
-                <option value='0'>Select Course</option>
-              </select>
+            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 text-center top-custom" id = "courses">
+                <select class="form-control" id="courseSelect">
+                    <option value='0'>Select Course</option>
+                </select>
             </div>
 
-            <div class="col-md-2">
-              <select class="form-control" id="yearSelect">
-                <option value='0'>Select Year</option>
+            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 text-center top-custom">
+                <select class="form-control" id="yearSelect">
+                    <option value='0'>Select Year</option>
 
-              </select>
+                </select>
             </div>
 
-            <div class="col-md-2">
-              <select class="form-control" id="semesterSelect">
-                <option value='0'>Select Semester</option>
-                <option value="1" >1</option>
-                <option value="2" >2</option>
-              </select>
+            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 text-center top-custom">
+                <select class="form-control" id="semesterSelect">
+                    <option value='0'>Select Semester</option>
+                    <option value="1" >1</option>
+                    <option value="2" >2</option>
+                </select>
             </div>
 
-            <div class="col-md-2">
-                <btn class="btn btn-primary" onclick="submit()">Submit</btn>
+            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 text-center top-custom">
+                <btn class="btn btn-primary" onclick="submit()">Search</btn>
             </div>
 
         </div>
-      </form>
+    </form>
 
 
 {%endblock header%}
+
+
 {%block content%}
 
-<script src="{{ STATIC_URL }}js/table.js"></script>
-<script src="{{ STATIC_URL }}js/timetableFilters.js"></script>
+    <script src="{{ STATIC_URL }}js/table.js"></script>
+    <script src="{{ STATIC_URL }}js/timetableFilters.js"></script>
 
 
-<style>
+    <style>
 
-table {
-    width: 100%;
-}
+        table {
+            width: 100%;
+        }
 
-th {
-    height: 60px;
-    align: center;
-}
+        th {
+            height: 60px;
+            align: center;
+        }
 
-</style>
+    </style>
 
-<div class="container-fluid col-md-11"></div>
+    <div class="container-fluid col-md-11"></div>
 
-<div id="timetable" class="container-fluid col-md-11" style="margin:20px"></div>
+    <div id="timetable" class="container-fluid col-md-11" style="margin:20px"></div>
 
-<div id="cellModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Add a class to the timetable</h4>
+    <div id="cellModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Add a class to the timetable</h4>
+                </div>
+                <div class="modal-body" id="cellModalBody">
+
+
+                    <form id="cellModalForm" action='' method='post' class="form">{% csrf_token %}
+
+                        <div class="form-group"> <label for="timeTable" id="id_timeTable">Timetable</label>{{ form.timeTable }}</div>
+                        <div class="form-group"> <label for="day" id="id_day">Day</label>{{ form.day }}</div>
+                        <div class="form-group"> <label for="time" id="id_time">Time</label>{{ form.time }}</div>
+                        <div class="form-group"> <label for="modCode">Module Code</label>{{ form.modCode }}</div>
+                        <div class="form-group"> <label for="roomCode">Room Code</label>{{ form.roomCode }}</div>
+                        <div class="form-group"> <label for="lecCode">Lecturer Name</label>{{ form.lecCode }}</div>
+
+                        <!--</div>-->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+
+                    </form>
+                </div>
             </div>
-            <div class="modal-body" id="cellModalBody">
-
-
-            <form id="cellModalForm" action='' method='post' class="form">{% csrf_token %}
-
-                <div class="form-group"> <label for="timeTable" id="id_timeTable">Timetable</label>{{ form.timeTable }}</div>
-                <div class="form-group"> <label for="day" id="id_day">Day</label>{{ form.day }}</div>
-                <div class="form-group"> <label for="time" id="id_time">Time</label>{{ form.time }}</div>
-                <div class="form-group"> <label for="modCode">Module Code</label>{{ form.modCode }}</div>
-                <div class="form-group"> <label for="roomCode">Room Code</label>{{ form.roomCode }}</div>
-                <div class="form-group"> <label for="lecCode">Lecturer Name</label>{{ form.lecCode }}</div>
-
-            <!--</div>-->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-            </div>
-
-            </form>
         </div>
-    </div>
-</div>
 
 
-<script>
+        <script>
 
-    window.onload=function(){
-        getDepartments();
+            window.onload=function(){
+                getDepartments();
 
-        //reloads the correct timetable after a class is added using the modal to allow you to enter multiple classes without having to filter the timetable out
-        //values for course, year and sem are returned from views.py
-        if (({{ check }})==true){
-            loadTimetable('load','{{ course }}','{{ year }}','{{ sem }}')
-        }
-
-    }
-
-    //Onclick to load timetable when semester is chosen
-    function submit(){
-        sem = document.getElementById('semesterSelect');
-        year = document.getElementById('yearSelect');
-        course = document.getElementById('courseSelect');
-
-        var val1 = course.options[course.selectedIndex].value;
-        var val2 = year.options[year.selectedIndex].value;
-        var val3 = sem.options[sem.selectedIndex].value;
-
-        sem.setAttribute('onchange', loadTimetable(department,val1,val2,val3));
-
-        year = val2;
-        semester = val3;
-    }
-
-    //Loads the timetable
-    function loadTimetable(department,course,year,semester){
-
-        var request = new XMLHttpRequest();
-        var message = buildURL("load",department,course,year,semester);
-        request.open('GET', message, false);  // `false` makes the request synchronous
-        request.send(null);
-
-        timeTable = JSON.parse(request.responseText);
-
-        retDiv = createTable(timeTable, 'admin');
-
-        el = document.getElementById("timetable");
-
-        //Clears div when a new timetable is selected
-        while (el.hasChildNodes()){
-            el.removeChild(el.firstChild);
-        }
-
-        document.getElementById("timetable").appendChild(retDiv);
-
-        var table = document.getElementsByTagName("table")[0];
-        var cells = table.getElementsByTagName("td"); //
-
-        //Adds onclick events to each cell to load the modal for data input
-        for(var i = 0; i < cells.length; i++) {
-            // Cell Object
-            var cell = cells[i];
-            // Track with onclick
-                cell.onclick = function(){
-                    $('#cellModal').modal('show');
+                //reloads the correct timetable after a class is added using the modal to allow you to enter multiple classes without having to filter the timetable out
+                //values for course, year and sem are returned from views.py
+                if (({{ check }})==true){
+                    loadTimetable('load','{{ course }}','{{ year }}','{{ sem }}')
                 }
+
+            }
+
+            //Onclick to load timetable when semester is chosen
+            function submit(){
+                sem = document.getElementById('semesterSelect');
+                year = document.getElementById('yearSelect');
+                course = document.getElementById('courseSelect');
+
+                var val1 = course.options[course.selectedIndex].value;
+                var val2 = year.options[year.selectedIndex].value;
+                var val3 = sem.options[sem.selectedIndex].value;
+
+                sem.setAttribute('onchange', loadTimetable(department,val1,val2,val3));
+
+                year = val2;
+                semester = val3;
+            }
+
+            //Loads the timetable
+            function loadTimetable(department,course,year,semester){
+
+                var request = new XMLHttpRequest();
+                var message = buildURL("load",department,course,year,semester);
+                request.open('GET', message, false);  // `false` makes the request synchronous
+                request.send(null);
+
+                timeTable = JSON.parse(request.responseText);
+
+                retDiv = createTable(timeTable, 'admin');
+
+                el = document.getElementById("timetable");
+
+                //Clears div when a new timetable is selected
+                while (el.hasChildNodes()){
+                    el.removeChild(el.firstChild);
+                }
+
+                document.getElementById("timetable").appendChild(retDiv);
+
+                var table = document.getElementsByTagName("table")[0];
+                var cells = table.getElementsByTagName("td"); //
+
+                //Adds onclick events to each cell to load the modal for data input
+                for(var i = 0; i < cells.length; i++) {
+                    // Cell Object
+                    var cell = cells[i];
+                    // Track with onclick
+                    cell.onclick = function(){
+                        $('#cellModal').modal('show');
+                    }
+                }
+
+
             }
 
 
-    }
-
-
-</script>
+        </script>
 
 {%endblock%}
