@@ -1,4 +1,4 @@
-function createTable(response) {
+function createTable(response, user) {
 
     var div = document.createElement('div');
     var table = document.createElement('table');
@@ -63,6 +63,7 @@ function createTable(response) {
                         response.timetable[k].lec + "<br>"
                     );
 
+                    cell.setAttribute("room", response.timetable[k].room);
                     cell.style.backgroundColor = '#' + response.timetable[k].colour;
                     cell.innerHTML = cellText;
 
@@ -70,13 +71,19 @@ function createTable(response) {
 
                     // otherwise, something default
                 } else {
-                    cell.appendChild(button);
+                    if(user=='admin')
+                        cell.appendChild(button);
+                    else
+                        cell.innerHTML = "<br> <br> <br>";
                 }
 
             }
 
             if(response.timetable.length == 0){
-                cell.appendChild(button);
+                if(user=='admin')
+                        cell.appendChild(button);
+                else
+                    cell.innerHTML = "<br> <br> <br>";
             }
 
             cell.setAttribute("time", i);
