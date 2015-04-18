@@ -63,14 +63,17 @@ function initialize() {
     });
 
     // Quick fix for map not loading fully during the first start
-    var centered = false;
+    var fixed = false;
     google.maps.event.addListener(map, 'idle', function() { // fox for map not loading fully
 
-        google.maps.event.trigger(map, 'resize');
-        if(centered==false){
-            map.setCenter(marker.getPosition());
-            centered = true;
-        }
+            google.maps.event.trigger(map, 'resize');
+            if(!fixed){
+                google.maps.event.addListenerOnce(map, 'tilesloaded' , function(){
+                    map.setCenter(marker.getPosition());
+                fixed=true;
+                });
+
+            }
 
     });
 }
