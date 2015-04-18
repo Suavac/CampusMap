@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d88e420-6be3-4149-84af-1704f5e47018" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CampusMap/templates/home.html" afterPath="$PROJECT_DIR$/CampusMap/templates/home.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/map.js" afterPath="$PROJECT_DIR$/static/js/map.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/sm.js" afterPath="$PROJECT_DIR$/static/js/sm.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="CampusMap.iws" />
@@ -884,7 +880,13 @@
       <option name="project" value="LOCAL" />
       <updated>1429322934701</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="removed save button from room template/edit room location - position updated while dragging pin">
+      <created>1429328376224</created>
+      <option name="number" value="00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1429328376224</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="ToolWindowManager">
