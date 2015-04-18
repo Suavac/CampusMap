@@ -33,21 +33,51 @@
                 </button>
                 <div class="dropdown-menu" >
                     <div class="col-sm-12">
+
+
+
+
+<form action="" method="post">
+    {% csrf_token %}
+
+   {% if form.errors %}
+        <p class=""error">Wrong Username or Password</p>
+    {% endif %}
+
+
                         <div class="col-sm-12">
                             Login
                         </div>
                         <div class="col-sm-12">
-                            <input type="text" placeholder="Uname or Email" onclick="return false;" class="form-control input-sm" id="inputError" />
+                            <input type="text" placeholder="User Name" onclick="return false;" class="form-control input-sm" name="username" value="" id="username" />
+
                         </div>
                         <br/>
                         <div class="col-sm-12">
-                            <input type="password" placeholder="Password" class="form-control input-sm" name="password" id="Password1" />
+                            <input type="password" placeholder="Password" class="form-control input-sm"  name="password" value="" id="password" />
+
                         </div>
                         <div class="col-sm-12">
-                            <button type="submit" class="btn btn-success btn-sm">Sign in</button>
+
+
+
+
+                            <button type="submit" value="login" class="btn btn-success btn-sm">Sign in</button>
+                            <input type="hidden" name="next" value="{{ next | escape }}" />
                         </div>
+
+    </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+
+{% block content %}
+
+
+
+
+{% endblock %}
