@@ -4,6 +4,9 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('map.views',
+                       url(r'^login/$', 'django_test.views.login'),
+                       url(r'^logout/$', 'django_test.views.logout'),
+
     url(r'^$', 'home'),
     url(r'^home/$', 'home'),
     url(r'^admin/', include(admin.site.urls)),

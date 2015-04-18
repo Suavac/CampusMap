@@ -6,8 +6,18 @@ from .models import Course, Timetable, Building, Module, Lecturer, Department, T
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
+from django.core.context_processors import csrf
+from django.contrib import  auth
 
 import json, urllib, urlparse
+
+
+def login(request):
+    c = {} # create dict
+    c.update(csrf(request)) # push csrf object to it
+    return render_to_response('dbstuff/login.html', c) # pass it to the login template
+
+
 
 def editTimetable(request):
 

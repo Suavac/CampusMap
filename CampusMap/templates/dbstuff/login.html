@@ -1,0 +1,53 @@
+<script>
+
+       $(function () {
+            $('.dropdown-menu input').click(function (event) {
+                event.stopPropagation();
+            });
+        });
+
+</script>
+<style type="text/css">
+
+    .navbar-collapse{background-color:black;padding-top:3px;padding-bottom:3px !important}
+    .dropdown-menu{width: 300px;border-top:0px;margin-top:3px;}
+    .dropdown-menu .col-sm-12{margin-bottom:7px;}
+    .dropdown-menu:after{
+    content: '';
+    display: inline-block;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #ffffff;
+    position: absolute;
+    top: -6px;
+    right: 10px;
+}
+
+
+</style>
+ <div class="navbar-collapse collapse">
+        <div class="navbar-right">
+            <div class="btn-group">
+                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                    Login <span class="caret"></span>
+                </button>
+                <div class="dropdown-menu" >
+                    <div class="col-sm-12">
+                        <div class="col-sm-12">
+                            Login
+                        </div>
+                        <div class="col-sm-12">
+                            <input type="text" placeholder="Uname or Email" onclick="return false;" class="form-control input-sm" id="inputError" />
+                        </div>
+                        <br/>
+                        <div class="col-sm-12">
+                            <input type="password" placeholder="Password" class="form-control input-sm" name="password" id="Password1" />
+                        </div>
+                        <div class="col-sm-12">
+                            <button type="submit" class="btn btn-success btn-sm">Sign in</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
