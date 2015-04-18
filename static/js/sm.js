@@ -3,20 +3,23 @@
 
     function getRecordDetails( url ) {// parameter is the name of the template
 
-        if (confirm("Are You Sure?") == true) { // confirm deletion
-            $(document).ready(function () { // get values from the selected row (table residing on the template)
+        var rowUniqueIdentifier;
+        $(document).ready(function () { // get values from the selected row (table residing on the template)
                 $('#test').on('click', 'tr', function (event) {
-                        var rowUniqueIdentifier = $(this).children().map(function () {
+                        rowUniqueIdentifier = $(this).children().map(function () {
                         return $.trim($(this).html())
                     }).get();
 
-                           deleteRecord(url , rowUniqueIdentifier);
-
                 });
             });
-        } else {
-            return;
+
+        bootbox.confirm("Are you sure want to delete "+ url+" ? ", function(result) { // confirm deletion
+            if(result){
+                  deleteRecord(url , rowUniqueIdentifier);
+            } else {
+                return;
         }
+    });
     }
 
     function deleteRecord( url ,rowUniqueIdentifier ) {
