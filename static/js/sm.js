@@ -30,6 +30,7 @@
             if(result){
                   deleteRecord(url , rowUniqueIdentifier);
             } else {
+               //$('#largeModal').modal('hide');
                 return;
         }
     });
@@ -66,7 +67,7 @@
 
                 loadPin(texts[0]);
 
-                $('#largeModal').modal('show');
+                //$('#largeModal').modal('show');
 
                 // the initial start of the map with given pin doesnt center correctly
                 // this fixes this problem for every new map display
