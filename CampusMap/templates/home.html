@@ -195,6 +195,18 @@ function initialize() {
         lng = event.latLng.lng();
     });
 
+    // Quick fix for map not loading fully during the first start
+    var centered = false;
+    google.maps.event.addListener(map, 'idle', function() { // fox for map not loading fully
+
+        google.maps.event.trigger(map, 'resize');
+        if(centered==false){
+            map.setCenter(marker.getPosition());
+            centered = true;
+        }
+
+    });
+
 }
 
     //Onclick to load timetable when semester is chosen
@@ -243,7 +255,7 @@ function initialize() {
                 var room = this.getAttribute("room");
                 $('#mapModal').modal('show');
 
-                initialize();
+                 initialize();
 
                 loadPin(room);
 

@@ -48,7 +48,7 @@
                     return $.trim($(this).html())
                 }).get();
 
-            document.cookie = "room="+texts[0]+"; expires=0; path=/";
+            document.cookie = "room="+texts[0]+"; expires=0; path=/"; // create Cookie file
 
             loadPin(texts[0]);
             });
@@ -67,8 +67,10 @@
         var coords = JSON.parse(request.responseText);
         var lat = coords.lat;
         var lng = coords.lng;
-        marker.setPosition(new google.maps.LatLng(coords.lat, coords.lng));
-        map.setCenter(new google.maps.LatLng(coords.lat, coords.lng));
 
+        marker.setPosition(new google.maps.LatLng(coords.lat, coords.lng));
+        map.setCenter(marker.getPosition());
+
+        //map.setCenter(marker.getPosition()); // setCenter takes a LatLng object
     }
 

@@ -4,11 +4,11 @@ window.onload=function(){
 
 };
 
-$('#saveButton').on('click', function () {
-    var $btn = $(this).button('loading');
-    saveCoord();
-    $(this).button('reset');
-});
+//$('#saveButton').on('click', function () {
+//   var $btn = $(this).button('loading');
+//    saveCoord();
+//    $(this).button('reset');
+//});
 
 // script reads value (rooms code name) from the cookie set in room template
 function getCookie(name) {
@@ -23,21 +23,7 @@ function getCookie(name) {
 return null;
 }
 
-function saveCoord(){
 
-    var request = new XMLHttpRequest();
-
-    var param = '../edit-map-json/?message=newCoord' + '&room=' +  getCookie("room") + '&lat=' + lat + '&lng=' + lng;
-
-    request.open('GET', param, false);
-    request.send(null);
-
-    if(request.responseText == 'success'){
-
-        console.log("message received")
-    }
-
-}
 
 var map = null;
 var marker = null;
@@ -59,8 +45,9 @@ function initialize() {
     });
 
 
+
     google.maps.event.addListener(marker, 'drag', function(event) {
-        //console.debug('new position is '+event.latLng.lat()+' / '+event.latLng.lng());
+
     });
 
     google.maps.event.addListener(marker, 'dragend', function(event) {
@@ -68,7 +55,38 @@ function initialize() {
         lat = event.latLng.lat();
         lng = event.latLng.lng();
 
+
+    });
+
+    google.maps.event.addListener(marker, 'dragend', function(event) { // save new position of the marker
         saveCoord();
+    });
+
+    // Quick fix for map not loading fully during the first start
+    var centered = false;
+    google.maps.event.addListener(map, 'idle', function() { // fox for map not loading fully
+
+        google.maps.event.trigger(map, 'resize');
+        if(centered==false){
+            map.setCenter(marker.getPosition());
+            centered = true;
+        }
+
     });
 }
 
+function saveCoord(){
+
+    var request = new XMLHttpRequest();
+
+    var param = '../edit-map-json/?message=newCoord' + '&room=' +  getCookie("room") + '&lat=' + lat + '&lng=' + lng;
+
+    request.open('GET', param, false);
+    request.send(null);
+
+    if(request.responseText == 'success'){
+
+        console.log("message received")
+    }
+
+}
