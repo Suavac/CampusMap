@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0d88e420-6be3-4149-84af-1704f5e47018" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CampusMap/templates/dbstuff/addroom.html" afterPath="$PROJECT_DIR$/CampusMap/templates/dbstuff/addroom.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/map.js" afterPath="$PROJECT_DIR$/static/js/map.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/sm.js" afterPath="$PROJECT_DIR$/static/js/sm.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="CampusMap.iws" />
@@ -35,10 +37,10 @@
       <file leaf-file-name="addroom.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/addroom.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-19.73077" vertical-offset="796" max-vertical-offset="1462">
-              <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+            <state vertical-scroll-proportion="-9.269231" vertical-offset="184" max-vertical-offset="1462">
+              <caret line="25" column="101" selection-start-line="25" selection-start-column="101" selection-end-line="25" selection-end-column="101" />
               <folding>
-                <element signature="e#1092#1110#0#HTML" expanded="true" />
+                <element signature="e#1047#1065#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -47,8 +49,8 @@
       <file leaf-file-name="sm.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/js/sm.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.413794" vertical-offset="731" max-vertical-offset="1394">
-              <caret line="71" column="7" selection-start-line="71" selection-start-column="7" selection-end-line="71" selection-end-column="44" />
+            <state vertical-scroll-proportion="-7.034483" vertical-offset="748" max-vertical-offset="2227">
+              <caret line="56" column="10" selection-start-line="56" selection-start-column="10" selection-end-line="56" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -97,7 +99,7 @@
       <file leaf-file-name="map.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CampusMap/templates/map.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.9615384" vertical-offset="0" max-vertical-offset="952">
+            <state vertical-scroll-proportion="9.038462" vertical-offset="286" max-vertical-offset="952">
               <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
             </state>
@@ -107,8 +109,8 @@
       <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CampusMap/templates/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.9454546" vertical-offset="2967" max-vertical-offset="4624">
-              <caret line="197" column="4" selection-start-line="197" selection-start-column="4" selection-end-line="197" selection-end-column="65" />
+            <state vertical-scroll-proportion="-8.181818" vertical-offset="3987" max-vertical-offset="4624">
+              <caret line="261" column="16" selection-start-line="261" selection-start-column="16" selection-end-line="261" selection-end-column="93" />
               <folding />
             </state>
           </provider>
@@ -117,8 +119,8 @@
       <file leaf-file-name="map.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/static/js/map.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6666667" vertical-offset="850" max-vertical-offset="1700">
-              <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1054">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -171,9 +173,9 @@
         <option value="$PROJECT_DIR$/static/js/bootbox.min.js" />
         <option value="$PROJECT_DIR$/CampusMap/templates/dbstuff/addcourse.html" />
         <option value="$PROJECT_DIR$/CampusMap/templates/map.html" />
+        <option value="$PROJECT_DIR$/CampusMap/templates/home.html" />
         <option value="$PROJECT_DIR$/CampusMap/templates/dbstuff/addroom.html" />
         <option value="$PROJECT_DIR$/static/js/sm.js" />
-        <option value="$PROJECT_DIR$/CampusMap/templates/home.html" />
         <option value="$PROJECT_DIR$/static/js/map.js" />
       </list>
     </option>
@@ -894,7 +896,13 @@
       <option name="project" value="LOCAL" />
       <updated>1429328501024</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Map issues fixed:&#10;- loading fully during the first start&#10;- Pin on the home page is now not draggable &#10;- New position of the room updated when pin released after mouse drag&#10;&#10;Remaining Map Issues:&#10;- sometimes during the first lunch, the map does not center according to the pin location ( Quick Fix applied)">
+      <created>1429330720399</created>
+      <option name="number" value="00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1429330720399</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -960,7 +968,8 @@
     <MESSAGE value="Removed edit-map, added label to color in modules page" />
     <MESSAGE value="removed save button from room template/edit room location - position updated while dragging pin" />
     <MESSAGE value="Map issues fixed:&#10;- loading fully during the first start&#10;- Pin one the home page not draggable &#10;- New position of the room saved when pin released after mouse drag" />
-    <option name="LAST_COMMIT_MESSAGE" value="Map issues fixed:&#10;- loading fully during the first start&#10;- Pin one the home page not draggable &#10;- New position of the room saved when pin released after mouse drag" />
+    <MESSAGE value="Map issues fixed:&#10;- loading fully during the first start&#10;- Pin on the home page is now not draggable &#10;- New position of the room updated when pin released after mouse drag&#10;&#10;Remaining Map Issues:&#10;- sometimes during the first lunch, the map does not center according to the pin location ( Quick Fix applied)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Map issues fixed:&#10;- loading fully during the first start&#10;- Pin on the home page is now not draggable &#10;- New position of the room updated when pin released after mouse drag&#10;&#10;Remaining Map Issues:&#10;- sometimes during the first lunch, the map does not center according to the pin location ( Quick Fix applied)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1278,14 +1287,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/addtimetable.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.576923" vertical-offset="306" max-vertical-offset="1275">
-          <caret line="25" column="46" selection-start-line="25" selection-start-column="46" selection-end-line="25" selection-end-column="86" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CampusMap/templates/timetable.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-40.0" vertical-offset="609" max-vertical-offset="2958">
@@ -1302,14 +1303,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CampusMap/templates/map.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.9615384" vertical-offset="0" max-vertical-offset="952">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/addcourse.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.9615384" vertical-offset="0" max-vertical-offset="1870">
@@ -1318,36 +1311,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/addroom.html">
+    <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/addtimetable.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.73077" vertical-offset="796" max-vertical-offset="1462">
-          <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
-          <folding>
-            <element signature="e#1092#1110#0#HTML" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="-4.576923" vertical-offset="306" max-vertical-offset="1275">
+          <caret line="25" column="46" selection-start-line="25" selection-start-column="46" selection-end-line="25" selection-end-column="86" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/sm.js">
+    <entry file="file://$PROJECT_DIR$/CampusMap/templates/map.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.413794" vertical-offset="731" max-vertical-offset="1394">
-          <caret line="71" column="7" selection-start-line="71" selection-start-column="7" selection-end-line="71" selection-end-column="44" />
+        <state vertical-scroll-proportion="9.038462" vertical-offset="286" max-vertical-offset="952">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CampusMap/templates/dbstuff/addroom.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.269231" vertical-offset="184" max-vertical-offset="1462">
+          <caret line="25" column="101" selection-start-line="25" selection-start-column="101" selection-end-line="25" selection-end-column="101" />
+          <folding>
+            <element signature="e#1047#1065#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CampusMap/templates/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.9454546" vertical-offset="2967" max-vertical-offset="4624">
-          <caret line="197" column="4" selection-start-line="197" selection-start-column="4" selection-end-line="197" selection-end-column="65" />
+        <state vertical-scroll-proportion="-8.181818" vertical-offset="3987" max-vertical-offset="4624">
+          <caret line="261" column="16" selection-start-line="261" selection-start-column="16" selection-end-line="261" selection-end-column="93" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/sm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.034483" vertical-offset="748" max-vertical-offset="2227">
+          <caret line="56" column="10" selection-start-line="56" selection-start-column="10" selection-end-line="56" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static/js/map.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6666667" vertical-offset="850" max-vertical-offset="1700">
-          <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1054">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
         </state>
       </provider>

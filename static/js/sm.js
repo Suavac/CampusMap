@@ -1,5 +1,18 @@
 
-// function used for deleting records from database
+    // script reads value (rooms code name) from the cookie set in room template
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        //alert(document.cookie);
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(nameEQ) != -1) return c.substring(nameEQ.length,c.length);
+        }
+    return null;
+    }
+
+    // function used for deleting records from database
 
     function getRecordDetails( url ) {// parameter is the name of the template
 
@@ -37,10 +50,11 @@
         request.send(null);
         location.reload();
 
-
     }
 
     function editRoomLocation() {
+
+        //initialize(); // initialize map
 
         $(document).ready(function () {
             $('#test').on('click', 'tr', function (event) {
@@ -48,11 +62,29 @@
                     return $.trim($(this).html())
                 }).get();
 
-            document.cookie = "room="+texts[0]+"; expires=0; path=/"; // create Cookie file
+                document.cookie = "room="+texts[0]+"; expires=0; path=/"; // create Cookie file
 
-            loadPin(texts[0]);
+                loadPin(texts[0]);
+
+                $('#largeModal').modal('show');
+
+                // the initial start of the map with given pin doesnt center correctly
+                // this fixes this problem for every new map display
+                var newMapLocation=false;
+
+                google.maps.event.addListener(map, 'idle', function() { // fox for map not loading fully
+
+                        google.maps.event.trigger(map, 'resize');
+                    if(!newMapLocation){
+                        map.setCenter(marker.getPosition());
+                        newMapLocation=true;
+                    }
+
+
+                });
             });
         });
+
     }
 
     function loadPin(room){
@@ -71,6 +103,23 @@
         marker.setPosition(new google.maps.LatLng(coords.lat, coords.lng));
         map.setCenter(marker.getPosition());
 
-        //map.setCenter(marker.getPosition()); // setCenter takes a LatLng object
+
     }
+
+function saveCoord(){
+
+    var request = new XMLHttpRequest();
+
+    var param = '../edit-map-json/?message=newCoord' + '&room=' +  getCookie("room") + '&lat=' + lat + '&lng=' + lng;
+
+    request.open('GET', param, false);
+    request.send(null);
+
+    if(request.responseText == 'success'){
+
+        console.log("message received")
+    }
+
+}
+
 

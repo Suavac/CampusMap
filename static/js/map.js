@@ -10,18 +10,6 @@ window.onload=function(){
 //    $(this).button('reset');
 //});
 
-// script reads value (rooms code name) from the cookie set in room template
-function getCookie(name) {
-    var nameEQ = name + "=";
-    //alert(document.cookie);
-    var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-    var c = ca[i];
-    while (c.charAt(0)==' ') c = c.substring(1);
-    if (c.indexOf(nameEQ) != -1) return c.substring(nameEQ.length,c.length);
-    }
-return null;
-}
 
 
 
@@ -32,6 +20,7 @@ var lat = null;
 var lng = null;
 
 function initialize() {
+
     var mapOptions = {
         center: {lat: 53.278, lng: -9.061608463525772},
         zoom: 17
@@ -62,34 +51,6 @@ function initialize() {
         saveCoord();
     });
 
-    // Quick fix for map not loading fully during the first start
-    var fixed = false;
-    google.maps.event.addListener(map, 'idle', function() { // fox for map not loading fully
-
-            google.maps.event.trigger(map, 'resize');
-            if(!fixed){
-                google.maps.event.addListenerOnce(map, 'tilesloaded' , function(){
-                    map.setCenter(marker.getPosition());
-                fixed=true;
-                });
-
-            }
-
-    });
-}
-
-function saveCoord(){
-
-    var request = new XMLHttpRequest();
-
-    var param = '../edit-map-json/?message=newCoord' + '&room=' +  getCookie("room") + '&lat=' + lat + '&lng=' + lng;
-
-    request.open('GET', param, false);
-    request.send(null);
-
-    if(request.responseText == 'success'){
-
-        console.log("message received")
-    }
 
 }
+
