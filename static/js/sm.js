@@ -64,13 +64,11 @@
         request.open('GET', param, false);  // `false` makes the request synchronous
         request.send(null);
 
-        coords = JSON.parse(request.responseText);
-
+        var coords = JSON.parse(request.responseText);
+        var lat = coords.lat;
+        var lng = coords.lng;
         marker.setPosition(new google.maps.LatLng(coords.lat, coords.lng));
         map.setCenter(new google.maps.LatLng(coords.lat, coords.lng));
 
-        lat = coords.lat;
-        lng = coords.lng;
-
-        document.getElementById('saveButton').disabled = false;
     }
+
