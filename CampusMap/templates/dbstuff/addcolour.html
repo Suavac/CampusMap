@@ -4,28 +4,25 @@
 
     <div class="container">
 
-        <h1>Add New Module</h1>
+        <h1>Add New Colour</h1>
 
 
          <table class="table table-striped" id="test">
             <!-- PRINT COLUMN NAME -->
             <tr>
-                <th>Module Code</th>
-                <th>Module Name</th>
                 <th>Colour</th>
+                <th>Hex Code</th>
                 <th>Delete</th>
             </tr>
             <!-- FILL ONE ROW - 3 COLUMNS  -->
             {% for item in query_results %}
                 <tr>
-                    <td >{{  item.modCode }}</td>
+                    <td >{{  item.colour }}</td>
 
-                    <td>{{  item.modName }}</td>
-
-                    <td>{{  item.color }}</td>
+                    <td style="background: '#'+{{ item.hex }};">{{  item.hex }}</td>
 
                     <td>
-                        <button type="submit" onclick="getRecordDetails('module');" class="btn btn-default" aria-label="Left Align" style="color: red">
+                        <button type="submit" onclick="getRecordDetails('colour');" class="btn btn-default" aria-label="Left Align" style="color: red">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         </button>
                     </td>
@@ -41,30 +38,17 @@
                     {% for field in form %}
 
                         <td>
-
-                            {% ifequal field.name "color" %}
-
-                                <select class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
-                                    <option value= {{ form.color }}
-
-                                                    <div style= "color: red"> {{ field.errors|striptags }}</div>
-                                <p class="help-text">{{ field.help_text }} </p>
-                                </select>
-                            {% else %}
-
                                 <input type="text" class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
                                 <div style= "color: red" >{{ field.errors|striptags }} </div>
-
-                            {% endifequal %}
-
 
                         </td>
 
                     {% endfor %}
-    <td><input type="submit" value="Submit"  class="btn btn-primary">
-    </td>
+                <td><input type="submit" value="Submit"  class="btn btn-primary">
+                </td>
+            </form>
          </tr>
-     </form>
+
 
     </table>
     </div>

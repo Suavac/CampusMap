@@ -11,6 +11,17 @@ class DepartmentForm(forms.ModelForm):
         model = Department
         fields = "__all__"
 
+class ColourForm(forms.ModelForm):
+
+    colour = forms.CharField(max_length = 50,label = mark_safe('<strong>Colour</strong>'))
+    hex = forms.CharField(max_length = 50,label = mark_safe('<strong>Hex Code</strong>'))
+
+
+    class Meta:
+        model = Colour
+        fields = "__all__"
+
+
 class CourseForm(forms.ModelForm):
 
     courseCode = forms.CharField(max_length=15,label = mark_safe('<strong>Code</strong>'))

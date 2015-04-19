@@ -39,7 +39,7 @@
     function deleteRecord( url ,rowUniqueIdentifier ) {
 
         var request = new XMLHttpRequest();
-        if(url=='timetable') { // timetable records in uniquely identified by 3 values
+        if(url=='timetable' || url=='TimeEntry') { // timetable records in uniquely identified by 3 values
             var param = '../timetable/?message=delete' + '&course=' + rowUniqueIdentifier[0]+ '&year=' + rowUniqueIdentifier[1] + '&semester=' + rowUniqueIdentifier[2];
         }
         else{ // other table's records can be identified by their primary key

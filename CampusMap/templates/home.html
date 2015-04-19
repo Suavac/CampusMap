@@ -222,7 +222,7 @@ function initialize() {
         var val2 = year.options[year.selectedIndex].value;
         var val3 = sem.options[sem.selectedIndex].value;
         console.log('Course = ' + val1 + ' Year= ' + val2 + ' Semester = ' + val3);
-        sem.setAttribute('onClick', loadTimetable(department,val1,val2,val3));
+        sem.setAttribute('onchange', loadTimetable(department,val1,val2,val3));
 
         year = val2;
         semester = val3;

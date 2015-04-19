@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
-from .forms import CourseForm, ModuleForm, RoomForm, LecturerForm, BuildingForm, TimetableForm, DepartmentForm,TimeEntryForm
+from .forms import CourseForm, ModuleForm, RoomForm, LecturerForm, BuildingForm, TimetableForm, DepartmentForm,TimeEntryForm, ColourForm
 
-from .models import Course, Timetable, Building, Module, Lecturer, Department, TimeEntry, Room
+from .models import Course, Timetable, Building, Module, Lecturer, Department, TimeEntry, Room, Colour
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
@@ -60,6 +60,7 @@ def editTimetable(request):
             check = 'true'
     else:
         form = TimeEntryForm() # An unbound form
+
 
     return render(request, 'timetable.html', {
         'form': form,
@@ -298,6 +299,13 @@ def module(request):
     # get all data from module table in ascending order
     query_results = Module.objects.all().order_by('modCode')
 
+    if request.method == 'GET':
+        message = request.GET.get('message')
+
+        if message == 'delete':
+            record = request.GET.get('toDelete')
+            Module.objects.filter(modCode=record).delete()
+
     if request.method == 'POST': # If the form has been submitted...
         form = ModuleForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
@@ -312,7 +320,7 @@ def module(request):
 
     return render_to_response('dbstuff/addmodule.html', locals(),context_instance=RequestContext(request))
 
-@login_requiredp
+@login_required
 def room(request):
     query_results = Room.objects.all().order_by('roomCode', 'building')
 
@@ -419,6 +427,32 @@ def department(request):
     return render_to_response('dbstuff/adddepartment.html', locals(),context_instance=RequestContext(request))
 
 @login_required
+def colour(request):
+    # get all data from building table in ascending order
+    query_results = Colour.objects.all().order_by('colour')
+
+    if request.method == 'GET':
+        message = request.GET.get('message')
+
+        if message == 'delete':
+            record = request.GET.get('toDelete')
+            Colour.objects.filter(colour=record).delete()
+            #return HttpResponseRedirect('/timetable/')
+
+    if request.method == 'POST': # If the form has been submitted...
+        form = ColourForm(request.POST) # A form bound to the POST data
+        if form.is_valid(): # All validation rules pass
+            # Process the data in form.cleaned_data
+            # ...
+
+            save_it = form.save()
+            save_it.save()
+            return HttpResponseRedirect('/colour/') # Redirect after POST
+    else:
+        form = ColourForm() # An unbound form
+    return render_to_response('dbstuff/addcolour.html', locals(),context_instance=RequestContext(request))
+
+@login_required
 def timetable(request):
     # get all data from timetable table in ascending order
     query_results = Timetable.objects.all().order_by('courseCode', 'year', 'semester')
@@ -446,3 +480,6 @@ def timetable(request):
         form = TimetableForm() # An unbound form
 
     return render(request, 'dbstuff/addtimetable.html', locals(),context_instance=RequestContext(request))
+
+def test(request):
+    return render(request, 'timetableAdmin.html')
