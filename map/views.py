@@ -11,14 +11,29 @@ from django.contrib import  auth
 
 import json, urllib, urlparse
 
-
-#def login(request):
-#    c = {} # create dict
- #   c.update(csrf(request)) # push csrf object to it
- #   return render_to_response('dbstuff/login.html', c) # pass it to the login template
+from django.contrib.auth.decorators import login_required
 
 
+def login(request):
+    c = {} # create dict
+    c.update(csrf(request)) # push csrf object to it
 
+    username = request.POST.get('username', '')
+    password = request.POST.get('password', '')
+    user = auth.authenticate(username=username, password=password)
+
+    if user is not None:
+        auth.login(request,user)
+        return HttpResponseRedirect('/home/') # Redirect after POST
+    else:
+        return HttpResponseRedirect('/home/') # Redirect after POST
+
+def logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect('/home/') # Redirect after POST
+
+
+@login_required
 def editTimetable(request):
 
     #Variables that are sent back to timetable.html to reload timetable after post
@@ -251,6 +266,7 @@ def home(request):
         'sem':s
     })
 
+@login_required
 def course(request):
     # get all data from course table in ascending order
     query_results = Course.objects.all().order_by('courseCode')
@@ -277,7 +293,7 @@ def course(request):
 
     return render_to_response('dbstuff/addcourse.html', locals(),context_instance=RequestContext(request))
 
-
+@login_required
 def module(request):
     # get all data from module table in ascending order
     query_results = Module.objects.all().order_by('modCode')
@@ -295,7 +311,6 @@ def module(request):
         form = ModuleForm() # An unbound form
 
     return render_to_response('dbstuff/addmodule.html', locals(),context_instance=RequestContext(request))
-
 
 def room(request):
     query_results = Room.objects.all().order_by('roomCode', 'building')
@@ -322,6 +337,7 @@ def room(request):
 
     return render(request, 'dbstuff/addroom.html', locals(),context_instance=RequestContext(request))
 
+@login_required
 def lecturer(request):
      # get all data from lecturer table in ascending order
     query_results = Lecturer.objects.all()
@@ -348,7 +364,7 @@ def lecturer(request):
 
     return render_to_response('dbstuff/addlecturer.html', locals(),context_instance=RequestContext(request))
 
-
+@login_required
 def building(request):
     # get all data from building table in ascending order
     query_results = Building.objects.all().order_by('buildingName')
@@ -375,6 +391,7 @@ def building(request):
 
     return render_to_response('dbstuff/addbuilding.html', locals(),context_instance=RequestContext(request))
 
+@login_required
 def department(request):
     # get all data from building table in ascending order
     query_results = Department.objects.all().order_by('depName')
@@ -400,6 +417,7 @@ def department(request):
         form = DepartmentForm() # An unbound form
     return render_to_response('dbstuff/adddepartment.html', locals(),context_instance=RequestContext(request))
 
+@login_required
 def timetable(request):
     # get all data from timetable table in ascending order
     query_results = Timetable.objects.all().order_by('courseCode', 'year', 'semester')

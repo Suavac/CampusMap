@@ -1,3 +1,5 @@
+{% block content %}
+
 <script>
 
        $(function () {
@@ -7,6 +9,7 @@
         });
 
 </script>
+
 <style type="text/css">
 
     .navbar-collapse{background-color:black;padding-top:3px;padding-bottom:3px !important}
@@ -25,58 +28,66 @@
 
 
 </style>
+
  <div class="navbar-collapse collapse">
         <div class="navbar-right">
             <div class="btn-group">
+
+        {% if user.is_anonymous %}
+
                 <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
                     Login <span class="caret"></span>
+
                 </button>
+
                 <div class="dropdown-menu" >
-                    <div class="col-sm-12">
+                <div class="col-sm-12">
+
+                        <form action="/accounts/login/" method="post">
+        {% csrf_token %}
+
+        {% if form.errors %}
+                            <p class="error">Wrong Username or Password</p>
+        {% endif %}
 
 
+                            <div class="col-sm-12">
+                                Login
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="text" placeholder="User Name" onclick="return false;" class="form-control input-sm" name="username" value="" id="username" />
 
+                            </div>
+                            <br/>
+                            <div class="col-sm-12">
+                                <input type="password" placeholder="Password" class="form-control input-sm"  name="password" value="" id="password" />
 
-<form action="" method="post">
-    {% csrf_token %}
+                            </div>
+                            <div class="col-sm-12">
+                                <button type="submit" value="login" class="btn btn-success btn-sm">Sign in</button>
+                                <input type="hidden" name="next" value="{{ next | escape }}" />
+                            </div>
 
-   {% if form.errors %}
-        <p class=""error">Wrong Username or Password</p>
-    {% endif %}
+                        </form>
 
-
-                        <div class="col-sm-12">
-                            Login
-                        </div>
-                        <div class="col-sm-12">
-                            <input type="text" placeholder="User Name" onclick="return false;" class="form-control input-sm" name="username" value="" id="username" />
-
-                        </div>
-                        <br/>
-                        <div class="col-sm-12">
-                            <input type="password" placeholder="Password" class="form-control input-sm"  name="password" value="" id="password" />
-
-                        </div>
-                        <div class="col-sm-12">
-
-
-
-
-                            <button type="submit" value="login" class="btn btn-success btn-sm">Sign in</button>
-                            <input type="hidden" name="next" value="{{ next | escape }}" />
-                        </div>
-
-    </form>
                     </div>
                 </div>
+
+            {% else %}
+
+            <a href="../course" class="btn btn-default" aria-label="Left Align" >
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"> Admin Panel</span>
+            </a>
+
+            <a href="/accounts/logout/" class="btn btn-danger" aria-label="Left Align">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"> Logout</span>
+            </a>
+
+            {% endif %}
+
             </div>
         </div>
     </div>
-
-
-
-{% block content %}
-
 
 
 
