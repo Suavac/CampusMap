@@ -312,7 +312,7 @@ def module(request):
 
     return render_to_response('dbstuff/addmodule.html', locals(),context_instance=RequestContext(request))
 
-@login_required
+@login_requiredp
 def room(request):
     query_results = Room.objects.all().order_by('roomCode', 'building')
 
