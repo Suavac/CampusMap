@@ -312,6 +312,7 @@ def module(request):
 
     return render_to_response('dbstuff/addmodule.html', locals(),context_instance=RequestContext(request))
 
+@login_required
 def room(request):
     query_results = Room.objects.all().order_by('roomCode', 'building')
 
@@ -331,7 +332,7 @@ def room(request):
 
             save_it = form.save()
             save_it.save()
-            return HttpResponseRedirect('/room/') # Redirect after POST
+            return HttpResponseRedirect('/rooms/') # Redirect after POST
     else:
         form = RoomForm() # An unbound form
 
