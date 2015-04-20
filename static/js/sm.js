@@ -23,25 +23,25 @@
                         return $.trim($(this).html())
                     }).get();
 
+
+                    if(action=='delete'){
+                       bootbox.confirm("Are you sure want to delete "+ rowUniqueIdentifier[0] +" "+ url+" ? ", function(result) { // confirm deletion
+                        if(result){
+                              deleteRecord(url , rowUniqueIdentifier);
+                            } else {
+                           //$('#largeModal').modal('hide');
+                            return;
+                        }
+                        });
+                    }
+                    else if(action == 'edit'){
+                    }
+                    else{
+                    }
                 });
             });
 
-        if(action=='delete'){
-           bootbox.confirm("Are you sure want to delete "+ url+" ? ", function(result) { // confirm deletion
-            if(result){
-                  deleteRecord(url , rowUniqueIdentifier);
-                } else {
-               //$('#largeModal').modal('hide');
-                return;
-            }
-            });
-        }
-        else if(action == 'edit'){
 
-        }
-        else{
-
-        }
 
     }
 
