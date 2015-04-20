@@ -7,28 +7,45 @@
         <h1>Add New Module</h1>
 
 
-         <table class="table table-striped" id="test">
+         <table class="table table-hover" id="test" style="width: 100%">
             <!-- PRINT COLUMN NAME -->
             <tr>
-                <th>Module Code</th>
-                <th>Module Name</th>
-                <th>Colour</th>
-                <th>Delete</th>
+                <th style="width: 20%">Module Code</th>
+                <th style="width: 50%">Module Name</th>
+                <th style="width: 30%">Colour</th>
+                <th ></th>
+                <th ></th>
+                <th ></th>
             </tr>
             <!-- FILL ONE ROW - 3 COLUMNS  -->
             {% for item in query_results %}
                 <tr>
-                    <td >{{  item.modCode }}</td>
+                    <td contentEditable>{{  item.modCode }}</td>
 
-                    <td>{{  item.modName }}</td>
+                    <td contentEditable>{{  item.modName }}</td>
 
-                    <td>{{  item.color }}</td>
+                    <td contentEditable>{{  item.color }}</td>
+
+                    <td id="confirmationButton">
+                        <a  class="btn btn-default" onclick="getRecordDetails('module');" aria-label="Left Align" style="color: green; visibility: visible">
+                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                        </a>
+                    </td>
+
+                    <td >
+                        <a id="editButton" class="btn btn-default" onclick="getRecordDetails('module','edit');" aria-label="Left Align" style="color: green">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                        </a>
+                    </td>
 
                     <td>
-                        <button type="submit" onclick="getRecordDetails('module');" class="btn btn-default" aria-label="Left Align" style="color: red">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        </button>
+                        <a class="btn btn-default" onclick="getRecordDetails('module','delete');" aria-label="Left Align" style="color: red">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </a>
+
                     </td>
+
+
                 </tr>
             {% endfor %}
 
@@ -61,8 +78,11 @@
                         </td>
 
                     {% endfor %}
+
     <td><input type="submit" value="Submit"  class="btn btn-primary">
     </td>
+    <td></td>
+    <td></td>
          </tr>
      </form>
 

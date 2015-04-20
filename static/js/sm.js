@@ -14,7 +14,7 @@
 
     // function used for deleting records from database
 
-    function getRecordDetails( url ) {// parameter is the name of the template
+    function getRecordDetails( url, action ) {// parameter is the name of the template
 
         var rowUniqueIdentifier;
         $(document).ready(function () { // get values from the selected row (table residing on the template)
@@ -26,14 +26,23 @@
                 });
             });
 
-        bootbox.confirm("Are you sure want to delete "+ url+" ? ", function(result) { // confirm deletion
+        if(action=='delete'){
+           bootbox.confirm("Are you sure want to delete "+ url+" ? ", function(result) { // confirm deletion
             if(result){
                   deleteRecord(url , rowUniqueIdentifier);
-            } else {
+                } else {
                //$('#largeModal').modal('hide');
                 return;
+            }
+            });
         }
-    });
+        else if(action == 'edit'){
+
+        }
+        else{
+
+        }
+
     }
 
     function deleteRecord( url ,rowUniqueIdentifier ) {
@@ -52,6 +61,25 @@
         location.reload();
 
     }
+
+    function deleteRecord( url ,rowUniqueIdentifier ) {
+
+        var request = new XMLHttpRequest();
+        if(url=='timetable' || url=='TimeEntry') { // timetable records in uniquely identified by 3 values
+            var param = '../timetable/?message=delete' + '&course=' + rowUniqueIdentifier[0]+ '&year=' + rowUniqueIdentifier[1] + '&semester=' + rowUniqueIdentifier[2];
+        }
+        else{ // other table's records can be identified by their primary key
+            var param = '../'+url+'/?message=delete' + '&toDelete=' + rowUniqueIdentifier[0];
+        }
+
+
+        request.open('GET', param, false);
+        request.send(null);
+        location.reload();
+
+    }
+
+
 
     function editRoomLocation() {
 
